@@ -1,0 +1,58 @@
+
+<h2 mat-dialog-title>User Delete</h2>
+<div mat-dialog-content class="mat-dialog">
+  <mat-list role="list">
+
+    <!-- ID -->
+    <mat-list-item role="listitem">
+      <span>ID :</span>
+      <div class="dialog-data">
+        {{ data.id }}
+      </div>
+    </mat-list-item>
+
+    <!-- Name -->
+    <mat-list-item role="listitem">
+      <span>Name :</span>
+      <div class="dialog-data">
+        {{data.name}}
+      </div>
+    </mat-list-item>
+
+    <!-- Email -->
+    <mat-list-item role="listitem">
+      <span>Email :</span>
+      <div class="dialog-data">
+        {{data.email}}
+      </div>
+    </mat-list-item>
+
+    <!-- Type -->
+    <mat-list-item role="listitem">
+      <span>Type :</span>
+      <div class="dialog-data">
+        {{data.type}}
+      </div>
+    </mat-list-item>
+
+    <!-- Phone -->
+    <mat-list-item role="listitem">
+      <span>Phone :</span>
+      <div class="dialog-data">
+        {{data.phone}}
+      </div>
+    </mat-list-item>
+
+    <!-- Address -->
+    <mat-list-item role="listitem">
+      <span>Address :</span>
+      <div class="dialog-data">
+        {{data.address}}
+      </div>
+    </mat-list-item>
+  </mat-list>
+</div>
+<div mat-dialog-actions class="close-btn">
+  <button mat-flat-button (click)="cancel()">Close</button>
+  <button mat-flat-button (click)="remove()" color="warn">Delete</button>
+</div>

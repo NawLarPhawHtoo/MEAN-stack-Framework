@@ -1,0 +1,34 @@
+.user-container {
+  width: 80%;
+  margin: 30px auto;
+}
+  .title {
+    margin-bottom: 20px;
+  }
+
+  .search-blk {
+    display: flex;
+    justify-content: end;
+
+      button {
+        padding: 3px 10px;
+      }
+
+      mat-icon {
+        margin-right: 5px;
+        margin-bottom: 5px;
+        transform: scale(0.8);
+      }
+    }
+
+  .mat-elevation-z8 {
+    width: 100%;
+    margin: 1% auto;
+    padding: 2%;
+    overflow-x: auto;
+
+    table {
+      width: 100%;
+    }
+  }
+

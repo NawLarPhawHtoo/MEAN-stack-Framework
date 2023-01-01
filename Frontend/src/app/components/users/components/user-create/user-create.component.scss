@@ -1,0 +1,39 @@
+.user-container {
+  width: 50%;
+  margin: 30px auto;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+
+  .user {
+    padding: 10px 15px;
+    background-color: #1F4690;
+    color: #EFEFEF;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 5px 5px 0 0%;
+  }
+
+  .user-form {
+    padding: 5px 25px 0 25px;
+
+    .form-group {
+      display: block;
+      margin-bottom: 5px;
+
+      textarea {
+        resize: none;
+      }
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: center;
+
+      button {
+        margin-bottom: 20px;
+        margin-left: 15px;
+        padding: 0 40px;
+      }
+    }
+  }
+}
