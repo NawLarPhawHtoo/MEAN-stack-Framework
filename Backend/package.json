@@ -1,0 +1,67 @@
+{
+  "name": "node-js-framework",
+  "description": "Node JS Framework Backend",
+  "version": "1.0.0",
+  "private": true,
+  "main": "dist/index",
+  "typings": "dist/index",
+  "scripts": {
+    "start:debug": "node -r dotenv/config --inspect=0.0.0.0:9226 ./dist/",
+    "start:dev": "npm run prebuild && tsc-watch --outDir ./dist --onSuccess \"npm run start:debug\" --onFailure \"'echo Compilation Failed'\"",
+    "start": "nodemon src/index.ts",
+    "build": "rimraf dist && tsc",
+    "prebuild": "rimraf dist",
+    "tsc": "rimraf dist && npm run lint && tsc --watch",
+    "lint": "eslint src --ext .js,.ts",
+    "lint:fix": "npm run lint -- --fix",
+    "migrate:up": "rimraf dist && tsc && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "migrate:down": "rimraf dist && tsc && npx sequelize-cli db:migrate:undo",
+    "seed": "npm run build && npx sequelize-cli db:seed:all",
+    "unseed": "npm run build && npx sequelize-cli db:seed:undo",
+    "create:db": "node_modules/.bin/sequelize db:create",
+    "get-version": "node -p \"require('./package.json').version\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NawLarPhawHtoo/Node-JS-Framework.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "autobind-decorator": "^2.4.0",
+    "convict": "^6.2.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.28.0",
+    "sequelize-cli": "^6.5.2"
+  },
+  "devDependencies": {
+    "@types/convict": "^6.1.1",
+    "@types/cors": "^2.8.13",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.15",
+    "@types/node": "^18.11.18",
+    "@types/sequelize": "^4.28.14",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.30.0",
+    "helmet": "^6.0.1",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.1.0",
+    "nodemon": "^2.0.20",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.9.1",
+    "tsc-watch": "^6.0.0",
+    "typescript": "^4.9.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "bugs": {
+    "url": "https://github.com/NawLarPhawHtoo/Node-JS-Framework/issues"
+  },
+  "homepage": "https://github.com/NawLarPhawHtoo/Node-JS-Framework#readme"
+}
