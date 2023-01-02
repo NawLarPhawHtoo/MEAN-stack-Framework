@@ -2,14 +2,11 @@ import { Request } from "express";
 
 import { Router } from "./custom-router";
 
-// import config from "../config";
-
 import { userRouter } from "./v1";
 
 const v1ApiRoutes = new Router();
-const baseRouter =new  Router();
 
-// baseRouter.use(config.get('version'));
+const baseRouter =new  Router();
 
 try {
   v1ApiRoutes.use('/users', userRouter);

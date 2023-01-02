@@ -1,47 +1,36 @@
-// import { UserRepository } from './../../dal/user/user.repository';
 import { FindOptions } from "sequelize";
 
-// import { IUserRepository } from "../../dal/user";
-
 import { IUserModel, UserDbModel } from "../../database";
-
-// export interface UserServiceOptions {
-//   userRepository: IUserRepository;
-// }
-
-export interface IUserService {
-  getUser(userId: number, userAttributes?: Array<keyof IUserModel>, otherFindOptions?: FindOptions): Promise<any>;
-
-  // getUserList(userId: number[], userAttributes?: Array<keyof IUserModel>, otherFindOptions?: FindOptions): Promise<any[]>;
-  getUserList(): Promise<any>;
-}
-
-class UserService implements IUserService {
-  // private services: UserServiceOptions;
-
-  // constructor(services: UserServiceOptions) {
-  //   this.services = services;
-  // }
-
-  async getUser(userId: number, userAttributes?: Array<keyof IUserModel>, otherFindOptions?: FindOptions): Promise<any> {
-    return (await UserDbModel.findOne({
+class UserService {
+ 
+  getUserList(userAttributes?: Array<keyof IUserModel>, otherFindOptions?: FindOptions): Promise<any> {
+    return UserDbModel.findAll({
       ...otherFindOptions,
-      where: { ...otherFindOptions?.where, id: userId },
       attributes: userAttributes
-    })) as any;
+    });
   }
-
-  // async getUserList(userId: number[], userAttributes?: Array<keyof IUserModel>, otherFindOptions?: FindOptions): Promise<any[]> {
-  //   return (await UserDbModel.findAll({
-  //     ...otherFindOptions,
-  //     where: { ...otherFindOptions?.where, id: userId },
-  //     attributes: userAttributes
-  //   })) as any;
-  // }
-
-  async getUserList(): Promise<any> {
-    return (await UserDbModel.findAll()) as any;
+  async createUser(returnObj: Partial<IUserModel>): Promise<UserDbModel> {
+    const createUser = await UserDbModel.create({ ...returnObj, created_at: new Date().toISOString() });
+    return createUser;
+  }
+  async updateUser(returnObj: Partial<IUserModel>): Promise<any> {
+    await UserDbModel.update(returnObj, {
+      where: { id: returnObj.id as number }
+    });
+  }
+  getUserById(user_id: number): Promise<any> {
+    return UserDbModel.findOne({
+      where: {
+        id: user_id,
+      }
+    }) as any;
+  }
+  async deleteUserById(id: number): Promise<any> {
+    await UserDbModel.destroy(
+      {
+        where: { id },
+      }
+    );
   }
 }
-
 export const userService = new UserService();
