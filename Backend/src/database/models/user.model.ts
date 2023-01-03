@@ -21,8 +21,12 @@ export interface IUserModel {
   name: string;
   email: string;
   password: string;
+  created_user_id: number;
   gender: UserGenderEnum;
   role: UserRoleEnum;
+  phone: string;
+  dob:string;
+  address: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -44,6 +48,9 @@ const modelAttributes: DbModelFieldInit<Partial<IUserModel>> = {
   password: {
     type: DataTypes.STRING,
   },
+  created_user_id: {
+    type: DataTypes.INTEGER,
+  },
   gender: {
     type: DataTypes.ENUM,
     values: Object.values(UserGenderEnum)
@@ -52,7 +59,17 @@ const modelAttributes: DbModelFieldInit<Partial<IUserModel>> = {
     type: DataTypes.ENUM,
     values: Object.values(UserRoleEnum),
     defaultValue: UserRoleEnum.USER
-  }
+  },
+  phone: {
+    type: DataTypes.STRING,
+  },
+  dob: {
+    type: DataTypes.DATE,
+  },
+  address: {
+    type: DataTypes.STRING,
+  },
+ 
 };
 
 @AssociativeModel

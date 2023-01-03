@@ -1,9 +1,11 @@
 export enum DataBaseTableNames {
   CONSTANT = 'constants',
-  USER = 'users'
+  USER = 'users',
+ POST='posts'
 }
 
 export enum DataBaseModelNames {
   CONSTANT = 'constant',
-  USER = 'user'
+  USER = 'user',
+  POST = 'post'
 }

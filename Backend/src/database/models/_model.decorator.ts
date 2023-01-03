@@ -1,7 +1,8 @@
 import { Model } from "sequelize";
 
 enum DbModelNameEnum {
-  UserDbModel
+  UserDbModel,
+  PostDbModel
 }
 
 interface AllModels {

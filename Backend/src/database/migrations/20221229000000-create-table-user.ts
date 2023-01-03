@@ -1,3 +1,4 @@
+import { UserDbModel } from './../models/user.model';
 import { DataTypes, ModelAttributes, QueryInterface, QueryOptions } from "sequelize";
 
 import { DataBaseTableNames } from "../constants";
@@ -28,6 +29,10 @@ export default {
             type: DataTypes.STRING,
             allowNull: false,
           },
+          created_user_id:{
+            type: DataTypes.INTEGER,
+            allowNull: true
+          },
           gender: {
             type: DataTypes.ENUM,
             values: Object.values(UserGenderEnum)
@@ -38,13 +43,23 @@ export default {
             values: Object.values(UserRoleEnum),
             defaultValue: "USER"
           },
+          phone:{
+            type: DataTypes.STRING,
+            allowNull: true,
+          },
+          dob:{
+            type: DataTypes.DATE,
+            allowNull: true,
+          },
+          address:{
+            type: DataTypes.STRING,
+            allowNull: true,
+          },
           created_at: {
             type: DataTypes.DATE
           },
           updated_at: {
-
             type: DataTypes.DATE
-
           },
         } as ModelAttributes, options
       );
