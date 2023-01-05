@@ -1,4 +1,4 @@
-import { UserDbModel } from './../models/user.model';
+// import { UserDbModel } from './../models/user.model';
 import { DataTypes, ModelAttributes, QueryInterface, QueryOptions } from "sequelize";
 
 import { DataBaseTableNames } from "../constants";

@@ -1,10 +1,15 @@
+// import { UserPostDbModel } from './../../database/models/user-post.model';
 import { FindOptions } from "sequelize";
 
-import { IUserModel, UserDbModel } from "../../database";
+import { IUserModel, PostDbModel, UserDbModel } from "../../database";
 class UserService {
- 
+
   getUserList(userAttributes?: Array<keyof IUserModel>, otherFindOptions?: FindOptions): Promise<any> {
     return UserDbModel.findAll({
+      // include: [{
+      //   model: PostDbModel,
+      //   // as: 'post',
+      // }],
       ...otherFindOptions,
       attributes: userAttributes
     });

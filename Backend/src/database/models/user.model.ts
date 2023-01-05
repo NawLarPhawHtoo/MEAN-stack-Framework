@@ -1,6 +1,6 @@
 import { DataTypes, Model, ModelAttributes } from "sequelize";
 
-import { DataBaseTableNames,DataBaseModelNames } from "../constants";
+import { DataBaseTableNames, DataBaseModelNames } from "../constants";
 import { DbModelFieldInit } from "../db-structure.model";
 import { db } from '../db.provider';
 import { AssociativeModel } from './_model.decorator';
@@ -25,10 +25,11 @@ export interface IUserModel {
   gender: UserGenderEnum;
   role: UserRoleEnum;
   phone: string;
-  dob:string;
+  dob: string;
   address: string;
   createdAt: string;
   updatedAt: string;
+  deletedAt: string;
 }
 
 const modelAttributes: DbModelFieldInit<Partial<IUserModel>> = {
@@ -69,22 +70,25 @@ const modelAttributes: DbModelFieldInit<Partial<IUserModel>> = {
   address: {
     type: DataTypes.STRING,
   },
- 
+
 };
 
 @AssociativeModel
-export class UserDbModel extends Model{
- static associate({
-//  UserDbModel
-}:any){
-// this.hasMany(UserDbModel,{ foreignKey:'id', as:'user'});
-}
+export class UserDbModel extends Model {
+  static associate({
+    // UserPostDbModel
+    PostDbModel
+  }: any) {
+
+    this.hasMany(PostDbModel);
+  }
 }
 
-UserDbModel.init(modelAttributes as ModelAttributes,{
-sequelize:db,
-modelName:DataBaseModelNames.USER,
-tableName:DataBaseTableNames.USER,
-timestamps:true,
-underscored:true
+UserDbModel.init(modelAttributes as ModelAttributes, {
+  sequelize: db,
+  modelName: DataBaseModelNames.USER,
+  tableName: DataBaseTableNames.USER,
+  createdAt: 'created_at',
+  updatedAt: 'updated_at',
+  timestamps: true
 });

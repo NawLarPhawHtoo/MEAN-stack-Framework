@@ -26,10 +26,6 @@ export default class Server {
     this.app.set('views', __dirname + '/views');
     this.app.set('view engine', 'pug');
   
-    this.app.get('/', (req, res) => {
-      res.send('Welcome to the Project');
-    });
-
     this.httpServer = http.createServer(this.app);
   }
 
