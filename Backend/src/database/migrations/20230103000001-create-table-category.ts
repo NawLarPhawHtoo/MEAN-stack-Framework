@@ -2,16 +2,13 @@ import { DataTypes, ModelAttributes, QueryInterface, QueryOptions } from "sequel
 
 import { DataBaseTableNames } from "../constants";
 
-import { UserGenderEnum, UserRoleEnum } from "../models";
-
 import { migrationWrapper } from "../transactions";
 
 export default {
-  up: async (queryInterface: QueryInterface, dataTypes: any) => {
+  up: async (queryInterface: QueryInterface, DataTypes: any) => {
     const migration = async (options: QueryOptions) => {
       await queryInterface.createTable(
-        DataBaseTableNames.USER,
-        {
+        DataBaseTableNames.CATEGOTY, {
           id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -19,36 +16,17 @@ export default {
           },
           name: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true
           },
-          email: {
+          description: {
             type: DataTypes.STRING,
-            allowNull: false,
           },
-          password: {
+          content: {
             type: DataTypes.STRING,
-            allowNull: false,
           },
-          gender: {
-            type: DataTypes.ENUM,
-            values: Object.values(UserGenderEnum)
-          },
-          role: {
-            type: DataTypes.ENUM,
-            values: Object.values(UserRoleEnum),
-            defaultValue: "USER"
-          },
-          phone:{
-            type: DataTypes.STRING,
-            allowNull: true,
-          },
-          dob:{
-            type: DataTypes.DATE,
-            allowNull: true,
-          },
-          address:{
-            type: DataTypes.STRING,
-            allowNull: true,
+          image: {
+            type: DataTypes.TEXT,
+            allowNull: true
           },
           created_at: {
             type: DataTypes.DATE
@@ -56,16 +34,14 @@ export default {
           updated_at: {
             type: DataTypes.DATE
           },
-        } as ModelAttributes, options
-      );
+        } as ModelAttributes, options);
     };
     await migrationWrapper(migration);
   },
   down: async (queryInterface: QueryInterface, Sequelize: any) => {
     const migration = async (options: QueryOptions) => {
-      await queryInterface.dropTable(
-        DataBaseTableNames.USER, options);
+      await queryInterface.dropTable(DataBaseTableNames.CATEGOTY,options);
     };
     await migrationWrapper(migration);
   }
-};
+}

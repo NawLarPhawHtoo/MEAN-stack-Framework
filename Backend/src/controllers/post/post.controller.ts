@@ -1,14 +1,31 @@
-import { userService } from './../../services/user/user.service';
 import autobind from 'autobind-decorator';
 
 import { Response, Request } from 'express';
 
 import { postService } from '../../services/post';
 
+import { IPostModel } from '../../database';
+
+const POSTS_DEFAULT_LIMIT = 12;
+
 @autobind
 class PostController {
 
-async getAllPosts(req: Request, res: Response) {
+  async getTopPosts(req: Request, res: Response) {
+    const options = {
+      limit: req.query.limit ? +req.query.limit : POSTS_DEFAULT_LIMIT,
+      offset: req.query.offset ? +req.query.offset : 0
+    };
+
+    const topPosts = await postService.getTopPostsAndCountAll(options);
+    return res.json({
+      count: topPosts.length || 0,
+      data: topPosts,
+      pageCount: options.limit && Math.ceil(topPosts.length || 0 / options.limit)
+    });
+  }
+
+  async getAllPosts(req: Request, res: Response) {
     const posts = await postService.getPostList();
     return res.json({
       count: posts.length,
@@ -16,8 +33,22 @@ async getAllPosts(req: Request, res: Response) {
     });
   }
 
-  async create(req: Request, res: Response) {
-    const postData = req.body as any;
+  async create(req: any, res: Response) {
+
+    let image: string = req.body.image;
+    if (req.files?.image?.length > 0) {
+      image = req.files?.image[0]?.path.replaceAll("\\", "/");
+    }
+    const postData: IPostModel = {
+      category_id: req.body.category_id,
+      created_user_id: req.body.created_user_id,
+      title: req.body.title,
+      content: req.body.content,
+      description: req.body.description,
+      author: req.body.author,
+      references: req.body.references,
+      image: image,
+    } as any;
 
     const result = await postService.createPost(postData);
 
@@ -27,16 +58,36 @@ async getAllPosts(req: Request, res: Response) {
     });
   }
 
-  async update(req: Request, res: Response) {
+  async update(req: any, res: Response) {
     const checkPost = await postService.getPostById(+req.params.id);
 
     if (!checkPost) {
       throw new Error('Post not found');
     }
-    const postData = req.body as any;
+  
+    let image: string = req.body.image;
+    if (req.files?.image?.length > 0) {
+      image = req.files.image[0].path.replace("\\", "/");
+
+      if (image) {
+        checkPost.image = image;
+      }
+    }
+
+    const postData: IPostModel = {
+      category_id: req.body.category_id,
+      created_user_id: req.body.created_user_id,
+      title: req.body.title,
+      content: req.body.content,
+      description: req.body.description,
+      author: req.body.author,
+      references: req.body.references,
+      image:image
+    } as any;
+
     postData.id = +req.params.id;
     await postService.updatePost(postData);
-    // res.end('true');
+  
     res.json({
       message: 'Post updated successfully',
       data: postData
@@ -55,7 +106,7 @@ async getAllPosts(req: Request, res: Response) {
 
     res.json({
       message: 'Post deleted successfully',
-      data:postData
+      data: postData
     })
   }
 }

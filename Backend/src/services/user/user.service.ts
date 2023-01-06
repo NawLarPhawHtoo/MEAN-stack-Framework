@@ -1,7 +1,6 @@
-// import { UserPostDbModel } from './../../database/models/user-post.model';
 import { FindOptions } from "sequelize";
 
-import { IUserModel, PostDbModel, UserDbModel } from "../../database";
+import { IUserModel,UserDbModel } from "../../database";
 class UserService {
 
   getUserList(userAttributes?: Array<keyof IUserModel>, otherFindOptions?: FindOptions): Promise<any> {
@@ -10,15 +9,18 @@ class UserService {
       attributes: userAttributes
     });
   }
-  async createUser(returnObj: Partial<IUserModel>): Promise<UserDbModel> {
-    const createUser = await UserDbModel.create({ ...returnObj, created_at: new Date().toISOString() });
+
+  async createUser(userObj: Partial<IUserModel>): Promise<UserDbModel> {
+    const createUser = await UserDbModel.create({ ...userObj, created_at: new Date().toISOString() });
     return createUser;
   }
-  async updateUser(returnObj: Partial<IUserModel>): Promise<any> {
-    await UserDbModel.update(returnObj, {
-      where: { id: returnObj.id as number }
+
+  async updateUser(userObj: Partial<IUserModel>): Promise<any> {
+    await UserDbModel.update(userObj, {
+      where: { id: userObj.id as number }
     });
   }
+
   getUserById(user_id: number): Promise<any> {
     return UserDbModel.findOne({
       where: {
@@ -26,6 +28,7 @@ class UserService {
       }
     }) as any;
   }
+
   async deleteUserById(id: number): Promise<any> {
     await UserDbModel.destroy(
       {

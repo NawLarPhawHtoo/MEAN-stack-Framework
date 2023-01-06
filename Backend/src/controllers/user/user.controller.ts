@@ -35,7 +35,7 @@ async getAllUsers(req: Request, res: Response) {
     const userData = req.body as any;
     userData.id = +req.params.id;
     await userService.updateUser(userData);
-    // res.end('true');
+
     res.json({
       message: 'User updated successfully',
       data: userData

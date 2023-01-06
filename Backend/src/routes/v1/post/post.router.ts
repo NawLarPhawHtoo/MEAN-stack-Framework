@@ -5,6 +5,8 @@ import { postController } from "../../../controllers/post";
 
 const router =new Router();
 
+router.get('/top-posts',postController.getTopPosts)
+
 router.get('/',postController.getAllPosts);
 
 router.post('/', postController.create)

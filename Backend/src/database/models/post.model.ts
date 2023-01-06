@@ -70,9 +70,13 @@ const modelAttributes: DbModelFieldInit<Partial<IPostModel>> = {
 @associative
 export class PostDbModel extends Model {
   static associate({
-    UserDbModel
+    UserDbModel,
+    TopPostsDbModel,
+    CategoryDbModel
   }: any) {
     this.belongsTo(UserDbModel, { foreignKey: 'created_user_id', as: 'user' });
+    this.belongsTo(CategoryDbModel, { foreignKey: 'category_id', as: 'category' });
+    this.hasMany(TopPostsDbModel, { foreignKey: 'post_id', as: 'post' });
   }
 }
 

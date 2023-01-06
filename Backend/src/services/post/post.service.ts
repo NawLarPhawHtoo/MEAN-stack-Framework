@@ -1,27 +1,32 @@
 import { FindOptions } from "sequelize";
 
-import { IPostModel, PostDbModel, UserDbModel } from "../../database";
+import { IPostModel, PostDbModel, UserDbModel, CategoryDbModel,TopPostsDbModel } from "../../database";
 
 class PostService {
 
   getPostList(options?: FindOptions): Promise<any> {
     return PostDbModel.findAll({
-      include: [{
-        model: UserDbModel,
-        as: 'user'
-      }],
+      include: [
+        {
+          model: CategoryDbModel,
+          as: 'category',
+        },
+        {
+          model: UserDbModel,
+          as: 'user'
+        }],
       ...options
     }) as any;
   }
 
-  async createPost(returnObj: Partial<IPostModel>): Promise<PostDbModel> {
-    const createPost = await PostDbModel.create({ ...returnObj, created_at: new Date().toISOString() });
+  async createPost(postObj: Partial<IPostModel>): Promise<PostDbModel> {
+    const createPost = await PostDbModel.create({ ...postObj,created_at: new Date().toISOString() });
     return createPost;
   }
 
-  async updatePost(returnObj: Partial<IPostModel>): Promise<any> {
-    await PostDbModel.update(returnObj, {
-      where: { id: returnObj.id as number }
+  async updatePost(postObj: Partial<IPostModel>): Promise<any> {
+    await PostDbModel.update(postObj, {
+      where: { id: postObj.id as number }
     });
   }
 
@@ -32,6 +37,7 @@ class PostService {
       }
     }) as any;
   }
+
   async deletePostById(id: number): Promise<any> {
     await PostDbModel.destroy(
       {
@@ -40,6 +46,23 @@ class PostService {
     );
   }
 
-
+  getTopPostsAndCountAll(options: FindOptions): Promise<any> {
+    return TopPostsDbModel.findAll({
+      include: [{
+        model: PostDbModel,
+        as: 'post',
+        include: [
+          {
+            model: CategoryDbModel,
+            as: 'category',
+          },
+          {
+            model: UserDbModel,
+            as: 'user'
+          }]
+      }],
+      order: [[{ model: PostDbModel, as: 'post' }, { model: UserDbModel, as: 'user' }, 'created_at', 'DESC']]
+    }) as any;
+  }
 }
 export const postService = new PostService();

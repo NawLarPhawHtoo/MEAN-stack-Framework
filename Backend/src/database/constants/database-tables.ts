@@ -1,11 +1,13 @@
 export enum DataBaseTableNames {
-  CONSTANT = 'constants',
   USER = 'users',
-  POST = 'posts'
+  POST = 'posts',
+  CATEGOTY = 'categories',
+  TOP_POST = 'top_posts',
 }
 
 export enum DataBaseModelNames {
-  CONSTANT = 'constant',
   USER = 'user',
-  POST = 'post'
+  POST = 'post',
+  CATEGOTY = 'category',
+  TOP_POST = 'top_post',
 }

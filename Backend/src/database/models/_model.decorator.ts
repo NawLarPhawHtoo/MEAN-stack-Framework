@@ -2,7 +2,9 @@ import { Model } from "sequelize";
 
 enum DbModelNameEnum {
   UserDbModel,
-  PostDbModel
+  PostDbModel,
+  CategoryDbModel,
+  TopPostsDbModel
 }
 
 interface AllModels {
