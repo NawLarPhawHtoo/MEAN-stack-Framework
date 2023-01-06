@@ -1,10 +1,8 @@
-import { TopPostsDbModel } from './top-post.model';
 import { Model } from "sequelize";
 
 enum DbModelNameEnum {
   UserDbModel,
-  PostDbModel,
-  TopPostsDbModel
+  PostDbModel
 }
 
 interface AllModels {
