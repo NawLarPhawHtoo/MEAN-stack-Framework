@@ -1,27 +1,23 @@
-import { UserDbModel } from './user.model';
 import { DataTypes, Model, ModelAttributes } from 'sequelize';
 
 import { DataBaseModelNames, DataBaseTableNames } from '../constants';
 
 import { DbModelFieldInit } from '../db-structure.model';
 
-import { UserPostDbModel } from './user-post.model';
-
 import { db } from '../db.provider';
 
-import { AssociativeModel } from './_model.decorator';
+import { associative } from './associate.decorator';
 
 export interface IPostModel {
   id: number;
   category_id: number;
-  userId: number;
+  created_user_id: number;
   title: string;
   content: string;
   description: string;
   author: string;
   references: string;
   image: string;
-  // created_user_id: number;
   createdAt: string;
   updatedAt: string;
   deleteAt: string;
@@ -35,20 +31,16 @@ const modelAttributes: DbModelFieldInit<Partial<IPostModel>> = {
   },
   category_id: {
     type: DataTypes.INTEGER,
-    allowNull: false,
-    // references: {}
+    allowNull: false
   },
-  userId: {
+  created_user_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    // references: {
-    //   model: 'user',
-    //   key: 'id',
-    // },
+    references: {
+      model: 'user',
+      key: 'id'
+    }
   },
-  // created_user_id: {
-  //   type: DataTypes.INTEGER
-  // },
   title: {
     type: DataTypes.STRING,
     allowNull: false
@@ -75,12 +67,12 @@ const modelAttributes: DbModelFieldInit<Partial<IPostModel>> = {
   },
 
 };
-@AssociativeModel
+@associative
 export class PostDbModel extends Model {
   static associate({
     UserDbModel
   }: any) {
-    this.belongsTo(UserDbModel);
+    this.belongsTo(UserDbModel, { foreignKey: 'created_user_id', as: 'user' });
   }
 }
 

@@ -1,9 +1,6 @@
 import { UserDbModel } from './../models/user.model';
 import { Sequelize } from 'sequelize';
-import { ModelAttributes } from 'sequelize';
-import { QueryOptions } from 'sequelize';
-import { QueryInterface } from 'sequelize';
-import { DataTypes } from 'sequelize';
+import { ModelAttributes, QueryOptions, QueryInterface, DataTypes } from 'sequelize';
 
 import { DataBaseTableNames } from '../constants';
 
@@ -24,27 +21,10 @@ export default {
             type: DataTypes.INTEGER,
             allowNull: true
           },
-          userId: {
+          created_user_id: {
             type: DataTypes.INTEGER,
-            allowNull: true,
-            // references: {
-            //   model: UserDbModel,
-            //   key: 'id',
-            // },
+            allowNull: true
           },
-          // created_user_id: {
-          //   type: DataTypes.INTEGER,
-          //   allowNull: true,
-          // references: {
-          //   model: UserDbModel,
-          //   key: 'id',
-          // },
-          // references: {
-          //   model: UserDbModel,
-          //   key: 'id',
-          //   as: 'created_user_id',
-          // },
-          // },
           title: {
             type: DataTypes.STRING,
             allowNull: false,

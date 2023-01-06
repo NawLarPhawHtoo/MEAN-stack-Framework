@@ -1,9 +1,12 @@
 import { DataTypes, Model, ModelAttributes } from "sequelize";
 
 import { DataBaseTableNames, DataBaseModelNames } from "../constants";
+
 import { DbModelFieldInit } from "../db-structure.model";
+
 import { db } from '../db.provider';
-import { AssociativeModel } from './_model.decorator';
+
+import { associative } from './associate.decorator';
 
 export enum UserGenderEnum {
   MALE = 'male',
@@ -21,7 +24,6 @@ export interface IUserModel {
   name: string;
   email: string;
   password: string;
-  created_user_id: number;
   gender: UserGenderEnum;
   role: UserRoleEnum;
   phone: string;
@@ -49,9 +51,6 @@ const modelAttributes: DbModelFieldInit<Partial<IUserModel>> = {
   password: {
     type: DataTypes.STRING,
   },
-  created_user_id: {
-    type: DataTypes.INTEGER,
-  },
   gender: {
     type: DataTypes.ENUM,
     values: Object.values(UserGenderEnum)
@@ -73,14 +72,13 @@ const modelAttributes: DbModelFieldInit<Partial<IUserModel>> = {
 
 };
 
-@AssociativeModel
+@associative
 export class UserDbModel extends Model {
   static associate({
-    // UserPostDbModel
     PostDbModel
   }: any) {
 
-    this.hasMany(PostDbModel);
+    this.hasMany(PostDbModel, { foreignKey: 'created_user_id', as: 'user' });
   }
 }
 

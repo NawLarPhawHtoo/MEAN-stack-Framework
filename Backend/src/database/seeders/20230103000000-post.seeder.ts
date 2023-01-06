@@ -9,7 +9,7 @@ export default {
       [
         {
           category_id: 1,
-          userId: 1,
+          created_user_id: 1,
           title: 'Learning Node JS',
           content: 'Learning About Node JS Framework',
           description: 'Learning Node JS Framework',
@@ -21,7 +21,7 @@ export default {
         },
         {
           category_id: 2,
-          userId: 2,
+          created_user_id: 2,
           title: 'Learning Angular',
           content: 'Learing About Angular',
           description: 'Learning Angular',

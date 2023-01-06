@@ -1,9 +1,9 @@
-// import { UserDbModel } from './../models/user.model';
 import { DataTypes, ModelAttributes, QueryInterface, QueryOptions } from "sequelize";
 
 import { DataBaseTableNames } from "../constants";
 
 import { UserGenderEnum, UserRoleEnum } from "../models";
+
 import { migrationWrapper } from "../transactions";
 
 export default {
@@ -28,10 +28,6 @@ export default {
           password: {
             type: DataTypes.STRING,
             allowNull: false,
-          },
-          created_user_id:{
-            type: DataTypes.INTEGER,
-            allowNull: true
           },
           gender: {
             type: DataTypes.ENUM,

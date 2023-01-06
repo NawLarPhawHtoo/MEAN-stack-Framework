@@ -6,10 +6,6 @@ class UserService {
 
   getUserList(userAttributes?: Array<keyof IUserModel>, otherFindOptions?: FindOptions): Promise<any> {
     return UserDbModel.findAll({
-      // include: [{
-      //   model: PostDbModel,
-      //   // as: 'post',
-      // }],
       ...otherFindOptions,
       attributes: userAttributes
     });
