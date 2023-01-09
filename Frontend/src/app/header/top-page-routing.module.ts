@@ -1,11 +1,12 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from '@angular/router';
-import { HeaderComponent } from "./components/header";
+import { TopPageComponent } from "./components/top-page";
+// import { HeaderComponent } from "./components/header";
 
 const routes: Routes = [
     {
         path: '',
-        component: HeaderComponent,
+        component: TopPageComponent,
         children: [
             {
                 path: '',
