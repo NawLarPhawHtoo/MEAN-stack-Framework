@@ -8,7 +8,7 @@ import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/shared/models/user.model';
 import { UsersState } from '../../store/users/user.state';
-import { GetUsers } from '../../store/users/user.state.action';
+import { DeleteUser, GetUsers, SetSelectedUser } from '../../store/users/user.state.action';
 import { IUserStateModel } from '../../store/users/user.state.model';
 
 @Component({
@@ -40,7 +40,7 @@ export class UserListComponent implements OnInit {
     this.store.dispatch(new GetUsers());
 
     this.users$.subscribe((dist:any) =>{
-      this.userList = dist.data;
+      this.userList = dist;
       this.dataSource = new MatTableDataSource(this.userList);
       this.dataSource.paginator = this.paginator;
     })
@@ -52,10 +52,16 @@ export class UserListComponent implements OnInit {
       width: '40%',
       data: data,
     });
-    dialogRef.afterClosed().subscribe();
+    dialogRef.afterClosed().subscribe(()=>{
+      this.store.dispatch(new DeleteUser(data.id));
+      this.router.navigate(['/user'])
+    });
   }
 
-  onSearch() { }
+  editUserData(payload:User){
+    this.store.dispatch(new SetSelectedUser(payload));
+    this.router.navigate(['/user/edit/' + payload.id])
+  }
 
   onClickUserCreate() {
     this.router.navigate(['/user/create']);

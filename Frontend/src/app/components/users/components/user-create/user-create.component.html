@@ -61,9 +61,8 @@
 
     <div class="button-group">
       <button mat-flat-button type="submit" [disabled]="userForm.invalid" color="primary"
-        class="btn-submit">{{confirmView === true ? 'Confirm' : 'Create'}}</button>
-      <button mat-stroked-button type="button" (click)="clearData()" color="warn">{{confirmView === true ? 'Cancel' :
-        'Clear'}}</button>
+        class="btn-submit">Create</button>
+      <button mat-stroked-button type="button" (click)="clearData()" color="warn">Cancel</button>
     </div>
   </form>
 </div>

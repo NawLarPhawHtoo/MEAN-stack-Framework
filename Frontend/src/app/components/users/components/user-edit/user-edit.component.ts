@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { UsersState } from '../../store/users/user.state';
+import { SetSelectedUser } from '../../store/users/user.state.action';
+import { IUserStateModel } from '../../store/users/user.state.model';
 
 @Component({
   selector: 'app-user-edit',
@@ -8,7 +13,9 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./user-edit.component.scss']
 })
 export class UserEditComponent implements OnInit{
-  confirmView: boolean = false;
+
+  @Select(UsersState.getSelectedUser) selectedUser: Observable<IUserStateModel>;
+
   profileImage: any;
   Imageloaded: boolean = false;
   imgFile: any;
@@ -23,11 +30,12 @@ export class UserEditComponent implements OnInit{
   public userID: any;
   public user: any;
   public userForm!: FormGroup;
-  public existingUser: any;
+  public edituser:boolean =  false;
 
   constructor(
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private store: Store
   ) {
     this.userForm = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -42,6 +50,16 @@ export class UserEditComponent implements OnInit{
   }
 
   ngOnInit(): void {
+
+    this.selectedUser.subscribe((user:any) => {
+      if (user) {
+        this.userForm.patchValue({
+          name: user.name
+        });
+      } else {
+        this.edituser = false;
+      }
+    })
   }
 
   get myForm() {
@@ -57,20 +75,11 @@ export class UserEditComponent implements OnInit{
   }
 
   clearData() {
-    if (this.confirmView == true) {
-      this.userForm.controls['name'].enable();
-      this.userForm.controls['email'].enable();
-      this.userForm.controls['address'].enable();
-      this.userForm.controls['type'].enable();
-      this.userForm.controls['dob'].enable();
-      this.userForm.controls['phone'].enable();
-      this.confirmView = false;
-    } else {
       this.userForm.reset();
-    }
   }
 
   confirmUser() {
+
   }
 
   OnDateChange(event: any) {

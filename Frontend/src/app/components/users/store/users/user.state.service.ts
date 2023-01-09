@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/shared/models/user.model';
 import { environment } from 'src/environments/environment';
+import { IUserStateModel } from './user.state.model';
 
 @Injectable()
 export class UserStateService {
@@ -12,15 +13,15 @@ export class UserStateService {
     return this.httpClient.get(`${environment.apiUrl}/users`);
   }
 
-  createUser(payload: User[]): Observable<any> {
+  createUser(payload: IUserStateModel): Observable<any> {
     return this.httpClient.post(`${environment.apiUrl}/users`, payload);
   }
 
-  updateUser(payload: User[], id: any): Observable<any> {
+  updateUser(payload: IUserStateModel, id: number): Observable<any> {
     return this.httpClient.put(`${environment.apiUrl}/users/` + id, payload)
   }
 
-  deleteUser(id: any): Observable<any> {
+  deleteUser(id: number): Observable<any> {
     return this.httpClient.delete(`${environment.apiUrl}/users/` + id)
   }
 

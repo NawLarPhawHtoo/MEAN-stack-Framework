@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AddUser } from '../../store/users/user.state.action';
+import { Store } from '@ngxs/store';
 // import { MustMatch } from 'src/app/validators/must-match.validator';
 
 @Component({
@@ -31,7 +33,8 @@ export class UserCreateComponent {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private store : Store
   ) { }
 
   ngOnInit(): void {
@@ -61,22 +64,50 @@ export class UserCreateComponent {
   }
 
   clearData() {
-    if (this.confirmView == true) {
-      this.userForm.controls['name'].enable();
-      this.userForm.controls['email'].enable();
-      this.userForm.controls['password'].enable();
-      this.userForm.controls['confirmPwd'].enable();
-      this.userForm.controls['address'].enable();
-      this.userForm.controls['type'].enable();
-      this.userForm.controls['dob'].enable();
-      this.userForm.controls['phone'].enable();
-      this.confirmView = false;
-    } else {
+    // if (this.confirmView == true) {
+    //   this.userForm.controls['name'].enable();
+    //   this.userForm.controls['email'].enable();
+    //   this.userForm.controls['password'].enable();
+    //   this.userForm.controls['confirmPwd'].enable();
+    //   this.userForm.controls['address'].enable();
+    //   this.userForm.controls['type'].enable();
+    //   this.userForm.controls['dob'].enable();
+    //   this.userForm.controls['phone'].enable();
+    //   this.confirmView = false;
+    // } else {
       this.userForm.reset();
-    }
+    // }
   }
 
   confirmUser() {
+      // const formData = new FormData();
+      // formData.append('name', this.userForm.controls['name'].value);
+      // formData.append('email', this.userForm.controls['email'].value);
+      // formData.append('password', this.userForm.controls['password'].value);
+      // formData.append('type', this.userForm.controls['type'].value);
+      // formData.append('phone', this.userForm.controls['phone'].value);
+      // formData.append('address', this.userForm.controls['address'].value);
+      // formData.append('dob', this.userForm.controls['dob'].value);
+      // formData.append('profile', this.imgFile);
+      // formData.append('created_user_id', this.userInfo);
+
+      this.store.dispatch(new AddUser(this.userForm.value)).subscribe(()=>{
+        this.router.navigate(['/user'])
+      });
+    
+
+    // if (this.userForm.valid) {
+    //   this.userForm.controls['name'].disable();
+    //   this.userForm.controls['email'].disable();
+    //   this.userForm.controls['password'].disable();
+    //   this.userForm.controls['confirmPwd'].disable();
+    //   this.userForm.controls['address'].disable();
+    //   this.userForm.controls['type'].disable();
+    //   this.userForm.controls['dob'].disable();
+    //   this.userForm.controls['phone'].disable();
+    //   this.userForm.controls['profile'].disable();
+    //   this.confirmView = true;
+    // }
   }
 
   OnDateChange(event: any) {
