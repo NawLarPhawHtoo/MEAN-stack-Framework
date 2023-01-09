@@ -8,6 +8,7 @@ export default {
       [
         {
           name: 'James Smith',
+          profile: '',
           email: 'jamessmith@gmail.com',
           password: '12345678',
           gender: 'male',
@@ -20,6 +21,7 @@ export default {
         },
         {
           name: 'Rose Mary',
+          profile: '',
           email: 'rosemary@gmail.com',
           password: '12345678',
           gender: 'female',

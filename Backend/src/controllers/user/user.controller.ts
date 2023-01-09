@@ -1,13 +1,16 @@
 import autobind from 'autobind-decorator';
 
-import { Response, Request } from 'express';
+import { Response, Request, NextFunction } from 'express';
+import { IUserModel } from '../../database';
+
+import bcrypt from 'bcrypt';
 
 import { userService } from '../../services/user';
 
 @autobind
 class UserController {
 
-async getAllUsers(req: Request, res: Response) {
+  async getAllUsers(req: Request, res: Response,next:NextFunction) {
     const users = await userService.getUserList();
     return res.json({
       count: users.length,
@@ -15,8 +18,23 @@ async getAllUsers(req: Request, res: Response) {
     });
   }
 
-  async create(req: Request, res: Response) {
-    const userData = req.body as any;
+  async create(req: any, res: Response) {
+
+    let profile: string = req.body.profile;
+    if (req.files?.profile?.length > 0) {
+      profile = req.files?.profile[0]?.path.replaceAll("\\", "/");
+    }
+    const userData: IUserModel = {
+      name: req.body.name,
+      email: req.body.email,
+      password: await bcrypt.hash(req.body.password, 12),
+      gender: req.body.gender,
+      role: req.body.role,
+      phone: req.body.phone,
+      dob: req.body.dob,
+      address: req.body.address,
+      profile: profile
+    } as any;
 
     const result = await userService.createUser(userData);
 
@@ -26,13 +44,27 @@ async getAllUsers(req: Request, res: Response) {
     });
   }
 
-  async update(req: Request, res: Response) {
+  async update(req: any, res: Response) {
     const checkUser = await userService.getUserById(+req.params.id);
 
     if (!checkUser) {
       throw new Error('User not found');
     }
-    const userData = req.body as any;
+    let profile: string = req.body.profile;
+    if (req.files?.profile?.length > 0) {
+      profile = req.files?.profile[0]?.path.replaceAll("\\", "/");
+    }
+    const userData: IUserModel = {
+      name: req.body.name,
+      email: req.body.email,
+      password: await bcrypt.hash(req.body.password, 12),
+      gender: req.body.gender,
+      role: req.body.role,
+      phone: req.body.phone,
+      dob: req.body.dob,
+      address: req.body.address,
+      profile: profile
+    } as any;
     userData.id = +req.params.id;
     await userService.updateUser(userData);
 

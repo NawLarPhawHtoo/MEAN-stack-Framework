@@ -21,6 +21,10 @@ export default {
             type: DataTypes.STRING,
             allowNull: false,
           },
+          profile: {
+            type: DataTypes.STRING,
+            allowNull: true,
+          },
           email: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -38,15 +42,15 @@ export default {
             values: Object.values(UserRoleEnum),
             defaultValue: "USER"
           },
-          phone:{
+          phone: {
             type: DataTypes.STRING,
             allowNull: true,
           },
-          dob:{
+          dob: {
             type: DataTypes.DATE,
             allowNull: true,
           },
-          address:{
+          address: {
             type: DataTypes.STRING,
             allowNull: true,
           },

@@ -1,14 +1,18 @@
 import { Request } from "express";
+import passport from "passport";
+
+require('../config/passport');
 
 import { Router } from "./custom-router";
 
-import { userRouter,postRouter,categoryRouter } from "./v1";
+import { authRouter, userRouter, postRouter, categoryRouter } from "./v1";
 
 const v1ApiRoutes = new Router();
 
-const baseRouter =new  Router();
+const baseRouter = new Router();
 
 try {
+  v1ApiRoutes.use('/', authRouter);
   v1ApiRoutes.use('/users', userRouter);
   v1ApiRoutes.use('/posts', postRouter);
   v1ApiRoutes.use('/categories', categoryRouter);
@@ -22,5 +26,5 @@ try {
   throw err;
 }
 
-export const router=baseRouter.toExpressRequestHandler();
+export const router = baseRouter.toExpressRequestHandler();
 

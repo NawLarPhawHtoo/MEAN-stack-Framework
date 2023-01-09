@@ -4,7 +4,8 @@ enum DbModelNameEnum {
   UserDbModel,
   PostDbModel,
   CategoryDbModel,
-  TopPostsDbModel
+  TopPostsDbModel,
+  PasswordResetDbModel
 }
 
 interface AllModels {

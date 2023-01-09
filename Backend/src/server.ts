@@ -12,8 +12,10 @@ import multer, { FileFilterCallback } from 'multer';
 
 import { config } from './config';
 
-import { router } from './routes';
+import passport from 'passport';
 
+import { router } from './routes';
+import session from "express-session";
 import { v4 } from 'uuid';
 
 const fileStorage = multer.diskStorage({
@@ -22,7 +24,7 @@ const fileStorage = multer.diskStorage({
     if (_file?.fieldname == "image") {
       cb(null, "apiuploads/images");
     } else {
-      cb(null, "apiuploads/images");
+      cb(null, "apiuploads/profiles");
     }
   },
   filename: (_req, file, cb) => {
@@ -51,9 +53,14 @@ export default class Server {
     this.app.use(cors());
     this.app.use(helmet());
     this.app.use(bodyParser.json());
+    // this.app.use(session({ secret: 'secret' }))
     this.app.use(bodyParser.urlencoded({ extended: true }));
-    this.app.use(multer({ storage: fileStorage, fileFilter }).fields([{ name: 'image', maxCount: 1 }]));
+    this.app.use(multer({ storage: fileStorage, fileFilter }).fields([{ name: 'profile', maxCount: 1 }, { name: 'image', maxCount: 1 }]));
     this.app.use("/apiuploads", express.static("apiuploads"));
+
+    // this.app.use(passport.initialize());
+    // this.app.use(passport.session());
+
     this.app.use(router);
 
     this.app.set('views', __dirname + '/views');

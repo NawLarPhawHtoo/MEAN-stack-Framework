@@ -25,11 +25,11 @@ export class Router {
   delete(route: string, ...middlewares: any[]) {
     return this.methodWrapper(this.router.delete, route, ...middlewares);
   }
-  
+
   use(...middlewares: any[]) {
     return this.methodWrapper(this.router.use, ...middlewares);
   }
-  
+
   toExpressRequestHandler() {
     return this.router;
   }
@@ -54,6 +54,7 @@ export class Router {
         } catch (err) {
           return next(err);
         }
+        // next();
 
         // just to detect if its pipeline
         if ((res as any)._eventsCount > 2) {
