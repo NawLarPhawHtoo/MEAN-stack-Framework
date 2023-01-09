@@ -22,6 +22,7 @@ export enum UserRoleEnum {
 export interface IUserModel {
   id: number;
   name: string;
+  profile: string;
   email: string;
   password: string;
   gender: UserGenderEnum;
@@ -43,6 +44,10 @@ const modelAttributes: DbModelFieldInit<Partial<IUserModel>> = {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
+  },
+  profile: {
+    type: DataTypes.STRING,
+    allowNull: true,
   },
   email: {
     type: DataTypes.STRING,

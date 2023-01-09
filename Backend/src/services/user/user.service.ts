@@ -1,6 +1,6 @@
 import { FindOptions } from "sequelize";
 
-import { IUserModel,UserDbModel } from "../../database";
+import { IUserModel, UserDbModel } from "../../database";
 class UserService {
 
   getUserList(userAttributes?: Array<keyof IUserModel>, otherFindOptions?: FindOptions): Promise<any> {
@@ -25,6 +25,14 @@ class UserService {
     return UserDbModel.findOne({
       where: {
         id: user_id,
+      }
+    }) as any;
+  }
+
+ getUserByEmail(email: string): Promise<any> {
+    return UserDbModel.findOne({
+      where: {
+        email: email,
       }
     }) as any;
   }

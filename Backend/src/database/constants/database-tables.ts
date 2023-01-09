@@ -3,6 +3,7 @@ export enum DataBaseTableNames {
   POST = 'posts',
   CATEGOTY = 'categories',
   TOP_POST = 'top_posts',
+  PASSWORD_RESET = 'password_reset'
 }
 
 export enum DataBaseModelNames {
@@ -10,4 +11,5 @@ export enum DataBaseModelNames {
   POST = 'post',
   CATEGOTY = 'category',
   TOP_POST = 'top_post',
+  PASSWORD_RESET = 'password_reset'
 }
