@@ -72,7 +72,7 @@
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns" class="mat-header-row"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="mat-row"></tr>
-
     </table>
+    <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons aria-label="Select page of periodic elements"></mat-paginator>
   </div>
 </div>
