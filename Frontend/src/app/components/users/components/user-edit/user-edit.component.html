@@ -44,6 +44,12 @@
       <textarea matInput formControlName="address"></textarea>
     </mat-form-field>
 
+    <label>Old Profile</label>
+    <div *ngIf="profileImage">
+      <img [src]="profileImage" class="profileimg">
+    </div>
+    <br>
+    
     <label>New Profile</label>
     <div class="profileinput">
       <input type="file" (change)="imageUpload($event)" formControlName="profile" accept="image/*" maxFileSize=2000000>

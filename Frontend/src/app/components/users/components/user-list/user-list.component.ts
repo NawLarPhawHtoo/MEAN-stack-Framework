@@ -52,8 +52,8 @@ export class UserListComponent implements OnInit {
       width: '40%',
       data: data,
     });
-    dialogRef.afterClosed().subscribe((data:any)=>{
-      if(data){
+    dialogRef.afterClosed().subscribe((dist:any)=>{
+      if(dist){
         this.store.dispatch(new DeleteUser(data.id));
       }
     });

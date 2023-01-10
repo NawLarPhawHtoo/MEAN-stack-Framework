@@ -57,6 +57,7 @@ export class UserEditComponent implements OnInit {
         this.userForm.controls['dob'].patchValue(user.dob);
         this.userForm.controls['address'].patchValue(user.address);
         this.profileImage = 'http://localhost:3000/' + user.profile;
+        console.log(this.profileImage)
       }
     })
   }
