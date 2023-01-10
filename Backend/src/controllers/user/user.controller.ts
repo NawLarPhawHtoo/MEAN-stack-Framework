@@ -10,7 +10,7 @@ import { userService } from '../../services/user';
 @autobind
 class UserController {
 
-  async getAllUsers(req: Request, res: Response,next:NextFunction) {
+  async getAllUsers(req: Request, res: Response, next: NextFunction) {
     const users = await userService.getUserList();
     return res.json({
       count: users.length,
@@ -45,7 +45,8 @@ class UserController {
   }
 
   async update(req: any, res: Response) {
-    const checkUser = await userService.getUserById(+req.params.id);
+    const id = +req.params.id
+    const checkUser = await userService.getUserById(id);
 
     if (!checkUser) {
       throw new Error('User not found');
@@ -57,7 +58,6 @@ class UserController {
     const userData: IUserModel = {
       name: req.body.name,
       email: req.body.email,
-      password: await bcrypt.hash(req.body.password, 12),
       gender: req.body.gender,
       role: req.body.role,
       phone: req.body.phone,
@@ -66,7 +66,7 @@ class UserController {
       profile: profile
     } as any;
     userData.id = +req.params.id;
-    await userService.updateUser(userData);
+    await userService.updateUser(id,userData);
 
     res.json({
       message: 'User updated successfully',
@@ -88,6 +88,15 @@ class UserController {
       message: 'User deleted successfully',
       data: userData
     })
+  }
+
+  async findUser(req: any, res: Response) {
+    const users = await userService.getUserById(+req.params.id);
+    console.log(users);
+    return res.json({
+      message: 'User found successfully',
+      data: users
+    });
   }
 }
 

@@ -12,5 +12,5 @@ passport.use(new JwtStrategy({
   secretOrKey: 'secrect'
 },
   function (jwtPayload: any) {
-    return UserDbModel.findByPk(jwtPayload.id);
+    return UserDbModel.findOne(jwtPayload.id)
   }))

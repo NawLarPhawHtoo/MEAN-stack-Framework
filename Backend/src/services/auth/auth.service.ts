@@ -1,3 +1,4 @@
+import { PasswordResetDbModel } from './../../database/models/password.reset';
 import { IUserModel, UserDbModel } from "../../database";
 
 class AuthService {
@@ -30,6 +31,14 @@ class AuthService {
         email: email,
       }
     }) as any;
+  }
+
+  resetPassword(user_id: number): Promise<any> {
+    return UserDbModel.findByPk(user_id) as any;
+  }
+
+  changePassword(user_id: number): Promise<any> {
+    return UserDbModel.findByPk(user_id) as any;
   }
 }
 

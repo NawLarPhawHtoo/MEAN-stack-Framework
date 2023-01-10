@@ -4,5 +4,6 @@ export * from './user.model';
 export * from './post.model';
 export * from './category.model';
 export * from './top-post.model';
+export * from './password.reset';
 
 processAssociations();

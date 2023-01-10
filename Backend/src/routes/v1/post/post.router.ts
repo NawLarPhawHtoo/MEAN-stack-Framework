@@ -3,16 +3,18 @@ import { Router } from "../../custom-router";
 import { postController } from "../../../controllers/post";
 
 
-const router =new Router();
+const router = new Router();
 
-router.get('/top-posts',postController.getTopPosts)
+router.get('/top-posts', postController.getTopPosts)
 
-router.get('/',postController.getAllPosts);
+router.get('/all', postController.getAllPosts);
 
-router.post('/', postController.create)
+router.get('/find/:id', postController.findPost);
 
-router.patch('/:id', postController.update);
+router.post('/create', postController.create)
 
-router.delete('/:id', postController.deletePost);
+router.patch('/edit/:id', postController.update);
+
+router.delete('/delete/:id', postController.deletePost);
 
 export const postRouter = router;

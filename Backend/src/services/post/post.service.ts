@@ -24,9 +24,9 @@ class PostService {
     return createPost;
   }
 
-  async updatePost(postObj: Partial<IPostModel>): Promise<any> {
+  async updatePost(post_id:number,postObj: Partial<IPostModel>): Promise<any> {
     await PostDbModel.update(postObj, {
-      where: { id: postObj.id as number }
+      where: { id: post_id as number }
     });
   }
 

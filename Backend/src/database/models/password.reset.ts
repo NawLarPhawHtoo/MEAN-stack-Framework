@@ -25,6 +25,10 @@ const modelAttributes: DbModelFieldInit<Partial<IPasswordResetModel>> = {
   email: {
     type: DataTypes.STRING,
     allowNull: false,
+    references: {
+      model: 'user',
+      key: 'id'
+    }
   },
   token: {
     type: DataTypes.STRING,
@@ -34,10 +38,10 @@ const modelAttributes: DbModelFieldInit<Partial<IPasswordResetModel>> = {
 @associative
 export class PasswordResetDbModel extends Model {
   static associate({
-    // PostDbModel
+    UserDbModel
   }: any) {
 
-    // this.hasMany(PostDbModel, { foreignKey: 'created_user_id', as: 'user' });
+    this.hasMany(UserDbModel, { foreignKey: 'email', as: 'user' });
   }
 }
 
