@@ -52,9 +52,10 @@ export class UserListComponent implements OnInit {
       width: '40%',
       data: data,
     });
-    dialogRef.afterClosed().subscribe(()=>{
-      this.store.dispatch(new DeleteUser(data.id));
-      this.router.navigate(['/user'])
+    dialogRef.afterClosed().subscribe((data:any)=>{
+      if(data){
+        this.store.dispatch(new DeleteUser(data.id));
+      }
     });
   }
 

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MustMatch } from 'src/app/shared/directives/must-match.validator';
-// import { MustMatch } from 'src/app/validators/must-match.validator';
 
 @Component({
   selector: 'app-change-password',
