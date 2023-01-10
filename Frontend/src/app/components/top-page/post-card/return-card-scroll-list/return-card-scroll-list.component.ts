@@ -1,9 +1,5 @@
-// import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-// import { trackByIdFn } from '@shared/helpers';
-// import { IReturnExtended } from '@shared/models';
 
 @Component({
   selector: 'return-card-scroll-list',

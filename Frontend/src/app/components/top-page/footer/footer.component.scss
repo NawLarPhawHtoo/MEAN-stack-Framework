@@ -3,7 +3,7 @@
   overflow: hidden;
   color: #fff;
   font-size: 12px;
-  background: no-repeat padding-box rgba(13,16,15,.95);
+  background: no-repeat padding-box rgba(13, 16, 15, .95);
   backdrop-filter: blur(20px);
   margin-top: 40px;
 }
@@ -19,7 +19,7 @@
   grid-area: logo;
   grid-column: 1/2;
   grid-row: 2/3;
-  border-right: 2px solid rgba(255,255,255,.5);
+  border-right: 2px solid rgba(255, 255, 255, .5);
 }
 
 .grid-area-message {
@@ -30,13 +30,21 @@
   padding-left: 30px;
 }
 
-.grid-area-contact{
+.grid-area-contact {
   grid-area: contact;
   grid-column: 4/5;
   grid-row: 2/3;
   justify-self: flex-end;
   text-align: right;
   align-self: center;
+
+  a {
+    margin-bottom: 24px;
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    transition: box-shadow .3s ease-in;
+  }
 }
 
 .contact-title {
@@ -55,18 +63,34 @@
   justify-items: start;
   padding-left: 30px;
   font-weight: 500;
-  color: #fff;
+
+  a {
+    margin-bottom: 24px;
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    transition: box-shadow .3s ease-in;
+  }
 }
 
-.grid-area-product-link{
+.grid-area-product-link {
   grid-area: product-link;
   grid-column: 3/4;
   grid-row: 4/5;
   justify-self: center;
+
+  a {
+    margin-bottom: 24px;
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    transition: box-shadow .3s ease-in;
+  }
+
 }
 
-.description{
-  color:#8d8d8d;
+.description {
+  color: #8d8d8d;
   margin-top: 12px;
 }
 
@@ -79,7 +103,7 @@
   padding-top: 60px;
 }
 
-.grid-area-newsletter::before{
+.grid-area-newsletter::before {
   content: '';
   position: absolute;
   top: 0;
@@ -96,7 +120,7 @@
   margin-bottom: 13px;
 }
 
-.email-input{
+.email-input {
   margin-top: 40px;
 }
 
@@ -107,12 +131,34 @@
   align-items: stretch;
 }
 
+.email {
+  border-top-left-radius: 24px;
+  border-bottom-left-radius: 24px;
+  width: 234.5px;
+  height: 47px;
+  font-size: 12px;
+  color: #131915;
+  letter-spacing: 0;
+  padding-left: 27px;
+  border: none;
+}
+
 .input-group-append {
   margin-left: -1px;
   display: flex;
+  border-top-right-radius: 24px;
+  border-bottom-right-radius: 24px;
+  width: 80.5px;
+  height: 47px;
+  background: no-repeat padding-box #5d7c69;
+  border: none;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
 }
 
-.input-group-text{
+.input-group-text {
   border-top-right-radius: 24px;
   border-bottom-right-radius: 24px;
   width: 135.5px px;
