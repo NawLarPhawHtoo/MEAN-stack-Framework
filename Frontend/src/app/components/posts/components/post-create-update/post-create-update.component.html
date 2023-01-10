@@ -1,0 +1,41 @@
+<div class="post-container">
+  <h2>{{ pageTitle }}</h2>
+  <form [formGroup]="postForm" (ngSubmit)="confirmPost()" class="post-form">
+    <!-- Title -->
+    <mat-form-field appearance="outline" class="form-group">
+      <mat-label>Title</mat-label>
+      <input matInput type="text" formControlName="title" placeholder="Title" name="title">
+      <mat-error *ngIf="myError('title', 'required')">Title is required</mat-error>
+      <mat-error *ngIf="myError('title', 'maxlength')">Title must be less than 255 characters</mat-error>
+    </mat-form-field>
+    <!-- /Title -->
+
+    <!-- Description -->
+    <mat-form-field appearance="outline" class="form-group">
+      <mat-label>Description</mat-label>
+      <textarea matInput rows="5" class="description" formControlName="description" name="description"
+        placeholder="Description"></textarea>
+      <mat-error *ngIf="myError('description', 'required')">Description is required</mat-error>
+    </mat-form-field>
+    <!-- /Description -->
+
+    <!-- /Photo -->
+    <input #file type="file" (change)="imageUpload($event)" formControlName="photo" accept="image/*"
+      maxFileSize=2000000>
+    <div  *ngIf="myError('photo', 'required')">
+      <mat-error  *ngIf="myError('photo', 'required')" class="photoerror">Profile can't be blank.
+      </mat-error>
+    </div>
+    <div *ngIf="postImg">
+      <img [src]="postImg" width="100" height="100" class="postImg">
+    </div>
+    <!-- /Photo -->
+
+    <div class="button-group">
+      <button mat-flat-button [disabled]="postForm.invalid" color="primary" class="btn-submit">{{confirmView === true ?
+        'Confirm' : buttonName}}</button>
+      <button mat-stroked-button type="button" (click)="clearData()" color="warn">{{confirmView === true ? 'Cancel' :
+        'Clear'}}</button>
+    </div>
+  </form>
+</div>
