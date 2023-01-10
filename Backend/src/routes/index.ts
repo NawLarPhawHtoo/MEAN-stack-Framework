@@ -1,7 +1,4 @@
 import { Request } from "express";
-import passport from "passport";
-
-require('../config/passport');
 
 import { Router } from "./custom-router";
 

@@ -8,9 +8,9 @@ export const sendEmail = async (email:any, subject:any, text:any) => {
       port: 587,
       secure: true,
       auth: {
-        user: "larphawhtoo6@gmail.com",
-        pass: "gbhgasqbwtuzccce",
-      },
+            user:process.env.USER,
+            pass:process.env.PASSWORD
+          }
     });
     await transporter.sendMail({
       from: "larphawhtoo6@gmail.com",

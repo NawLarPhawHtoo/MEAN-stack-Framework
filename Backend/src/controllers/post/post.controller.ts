@@ -59,12 +59,13 @@ class PostController {
   }
 
   async update(req: any, res: Response) {
-    const checkPost = await postService.getPostById(+req.params.id);
+    const id = +req.params.id
+    const checkPost = await postService.getPostById(id);
 
     if (!checkPost) {
       throw new Error('Post not found');
     }
-  
+
     let image: string = req.body.image;
     if (req.files?.image?.length > 0) {
       image = req.files.image[0].path.replace("\\", "/");
@@ -82,12 +83,12 @@ class PostController {
       description: req.body.description,
       author: req.body.author,
       references: req.body.references,
-      image:image
+      image: image
     } as any;
 
     postData.id = +req.params.id;
-    await postService.updatePost(postData);
-  
+    await postService.updatePost(id, postData);
+
     res.json({
       message: 'Post updated successfully',
       data: postData
@@ -106,6 +107,16 @@ class PostController {
 
     res.json({
       message: 'Post deleted successfully',
+      data: postData
+    })
+  }
+
+  async findPost(req: Request, res: Response) {
+    const post_id = +req.params.id;
+    const postData = await postService.getPostById(post_id);
+    console.log(postData);
+    res.json({
+      message: 'Find Post successfully',
       data: postData
     })
   }
