@@ -11,6 +11,7 @@ import { authService } from "../../services/auth/auth.service";
 import { IUserModel, UserDbModel } from "../../database";
 // import { PasswordResetDbModel,IPasswordResetModel } from '../../database/models/password.reset';
 import { sendEmail } from './../../utils/sendEmail';
+import { STRING } from 'sequelize';
 // import { userService } from "../../services/user";
 
 @autobind
@@ -73,20 +74,26 @@ class AuthController {
     try {
       const email = req.body.email as any;
       const user = await authService.forgotPassword(email);
-      // console.log(user);
       if (!user)
         return res.status(401).send("Email does not exist");
-      console.log('......User Id.....', user.id);
-      // let token = await UserDbModel.findOne(user.email)
-      // console.log(token);
-      // if (!token) {
-      //   token = await new UserDbModel({
-      //     email: req.body.email,
-      //     token: crypto.randomBytes(16).toString("hex"),
-      //   }).save();
-      // }
-      // const link = `${process.env.BASE_URL}/forget-password-update/${user.id}/${token}`;
-      // await sendEmail(user.email, "Password reset", link);
+      console.log(user.id);
+      const id: number = user.id;
+      let data: any = await UserDbModel.findByPk(id);
+
+      if (!data.token) {
+        const email = req.body.email;
+        console.log(email);
+        const token = crypto.randomBytes(16).toString('hex')
+        console.log('....Token.....', token);
+
+        data = await new PasswordResetDbModel({
+          email: email,
+          token: token,
+        }).save();
+      }
+      console.log('....Data.....', data);
+      const link = `${process.env.BASE_URL}/forgot-password-update/${user.id}/${data.token}`;
+      await sendEmail(user.email, "Password reset", link);
 
       res.status(200).json({
         message: "Password reset link sent to your email account"
@@ -95,6 +102,93 @@ class AuthController {
       res.send("An error occured");
     }
   }
+
+  async resetPassword(req: any, res: Response): Promise<any> {
+    try {
+      let id = req.params.id;
+      if (isNaN(id)) {
+        id = Number(req.params.id)
+      }
+      console.log(id);
+      const user = await authService.resetPassword(id);
+    
+      if (!user) return res.status(401).send("User Id does not exist");
+
+      const token = req.params.token;
+      console.log(token);
+
+      const passwordReset = await PasswordResetDbModel.findOne({
+        where: { token: token }
+      });
+      console.log(passwordReset);
+
+      if (!passwordReset) return res.status(401).send("Invalid link or expired");
+      console.log(req.body.password);
+
+      user.password = await bcrypt.hash(req.body.password, 12);
+      await user.save();
+      console.log(user);
+      
+      res.json({
+        message: "Password reset sucessfully."
+      });
+    } catch (error) {
+      res.send("An error occured");
+    }
+  }
+
+  async changePassword(req: any, res: Response): Promise<any> {
+    try {
+      let id = req.params.id;
+      if (isNaN(id)) {
+        id = Number(req.params.id)
+      }
+      console.log(id);
+      await authService.changePassword(id)
+        .then(async (user: any) => {
+          if (!user) {
+            return res.status(404).send({
+              success: false,
+              message: 'Could not find user'
+            })
+          }
+
+          const token = req.params.token;
+          console.log(token);
+
+          const passwordReset = await PasswordResetDbModel.findOne({
+            where: { token: token }
+          });
+          console.log(passwordReset);
+
+          if (!token) return res.status(401).send("Unauthorized");
+
+          console.log('User Password', user.password);
+          if (!compareSync(req.body.oldPassword, user.password)) {
+            return res.send({
+              success: false,
+              message: 'Incorrect password'
+            });
+          }
+
+          if (compareSync(req.body.newPassword, user.password)) {
+            return res.send({
+              success: false,
+              message: 'Current Password and New Password are same.'
+            });
+          }
+
+          user.password = await bcrypt.hash(req.body.newPassword, 12);
+          console.log(user.password);
+          await user.save();
+          await passwordReset?.destroy();
+          res.json({ message: "Password Change Successfully!" });
+        })
+    } catch (error) {
+      res.send("An error occured");
+    }
+  }
+
 }
 
 export const authController = new AuthController();

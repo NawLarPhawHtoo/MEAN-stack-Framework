@@ -15,9 +15,9 @@ class UserService {
     return createUser;
   }
 
-  async updateUser(userObj: Partial<IUserModel>): Promise<any> {
+  async updateUser(user_id:number,userObj: Partial<IUserModel>): Promise<any> {
     await UserDbModel.update(userObj, {
-      where: { id: userObj.id as number }
+      where: { id: user_id as number }
     });
   }
 
@@ -29,7 +29,7 @@ class UserService {
     }) as any;
   }
 
- getUserByEmail(email: string): Promise<any> {
+  getUserByEmail(email: string): Promise<any> {
     return UserDbModel.findOne({
       where: {
         email: email,
@@ -45,4 +45,5 @@ class UserService {
     );
   }
 }
+
 export const userService = new UserService();
