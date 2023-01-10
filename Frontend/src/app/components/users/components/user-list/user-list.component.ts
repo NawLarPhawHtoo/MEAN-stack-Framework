@@ -7,9 +7,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/shared/models/user.model';
-import { UsersState } from '../../store/users/user.state';
 import { DeleteUser, GetUsers, SetSelectedUser } from '../../store/users/user.state.action';
 import { IUserStateModel } from '../../store/users/user.state.model';
+import { UsersState } from '../../store/users/user.state';
 
 @Component({
   selector: 'app-user-list',

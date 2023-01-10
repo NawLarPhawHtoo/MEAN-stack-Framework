@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxsModule } from '@ngxs/store';
-import { UsersState } from './components/users/store/users/user.state';
 import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 
