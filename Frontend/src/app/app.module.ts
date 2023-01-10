@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxsModule } from '@ngxs/store';
 import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
+import {ScrollingModule} from '@angular/cdk/scrolling';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     BrowserAnimationsModule,
     NgxsModule.forRoot([], { developmentMode: !environment.production }),
-    HttpClientModule
+    HttpClientModule,
+    ScrollingModule
   ],
 
   providers: [],
