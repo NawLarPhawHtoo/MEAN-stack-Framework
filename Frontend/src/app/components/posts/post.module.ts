@@ -5,6 +5,7 @@ import { PostRoutingModule } from './post-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PostCreateUpdateComponent, PostDeleteDialogComponent, PostListComponent, PostPageComponent } from './components';
 import { AngularMaterialModule } from 'src/app/angular-material.module';
+import { PostStateModule } from './store/posts/post.state.module';
 
 const COMPONENTS = [
   PostPageComponent,
@@ -20,7 +21,8 @@ const COMPONENTS = [
     PostRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    PostStateModule
   ]
 })
 export class PostModule { }

@@ -1,0 +1,15 @@
+.mask {
+  background-color: rgba(0, 0, 0, 0.7);
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+}
+
+#intro-example {
+  height: 500px;
+  background-image: url('../../../../assets/images/programming_bg_img.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  margin-top: 40px;
+  color: inherit;
+}
