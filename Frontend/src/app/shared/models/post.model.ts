@@ -1,10 +1,11 @@
-export interface Post {
+export class Post {
   id: number;
-  created_id: number;
+  category_id: number;
+  created_user_id: number;
   title: string;
-  description: string;
-  references: string;
   content: string;
+  description: string;
   author: string;
+  references: string;
   image: string;
 }
