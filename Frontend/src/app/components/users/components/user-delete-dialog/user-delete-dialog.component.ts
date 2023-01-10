@@ -9,7 +9,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class UserDeleteDialogComponent implements OnInit{
   id?: string;
   name?: string;
-  type?: string;
+  role?: string;
   email?: string;
   phone?: string;
   dob?: string;

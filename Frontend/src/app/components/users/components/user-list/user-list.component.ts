@@ -52,13 +52,14 @@ export class UserListComponent implements OnInit {
       width: '40%',
       data: data,
     });
-    dialogRef.afterClosed().subscribe(()=>{
-      this.store.dispatch(new DeleteUser(data.id));
-      this.router.navigate(['/user'])
+    dialogRef.afterClosed().subscribe((dist:any)=>{
+      if(dist){
+        this.store.dispatch(new DeleteUser(data.id));
+      }
     });
   }
 
-  editUserData(payload:User){
+  editUserData(payload:User,){
     this.store.dispatch(new SetSelectedUser(payload));
     this.router.navigate(['/user/edit/' + payload.id])
   }

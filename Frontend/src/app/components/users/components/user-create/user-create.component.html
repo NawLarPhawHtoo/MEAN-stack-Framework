@@ -31,8 +31,8 @@
     </mat-form-field>
 
     <mat-form-field class="form-group" appearance="outline">
-      <mat-label>Type</mat-label>
-      <mat-select matNativeControl name="type" formControlName="type" required>
+      <mat-label>Role</mat-label>
+      <mat-select matNativeControl name="role" formControlName="role" required>
         <mat-option *ngFor="let selectOption of typeOption" [value]="selectOption.enum"> {{selectOption.enum}}
         </mat-option>
       </mat-select>
@@ -58,6 +58,17 @@
       <mat-label>Address</mat-label>
       <textarea matInput formControlName="address"></textarea>
     </mat-form-field>
+
+    <label>Profile</label>
+    <input #file type="file" (change)="imageUpload($event)" formControlName="profile" accept="image/*"
+      maxFileSize=2000000>
+    <div *ngIf="myForm['profile'].invalid  && (myForm['profile'].dirty || myForm['profile'].touched || submitted)">
+      <mat-error *ngIf="myForm['profile'].hasError('required')" class="profileerror">Profile can't be blank.
+      </mat-error>
+    </div>
+    <div *ngIf="profileImage">
+      <img [src]="profileImage" width="100" height="100" class="profileimg">
+    </div>
 
     <div class="button-group">
       <button mat-flat-button type="submit" [disabled]="userForm.invalid" color="primary"
