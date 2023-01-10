@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./top-page.component.scss']
 })
 export class TopPageComponent {
-
+  
 }

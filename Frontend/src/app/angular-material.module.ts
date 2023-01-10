@@ -19,6 +19,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTabsModule } from '@angular/material/tabs';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatRadioModule,
     MatSelectModule,
     MatPaginatorModule,
-    MatTabsModule
+    MatTabsModule,
+    ScrollingModule
   ],
 })
 export class AngularMaterialModule { }
