@@ -64,8 +64,7 @@ const modelAttributes: DbModelFieldInit<Partial<IPostModel>> = {
   image: {
     type: DataTypes.TEXT,
     allowNull: true
-  },
-
+  }
 };
 @associative
 export class PostDbModel extends Model {

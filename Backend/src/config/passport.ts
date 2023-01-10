@@ -1,6 +1,6 @@
-import passport, { use } from "passport";
+import passport from "passport";
 
-import passportJWT, { Strategy } from "passport-jwt";
+import passportJWT from "passport-jwt";
 
 import { UserDbModel } from "../database";
 
@@ -11,6 +11,10 @@ passport.use(new JwtStrategy({
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: 'secrect'
 },
-  function (jwtPayload: any) {
-    return UserDbModel.findOne(jwtPayload.id)
-  }))
+  async function (jwtPayload: any, cb: any) {
+
+    const user = await UserDbModel.findByPk(jwtPayload.id);
+
+    return cb(null, user);
+  }
+));

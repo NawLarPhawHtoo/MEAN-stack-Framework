@@ -1,18 +1,12 @@
-import { PasswordResetDbModel } from './../../database/models/password.reset';
-// import { sendEmail } from './../../utils/sendEmail';
-// import { IPasswordResetModel } from './../../database/models/password.reset';
-// import { UserDbModel } from './../../database/models/user.model';
 import autobind from "autobind-decorator";
 import { Response } from "express";
 import bcrypt, { compareSync } from "bcrypt";
 import crypto from "crypto";
 import jwt from 'jsonwebtoken';
 import { authService } from "../../services/auth/auth.service";
-import { IUserModel, UserDbModel } from "../../database";
-// import { PasswordResetDbModel,IPasswordResetModel } from '../../database/models/password.reset';
+import { IUserModel, UserDbModel,PasswordResetDbModel} from "../../database";
+
 import { sendEmail } from './../../utils/sendEmail';
-import { STRING } from 'sequelize';
-// import { userService } from "../../services/user";
 
 @autobind
 
@@ -52,8 +46,6 @@ class AuthController {
     const payload = {
       email: userData.email,
       id: userData.id
-      // email: await bcrypt.hash(userData.email, 12),
-      // id: await bcrypt.hash(userData.id, 12)
     }
     const token = jwt.sign(payload, 'secrect', { expiresIn: '1d' });
 
@@ -76,15 +68,13 @@ class AuthController {
       const user = await authService.forgotPassword(email);
       if (!user)
         return res.status(401).send("Email does not exist");
-      console.log(user.id);
+
       const id: number = user.id;
       let data: any = await UserDbModel.findByPk(id);
 
       if (!data.token) {
         const email = req.body.email;
-        console.log(email);
-        const token = crypto.randomBytes(16).toString('hex')
-        console.log('....Token.....', token);
+        const token = crypto.randomBytes(16).toString('hex');
 
         data = await new PasswordResetDbModel({
           email: email,
@@ -109,25 +99,21 @@ class AuthController {
       if (isNaN(id)) {
         id = Number(req.params.id)
       }
-      console.log(id);
+  
       const user = await authService.resetPassword(id);
     
       if (!user) return res.status(401).send("User Id does not exist");
 
       const token = req.params.token;
-      console.log(token);
 
       const passwordReset = await PasswordResetDbModel.findOne({
         where: { token: token }
       });
-      console.log(passwordReset);
 
       if (!passwordReset) return res.status(401).send("Invalid link or expired");
-      console.log(req.body.password);
 
       user.password = await bcrypt.hash(req.body.password, 12);
       await user.save();
-      console.log(user);
       
       res.json({
         message: "Password reset sucessfully."
@@ -136,59 +122,6 @@ class AuthController {
       res.send("An error occured");
     }
   }
-
-  async changePassword(req: any, res: Response): Promise<any> {
-    try {
-      let id = req.params.id;
-      if (isNaN(id)) {
-        id = Number(req.params.id)
-      }
-      console.log(id);
-      await authService.changePassword(id)
-        .then(async (user: any) => {
-          if (!user) {
-            return res.status(404).send({
-              success: false,
-              message: 'Could not find user'
-            })
-          }
-
-          const token = req.params.token;
-          console.log(token);
-
-          const passwordReset = await PasswordResetDbModel.findOne({
-            where: { token: token }
-          });
-          console.log(passwordReset);
-
-          if (!token) return res.status(401).send("Unauthorized");
-
-          console.log('User Password', user.password);
-          if (!compareSync(req.body.oldPassword, user.password)) {
-            return res.send({
-              success: false,
-              message: 'Incorrect password'
-            });
-          }
-
-          if (compareSync(req.body.newPassword, user.password)) {
-            return res.send({
-              success: false,
-              message: 'Current Password and New Password are same.'
-            });
-          }
-
-          user.password = await bcrypt.hash(req.body.newPassword, 12);
-          console.log(user.password);
-          await user.save();
-          await passwordReset?.destroy();
-          res.json({ message: "Password Change Successfully!" });
-        })
-    } catch (error) {
-      res.send("An error occured");
-    }
-  }
-
 }
 
 export const authController = new AuthController();

@@ -1,8 +1,3 @@
-
-import path from 'path';
-
-// import convict from 'convict';
-
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -22,5 +17,4 @@ export const config = {
   DB_NAME: process.env.DB_NAME || 'nodejs',
   DB_PASSWORD: process.env.DB_PASSWORD || 'root',
   DB_USERNAME: process.env.DB_USERNAME || 'root',
-
 }

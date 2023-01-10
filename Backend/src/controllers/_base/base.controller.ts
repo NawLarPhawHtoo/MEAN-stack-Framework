@@ -1,5 +1,4 @@
 export interface IController { }
-
 export abstract class BaseController<T> implements IController {
   protected readonly services: T;
 

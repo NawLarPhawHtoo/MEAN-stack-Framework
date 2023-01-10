@@ -1,6 +1,7 @@
 import autobind from 'autobind-decorator';
 
 import { Response, Request, NextFunction } from 'express';
+
 import { IUserModel } from '../../database';
 
 import bcrypt from 'bcrypt';
@@ -10,7 +11,7 @@ import { userService } from '../../services/user';
 @autobind
 class UserController {
 
-  async getAllUsers(req: Request, res: Response, next: NextFunction) {
+  async getAllUsers(req: Request, res: Response) {
     const users = await userService.getUserList();
     return res.json({
       count: users.length,
@@ -66,7 +67,7 @@ class UserController {
       profile: profile
     } as any;
     userData.id = +req.params.id;
-    await userService.updateUser(id,userData);
+    await userService.updateUser(id, userData);
 
     res.json({
       message: 'User updated successfully',
@@ -77,7 +78,6 @@ class UserController {
   async deleteUser(req: Request, res: Response) {
     const user_id = +req.params.id;
     const userData = await userService.getUserById(user_id);
-    console.log(userData);
 
     if (!userData) {
       throw new Error('User is not found');
@@ -92,11 +92,51 @@ class UserController {
 
   async findUser(req: any, res: Response) {
     const users = await userService.getUserById(+req.params.id);
-    console.log(users);
+
     return res.json({
       message: 'User found successfully',
       data: users
     });
+  }
+
+  async changePassword(req: any, res: Response) {
+    try {
+      const user_id = +req.params.id;
+
+      const user: any = await userService.getUserById(user_id);
+
+      const { oldPassword, newPassword, confirmPassword } = req.body as any;
+
+      //Check required fields
+      if (!oldPassword || !newPassword || !confirmPassword) {
+        res.json({ message: "Please fill in all fields." });
+      }
+      //Check passwords match
+      if (newPassword !== confirmPassword) {
+        res.json({ message: "New password do not match." });
+      } else {
+        //Validation Passed
+        const isMatch = await bcrypt.compare(oldPassword, user.password);
+        console.log(isMatch);
+        if (isMatch) {
+          //Update password for user with new password
+          bcrypt.genSalt(12, (err, salt) =>
+            bcrypt.hash(newPassword, salt, (err, hash) => {
+              if (err) {
+                throw err;
+              }
+              user.password = hash;
+              user.save();
+            })
+          );
+          res.json({ message: "Password Successfully Updated!", data: user, status: 1 });
+        } else {
+          res.json({ message: "Current Password is not match." })
+        }
+      }
+    } catch (err) {
+      res.json({ message: "Password does not match" });
+    }
   }
 }
 

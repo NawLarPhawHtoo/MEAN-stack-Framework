@@ -42,7 +42,6 @@ const modelAttributes: DbModelFieldInit<Partial<ITopPostsModel>> = {
     type: DataTypes.DATE
   }
 };
-
 @associative
 export class TopPostsDbModel extends Model {
   public id!: number;
