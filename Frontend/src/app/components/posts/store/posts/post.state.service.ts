@@ -9,7 +9,11 @@ export class PostStateService {
   constructor(private httpClient: HttpClient) { }
 
   public getPost(): Observable<any> {
-    return this.httpClient.get(`${environment.apiUrl}/posts`);
+    return this.httpClient.get(`${environment.apiUrl}/posts/all`);
+  }
+
+  public getTopPost(): Observable<any> {
+    return this.httpClient.get(`${environment.apiUrl}/posts/top-posts`);
   }
 
   public createPost(payload: IPostStateModel): Observable<any> {
