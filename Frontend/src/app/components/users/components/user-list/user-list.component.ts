@@ -58,7 +58,7 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  editUserData(payload:User){
+  editUserData(payload:User,){
     this.store.dispatch(new SetSelectedUser(payload));
     this.router.navigate(['/user/edit/' + payload.id])
   }

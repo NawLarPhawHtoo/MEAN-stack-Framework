@@ -5,11 +5,6 @@ import { AddUser, DeleteUser, GetUsers, SetSelectedUser, UpdateUser } from './us
 import { IUserStateModel } from './user.state.model';
 import { UserStateService } from './user.state.service';
 
-// export class IUserStateModel {
-//     users!: User[];
-//     // selectedUser: User;
-// }
-
 @State<IUserStateModel>({
     name: 'users',
     defaults: {
@@ -56,11 +51,11 @@ export class UsersState {
     }
 
     @Action(UpdateUser)
-    updateUser({getState, setState}: StateContext<IUserStateModel>, {payload, id}: UpdateUser) {
-        return this.userService.updateUser(payload, id).pipe(tap((result) => {
+    updateUser({getState, setState}: StateContext<IUserStateModel>, {payload,id}: UpdateUser) {
+        return this.userService.updateUser(payload,id).pipe(tap((result) => {
             const state = getState();
             const userList = [...state.users];
-            const userIndex = userList.findIndex(item => item.id === id);
+            const userIndex = userList.findIndex(item => item.id === payload.id);
             userList[userIndex] = result;
             setState({
                 ...state,

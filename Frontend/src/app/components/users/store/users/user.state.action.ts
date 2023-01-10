@@ -4,7 +4,7 @@ import { IUserStateModel } from "./user.state.model";
 export class AddUser {
     static readonly type = '[User] Add';
 
-    constructor(public payload: IUserStateModel) {
+    constructor(public payload: any) {
     }
 }
 
@@ -15,7 +15,7 @@ export class GetUsers {
 export class UpdateUser {
     static readonly type = '[User] Update';
 
-    constructor(public payload: IUserStateModel, public id: number) {
+    constructor(public payload: any,public id :number) {
     }
 }
 

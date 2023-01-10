@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MustMatch } from 'src/app/shared/directives/must-match.validator';
 // import { MustMatch } from 'src/app/validators/must-match.validator';
 
 @Component({
@@ -28,7 +29,10 @@ export class ChangePasswordComponent implements OnInit {
     this.passwordForm = this.fb.group({
       oldPassword: ['', [Validators.required]],
       newPassword: ['', [Validators.required, Validators.pattern('^(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9]{8,}$')]],
-      confirmPassword: ['', [Validators.required]]
+      confirmPassword: ['', [Validators.required,MustMatch]]
+    },
+    {
+      validator: MustMatch('password', 'confirmPwd')
     });
     this.userInfo = localStorage.getItem('userLoginData') || "";
     this.userId = JSON.parse(this.userInfo)._id;

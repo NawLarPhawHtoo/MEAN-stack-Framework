@@ -17,8 +17,8 @@ export class UserStateService {
     return this.httpClient.post(`${environment.apiUrl}/users`, payload);
   }
 
-  updateUser(payload: IUserStateModel, id: number): Observable<any> {
-    return this.httpClient.put(`${environment.apiUrl}/users/` + id, payload)
+  updateUser(payload: any,id : number): Observable<any> {
+    return this.httpClient.patch(`${environment.apiUrl}/users/` + id, payload)
   }
 
   deleteUser(id: number): Observable<any> {
