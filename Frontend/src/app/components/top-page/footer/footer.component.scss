@@ -19,11 +19,10 @@
   grid-area: logo;
   grid-column: 1/2;
   grid-row: 2/3;
-  border-right: 2px solid rgba(255, 255, 255, .5);
 }
 
 .grid-area-message {
-  grid-area: tells-message;
+  grid-area: message;
   grid-column: 2/3;
   grid-row: 2/3;
   align-self: center;
