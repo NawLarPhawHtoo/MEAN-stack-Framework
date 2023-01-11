@@ -24,7 +24,6 @@ export class UserEditComponent implements OnInit {
   ];
   pickDate: any;
   today = new Date();
-  userData: any;
   public user: any;
   public userForm!: FormGroup;
 
