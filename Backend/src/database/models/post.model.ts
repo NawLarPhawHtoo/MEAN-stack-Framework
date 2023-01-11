@@ -55,7 +55,7 @@ const modelAttributes: DbModelFieldInit<Partial<IPostModel>> = {
   },
   author: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   },
   references: {
     type: DataTypes.STRING,
