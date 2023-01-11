@@ -4,12 +4,14 @@ import { categoryController } from "../../../controllers/category";
 
 const router = new Router();
 
-router.get('/', categoryController.getAllCategories);
+router.get('/all', categoryController.getAllCategories);
 
-router.post('/', categoryController.create)
+router.get('/find/:id', categoryController.findCategory);
 
-router.patch('/:id', categoryController.update);
+router.post('/create', categoryController.create)
 
-router.delete('/:id', categoryController.deleteCategory);
+router.patch('/edit/:id', categoryController.update);
+
+router.delete('/delete/:id', categoryController.deleteCategory);
 
 export const categoryRouter = router;

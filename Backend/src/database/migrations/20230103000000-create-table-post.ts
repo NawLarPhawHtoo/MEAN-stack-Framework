@@ -1,5 +1,3 @@
-// import { UserDbModel } from './../models/user.model';
-// import { Sequelize } from 'sequelize';
 import { ModelAttributes, QueryOptions, QueryInterface, DataTypes } from 'sequelize';
 
 import { DataBaseTableNames } from '../constants';

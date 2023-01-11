@@ -1,7 +1,5 @@
 import { config } from "./config";
 
-// const { username, password, name: database, host, port } = config.get('db');
-
 module.exports = {
   local: {
     username: config.DB_USERNAME || 'root',

@@ -1,4 +1,3 @@
-import { PasswordResetDbModel } from './../../database/models/password.reset';
 import { IUserModel, UserDbModel } from "../../database";
 
 class AuthService {

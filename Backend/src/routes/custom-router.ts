@@ -54,7 +54,7 @@ export class Router {
         } catch (err) {
           return next(err);
         }
-        // next();
+        next();
 
         // just to detect if its pipeline
         if ((res as any)._eventsCount > 2) {

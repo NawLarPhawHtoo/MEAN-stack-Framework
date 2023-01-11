@@ -14,4 +14,6 @@ router.delete('/delete/:id', userController.deleteUser);
 
 router.get('/find/:id', userController.findUser);
 
+router.post('/change-password/:id', userController.changePassword);
+
 export const userRouter = router;

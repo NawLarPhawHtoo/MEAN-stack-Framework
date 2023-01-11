@@ -38,7 +38,6 @@ const modelAttributes: DbModelFieldInit<Partial<ICategoryModel>> = {
     type: DataTypes.TEXT
   }
 };
-
 @associative
 export class CategoryDbModel extends Model {
   static associate({

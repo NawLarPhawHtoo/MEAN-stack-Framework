@@ -34,13 +34,11 @@ const modelAttributes: DbModelFieldInit<Partial<IPasswordResetModel>> = {
     type: DataTypes.STRING,
   },
 };
-
 @associative
 export class PasswordResetDbModel extends Model {
   static associate({
     UserDbModel
   }: any) {
-
     this.hasMany(UserDbModel, { foreignKey: 'email', as: 'user' });
   }
 }
