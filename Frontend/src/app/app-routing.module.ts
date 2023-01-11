@@ -4,6 +4,10 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
+    loadChildren: () => import('./components/login/login.module').then(mod => mod.LoginModule)
+  },
+  {
+    path: 'top-page',
     loadChildren: () => import('./components/top-page/top-page.module').then(mod => mod.TopPageModule)
   },
   {

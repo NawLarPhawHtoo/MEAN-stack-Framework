@@ -6,11 +6,13 @@ const routes: Routes = [
   {
     path: '',
     component: TopPageComponent,
-    //children: [
-    //  {
-    //    path: 'top-page'
-    //  }
-    //]
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: ''
+      }
+    ]
   }
 ];
 

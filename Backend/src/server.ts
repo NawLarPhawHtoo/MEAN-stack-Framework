@@ -64,8 +64,8 @@ export default class Server {
     this.app.use(passport.initialize());
     
     this.app.use('/api', authRouter);
-    this.app.use(passport.authenticate('jwt', { session: false }), router);
-
+    // this.app.use(passport.authenticate('jwt', { session: false }), router);
+    this.app.use( router);
     this.app.set('views', __dirname + '/views');
     this.app.set('view engine', 'pug');
 
