@@ -2,8 +2,6 @@ import { DataTypes, ModelAttributes, QueryInterface, QueryOptions } from "sequel
 
 import { DataBaseTableNames } from "../constants";
 
-// import { UserGenderEnum, UserRoleEnum } from "../models";
-
 import { migrationWrapper } from "../transactions";
 
 export default {

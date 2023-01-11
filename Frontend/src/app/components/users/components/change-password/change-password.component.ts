@@ -31,11 +31,11 @@ export class ChangePasswordComponent implements OnInit {
       confirmPassword: ['', [Validators.required,MustMatch]]
     },
     {
-      validator: MustMatch('password', 'confirmPwd')
+      validator: MustMatch('newPassword', 'confirmPassword')
     });
-    this.userInfo = localStorage.getItem('userLoginData') || "";
-    this.userId = JSON.parse(this.userInfo)._id;
-    this.password = this.userInfo.password;
+    // this.userInfo = localStorage.getItem('userLoginData') || "";
+    // this.userId = JSON.parse(this.userInfo)._id;
+    // this.password = this.userInfo.password;
   }
 
   public myError = (controlName: string, errorName: string) => {

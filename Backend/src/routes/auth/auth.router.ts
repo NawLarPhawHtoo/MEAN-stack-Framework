@@ -1,8 +1,8 @@
-import { Router } from "../../custom-router";
+import express from "express";
 
-import { authController } from "../../../controllers/auth/auth.controller";
+import { authController } from "../../controllers/auth/auth.controller";
 
-const router =new Router();
+const router =express.Router();
 
 router.post('/signup', authController.signup);
 
@@ -14,6 +14,4 @@ router.post('/forgot-password', authController.forgotPassword);
 
 router.post('/forgot-password-update/:id/:token', authController.resetPassword);
 
-router.post('/change-password/:id/:token', authController.changePassword);
-
-export const authRouter = router;
+export default router;

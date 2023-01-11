@@ -23,14 +23,7 @@ export class UserListComponent implements OnInit {
   displayedColumns: string[] = ['name', 'email', 'created_user_id', 'phone', 'dob', 'address', 'created_at', 'updated_at', 'action'];
   public dataSource!: MatTableDataSource<any>;
   public userList: IUserStateModel[] = [];
-  username = "";
-  email = "";
-  fromDate = "";
-  toDate = "";
   today = new Date();
- 
-
-  public dataSubject: any = null;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 

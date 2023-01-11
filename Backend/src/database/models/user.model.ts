@@ -74,15 +74,12 @@ const modelAttributes: DbModelFieldInit<Partial<IUserModel>> = {
   address: {
     type: DataTypes.STRING,
   },
-
 };
-
 @associative
 export class UserDbModel extends Model {
   static associate({
     PostDbModel
   }: any) {
-
     this.hasMany(PostDbModel, { foreignKey: 'created_user_id', as: 'user' });
   }
 }

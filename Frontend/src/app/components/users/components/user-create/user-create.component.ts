@@ -10,7 +10,7 @@ import { MustMatch } from 'src/app/shared/directives/must-match.validator';
   templateUrl: './user-create.component.html',
   styleUrls: ['./user-create.component.scss']
 })
-export class UserCreateComponent {
+export class UserCreateComponent implements OnInit {
   profileImage: any;
   imgFile: any;
   typeOption = [

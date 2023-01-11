@@ -1,4 +1,4 @@
-export class Post {
+export interface Post {
   id: number;
   category_id: number;
   created_user_id: number;

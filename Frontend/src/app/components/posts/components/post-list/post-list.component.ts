@@ -4,8 +4,12 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { POST } from 'src/app/shared/constants/post.constant';
 import { PostDeleteDialogComponent } from '../post-delete-dialog';
+import { PostsState } from '../../store/posts/post.state';
+import { Observable } from 'rxjs';
+import { IPostStateModel } from '../../store/posts/post.state.model';
+import { Select,Store } from '@ngxs/store';
+import { DeletePost, GetPosts, SetSelectedPost } from '../../store/posts/post.state.action';
 
 @Component({
   selector: 'app-post-list',
@@ -14,8 +18,9 @@ import { PostDeleteDialogComponent } from '../post-delete-dialog';
 })
 export class PostListComponent implements OnInit{
  
-  public postList:any = [];
+  @Select(PostsState.getPostList) posts$: Observable<IPostStateModel[]>;
 
+  public postList: IPostStateModel[] = [];
   dataSource!: MatTableDataSource<any>;
   displayedColumns: string[] = ['title', 'description', 'photo', 'created_user_id', 'created_at', 'action'];
 
@@ -25,16 +30,17 @@ export class PostListComponent implements OnInit{
     private router: Router,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private store : Store) { }
 
   ngOnInit(): void {
-    this.postList = POST;
-    console.log('../../../../../assets/p1.jpg')
-    this.dataSource = new MatTableDataSource(this.postList);
-  }
+    this.store.dispatch(new GetPosts());
 
-  ngAfterViewInit(): void{
-    this.dataSource.paginator = this.paginator;
+    this.posts$.subscribe((dist:any)=>{
+      this.postList = dist;
+      this.dataSource = new MatTableDataSource(this.postList);
+      this.dataSource.paginator = this.paginator;
+    })
   }
 
   //post search filter
@@ -45,21 +51,22 @@ export class PostListComponent implements OnInit{
   }
 
   //post edit
-  editPost(postId: number) {
-    this.router.navigate(['/post/edit/' + postId])
+  editPost(payload: any) {
+    this.store.dispatch(new SetSelectedPost(payload));
+    this.router.navigate(['/post/edit/' + payload.id])
   }
 
   //post delete
   deletePost(data:any){
     const postId = data._id;
     let dialogRef = this.dialog.open(PostDeleteDialogComponent, {
-      width: '40%',
+      width: '35%',
       data: data,
     });
-    dialogRef.afterClosed().subscribe((data) => {
-       
-          this.router.navigate(['post/post-list'])
-        
+    dialogRef.afterClosed().subscribe((dist:any) => {
+       if(dist){
+        this.store.dispatch(new DeletePost(data.id));
+       }
       })
     }
 

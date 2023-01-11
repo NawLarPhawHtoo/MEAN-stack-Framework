@@ -55,7 +55,7 @@ const modelAttributes: DbModelFieldInit<Partial<IPostModel>> = {
   },
   author: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   },
   references: {
     type: DataTypes.STRING,
@@ -64,8 +64,7 @@ const modelAttributes: DbModelFieldInit<Partial<IPostModel>> = {
   image: {
     type: DataTypes.TEXT,
     allowNull: true
-  },
-
+  }
 };
 @associative
 export class PostDbModel extends Model {

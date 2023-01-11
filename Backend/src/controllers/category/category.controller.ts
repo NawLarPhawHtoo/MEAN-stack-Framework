@@ -3,6 +3,7 @@ import autobind from 'autobind-decorator';
 import { Response, Request } from 'express';
 
 import { categoryService } from '../../services/category';
+
 import { ICategoryModel } from '../../database';
 
 @autobind
@@ -50,7 +51,7 @@ class CategoryController {
     }
 
     const categoryData: ICategoryModel = {
-     name: req.body.name,
+      name: req.body.name,
       description: req.body.description,
       content: req.body.content,
       image: image,
@@ -68,7 +69,6 @@ class CategoryController {
   async deleteCategory(req: Request, res: Response) {
     const category_id = +req.params.id;
     const categoryData = await categoryService.getCategoryById(category_id);
-    console.log(categoryData);
 
     if (!categoryData) {
       throw new Error('Category is not found');
@@ -77,6 +77,16 @@ class CategoryController {
 
     res.json({
       message: 'Category deleted successfully',
+      data: categoryData
+    })
+  }
+
+  async findCategory(req: Request, res: Response) {
+    const category_id = +req.params.id;
+    const categoryData = await categoryService.getCategoryById(category_id);
+
+    res.json({
+      message: 'Find Category successfully',
       data: categoryData
     })
   }

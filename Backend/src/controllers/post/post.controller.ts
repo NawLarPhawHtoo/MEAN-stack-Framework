@@ -98,7 +98,6 @@ class PostController {
   async deletePost(req: Request, res: Response) {
     const post_id = +req.params.id;
     const postData = await postService.getPostById(post_id);
-    console.log(postData);
 
     if (!postData) {
       throw new Error('Post is not found');
@@ -114,7 +113,7 @@ class PostController {
   async findPost(req: Request, res: Response) {
     const post_id = +req.params.id;
     const postData = await postService.getPostById(post_id);
-    console.log(postData);
+
     res.json({
       message: 'Find Post successfully',
       data: postData

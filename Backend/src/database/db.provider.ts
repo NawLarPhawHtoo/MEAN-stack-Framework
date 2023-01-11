@@ -1,7 +1,6 @@
 import { Sequelize } from "sequelize";
 
 import { config } from "../config";
-
 class DbProvider {
   db: Sequelize;
 
