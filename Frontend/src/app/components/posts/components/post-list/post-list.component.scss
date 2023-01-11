@@ -2,13 +2,11 @@
   width: 82%;
   margin: 2% auto;
 
-  .filter {
+  .operation {
     display: flex;
-    align-items: baseline;
-    justify-content:start;
+    justify-content:end;
 
     .opr-btn {
-      // margin-top: 0.5%;
       margin-left: 1.4%;
 
       button {

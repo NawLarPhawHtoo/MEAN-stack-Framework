@@ -1,10 +1,9 @@
 import { Post } from "src/app/shared/models/post.model";
-import { IPostStateModel } from "./post.state.model";
 
 export class AddPost {
   static readonly type = '[Post] Add';
 
-  constructor(public payload: IPostStateModel) { }
+  constructor(public payload: any) { }
 }
 
 export class GetPosts {
@@ -14,7 +13,7 @@ export class GetPosts {
 export class UpdatePost {
   static readonly type = '[Post] Update';
 
-  constructor(public payload: IPostStateModel, public id: number) { }
+  constructor(public payload: any, public id: number) { }
 }
 
 export class DeletePost {

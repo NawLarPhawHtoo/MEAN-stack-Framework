@@ -27,15 +27,13 @@
       </mat-error>
     </div>
     <div *ngIf="postImg">
-      <img [src]="postImg" width="100" height="100" class="postImg">
+      <img [src]="postImg" crossorigin="anonymous" width="100" height="100" class="postImg">
     </div>
     <!-- /Photo -->
 
     <div class="button-group">
-      <button mat-flat-button [disabled]="postForm.invalid" color="primary" class="btn-submit">{{confirmView === true ?
-        'Confirm' : buttonName}}</button>
-      <button mat-stroked-button type="button" (click)="clearData()" color="warn">{{confirmView === true ? 'Cancel' :
-        'Clear'}}</button>
+      <button mat-flat-button [disabled]="postForm.invalid" color="primary" class="btn-submit">{{ buttonName}}</button>
+      <button mat-stroked-button type="button" (click)="clearData()" color="warn">{{'Clear'}}</button>
     </div>
   </form>
 </div>

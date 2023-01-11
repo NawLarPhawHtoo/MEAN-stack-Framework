@@ -17,14 +17,14 @@ export class PostStateService {
   }
 
   public createPost(payload: IPostStateModel): Observable<any> {
-    return this.httpClient.post(`${environment.apiUrl}/posts`, payload);
+    return this.httpClient.post(`${environment.apiUrl}/posts/create`, payload);
   }
 
   public updatePost(payload: IPostStateModel, id: number): Observable<any> {
-    return this.httpClient.put(`${environment.apiUrl}/posts` + id, payload);
+    return this.httpClient.patch(`${environment.apiUrl}/posts/edit/` + id, payload);
   }
 
   public deletePost(id: number): Observable<any> {
-    return this.httpClient.delete(`${environment.apiUrl}/posts` + id)
+    return this.httpClient.delete(`${environment.apiUrl}/posts/delete/` + id)
   }
 }

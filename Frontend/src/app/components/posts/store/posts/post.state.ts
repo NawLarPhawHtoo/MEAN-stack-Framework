@@ -41,7 +41,7 @@ export class PostsState {
   }
 
   @Action(AddPost)
-  addUser({getState, patchState}: StateContext<IPostStateModel>, {payload}: AddPost) {
+  addPost({getState, patchState}: StateContext<IPostStateModel>, {payload}: AddPost) {
       return this.postService.createPost(payload).pipe(tap((result) => {
           const state = getState();
           patchState({
@@ -77,7 +77,7 @@ export class PostsState {
   }
 
   @Action(SetSelectedPost)
-  setSelectedUserId({getState, setState}: StateContext<IPostStateModel>, {payload}: SetSelectedPost) {
+  setSelectedPostId({getState, setState}: StateContext<IPostStateModel>, {payload}: SetSelectedPost) {
       const state = getState();
       setState({
           ...state,

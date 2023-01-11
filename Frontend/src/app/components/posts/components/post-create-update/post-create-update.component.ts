@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { PostsState } from '../../store/posts/post.state';
+import { AddPost, UpdatePost } from '../../store/posts/post.state.action';
+import { IPostStateModel } from '../../store/posts/post.state.model';
 
 @Component({
   selector: 'app-post-create-update',
@@ -9,6 +13,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./post-create-update.component.scss']
 })
 export class PostCreateUpdateComponent {
+
+  @Select(PostsState.getSelectedPost) selectedPost: Observable<IPostStateModel>;
+
   confirmView: Boolean = false;
   pageTitle: string = 'Create Post';
   buttonName: string = 'Create';
@@ -18,17 +25,17 @@ export class PostCreateUpdateComponent {
   public existingPost: any;
   public postData: any;
   public userInfo: any;
-  public imgFile:any;
-  public postImg:any;
+  public imgFile: any;
+  public postImg: any;
 
   constructor(
     public router: Router,
     private activatedRoute: ActivatedRoute,
-    private snackBar: MatSnackBar) {
+    private store: Store) {
     this.postForm = new FormGroup({
       title: new FormControl('', [Validators.required, Validators.maxLength(255)]),
       description: new FormControl('', [Validators.required]),
-      photo : new FormControl('',[Validators.required])
+      photo: new FormControl('')
     });
   }
 
@@ -36,17 +43,17 @@ export class PostCreateUpdateComponent {
 
     this.postId = this.activatedRoute.snapshot.params["id"];
 
-    if (this.router.url.indexOf('/post/edit') !== -1 && this.postId !== undefined) {
+    if (this.postId !== undefined) {
       this.pageTitle = 'Update Post';
       this.buttonName = 'Update';
 
-      this.existingPost = this.activatedRoute.snapshot.data['post'];
-
-      if (this.existingPost) {
-        this.postForm.controls['title'].setValue(this.existingPost.data.title);
-        this.postForm.controls['description'].setValue(this.existingPost.data.description);
-        this.postForm.controls['photo'].setValue(this.existingPost.data.photo);
-      }
+      this.selectedPost.subscribe((post: any) => {
+        if (post) {
+          this.postForm.controls['title'].patchValue(post.title);
+          this.postForm.controls['description'].patchValue(post.description);
+          this.postImg = 'http://localhost:3000/' + post.image;
+        }
+      })
     }
   }
 
@@ -55,45 +62,40 @@ export class PostCreateUpdateComponent {
   }
 
   clearData() {
-    if (this.confirmView == true) {
-      this.postForm.controls['title'].enable();
-      this.postForm.controls['description'].enable();
-      this.postForm.controls['photo'].enable();
-      this.confirmView = false;
-    } else {
-      this.postForm.reset();
-    }
+    this.postForm.reset();
   }
 
   confirmPost() {
-    if (this.confirmView == true && this.buttonName == 'Create') {
-      const data: any = localStorage.getItem('userLoginData') || "";
-      this.userInfo = JSON.parse(data)._id;
-      const payload = {
-        title: this.postForm.controls['title'].value,
-        description: this.postForm.controls['description'].value,
-        photo: this.postForm.controls['photo'].value,
-        created_user_id: this.userInfo
-      }
+    if (this.buttonName == 'Create') {
+      // const data: any = localStorage.getItem('userLoginData') || "";
+      // this.userInfo = JSON.parse(data)._id;
+      const formData = new FormData();
+      formData.append('title', this.postForm.controls['title'].value);
+      formData.append('description', this.postForm.controls['description'].value);
+      formData.append('image', this.imgFile);
+      formData.append('created_user_id', '4');
+      formData.append('category_id', '4');
+
+      this.store.dispatch(new AddPost(formData)).subscribe(() => {
+        this.router.navigate(['/post'])
+      });
     }
-    else if (this.confirmView == true && this.buttonName == 'Update') {
-      const data: any = localStorage.getItem('userLoginData') || "";
-      this.userInfo = JSON.parse(data)._id;
+    else if (this.buttonName == 'Update') {
+      // const data: any = localStorage.getItem('userLoginData') || "";
+      // this.userInfo = JSON.parse(data)._id;
+
+      const formData = new FormData();
+      formData.append('title', this.postForm.controls['title'].value);
+      formData.append('description', this.postForm.controls['description'].value);
+      this.imgFile ? formData.append('image', this.imgFile) : "";
+      formData.append('created_user_id', '4');
+      formData.append('category_id', '4');
+
+      this.store.dispatch(new UpdatePost(formData, this.postId)).subscribe(() => {
+        this.router.navigate(['/post'])
+      });
 
       const id: string = this.activatedRoute.snapshot.params['id'];
-      const payload = {
-        title: this.postForm.controls['title'].value,
-        description: this.postForm.controls['description'].value,
-        photo: this.postForm.controls['photo'].value,
-        updated_user_id: this.userInfo
-      }
-    }
-
-    if (this.postForm.valid) {
-      this.postForm.controls['title'].disable();
-      this.postForm.controls['description'].disable();
-      this.postForm.controls['photo'].disable();
-      this.confirmView = true;
     }
   }
 
