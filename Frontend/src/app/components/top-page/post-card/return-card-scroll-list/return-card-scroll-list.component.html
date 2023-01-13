@@ -1,27 +1,29 @@
-<h1 class="post-cards--tittle fs-18 fs-sm-24 text-center w-100">
-  Top Page Post Cards
-</h1>
+<div class="container">
+  <h1 class="post-cards--tittle fs-18 fs-sm-24 text-center w-100">
+    Top Page Post Cards
+  </h1>
 
-<cdk-virtual-scroll-viewport class="scroll-container" #scrollContainer itemSize="200" orientation="horizontal"
-  drag-scroll-viewport fwvResizeObserver (resize$)="onResize(scrollContainer)">
+  <cdk-virtual-scroll-viewport class="scroll-container" #scrollContainer itemSize="200" orientation="horizontal"
+    drag-scroll-viewport fwvResizeObserver (resize$)="onResize(scrollContainer)">
 
-  <return-card *cdkVirtualFor="let post of posts" [post]="post"></return-card>
+    <return-card *cdkVirtualFor="let post of posts" [post]="post"></return-card>
 
-</cdk-virtual-scroll-viewport>
+  </cdk-virtual-scroll-viewport>
 
 
-<ng-container *ngIf="showScrollButton">
-  <button class="scroll-button scroll-button--to-left position-absolute" (click)="scrollLeft(scrollContainer)">
-    <svg width="10" height="18" class="scroll-button--to-right--icon position-absolute">
-      <polyline points="9.5 0.5, 0.5 9, 9.5 17.5" stroke="white" stroke-width="2" stroke-linejoin="round"
-        stroke-linecap="round" fill="none"></polyline>
-    </svg>
-  </button>
+  <ng-container *ngIf="showScrollButton">
+    <button class="scroll-button scroll-button--to-left position-absolute" (click)="scrollLeft(scrollContainer)">
+      <svg width="10" height="18" class="scroll-button--to-right--icon position-absolute">
+        <polyline points="9.5 0.5, 0.5 9, 9.5 17.5" stroke="white" stroke-width="2" stroke-linejoin="round"
+          stroke-linecap="round" fill="none"></polyline>
+      </svg>
+    </button>
 
-  <button class="scroll-button scroll-button--to-right position-absolute" (click)="scrollRight(scrollContainer)">
-    <svg width="10" height="18" class="scroll-button--to-right--icon position-absolute">
-      <polyline points="0.5 0.5, 9.5 9, 0.5 17.5" stroke="white" stroke-width="2" stroke-linejoin="round"
-        stroke-linecap="round" fill="none"></polyline>
-    </svg>
-  </button>
-</ng-container>
+    <button class="scroll-button scroll-button--to-right position-absolute" (click)="scrollRight(scrollContainer)">
+      <svg width="10" height="18" class="scroll-button--to-right--icon position-absolute">
+        <polyline points="0.5 0.5, 9.5 9, 0.5 17.5" stroke="white" stroke-width="2" stroke-linejoin="round"
+          stroke-linecap="round" fill="none"></polyline>
+      </svg>
+    </button>
+  </ng-container>
+</div>

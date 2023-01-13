@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './shared/guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -8,16 +9,24 @@ const routes: Routes = [
   },
   {
     path: 'top-page',
-    loadChildren: () => import('./components/top-page/top-page.module').then(mod => mod.TopPageModule)
+    loadChildren: () => import('./components/top-page/top-page.module').then(mod => mod.TopPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'user',
-    loadChildren: () => import('./components/users/users.module').then(mod => mod.UsersModule)
+    loadChildren: () => import('./components/users/users.module').then(mod => mod.UsersModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'post',
-    loadChildren: () => import('./components/posts/post.module').then(mod => mod.PostModule)
+    loadChildren: () => import('./components/posts/post.module').then(mod => mod.PostModule),
+    canActivate: [AuthGuard]
   },
+  {
+    path: '*',
+    pathMatch: 'full',
+    redirectTo: '/'
+  }
 ];
 
 @NgModule({

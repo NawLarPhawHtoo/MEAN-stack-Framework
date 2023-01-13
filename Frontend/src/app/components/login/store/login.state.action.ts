@@ -1,14 +1,19 @@
-import { Auth } from "src/app/shared/models/auth.model";
-import { IAuthStateModel } from "./login.state.model";
+import { User } from "src/app/shared/models/user.model";
+import { IUserStateModel } from "../../users/store/users/user.state.model";
 
-export class AddAuth {
-    static readonly type = '[Auth] Add';
+
+export class Login {
+    static readonly type = '[User] Add';
 
     constructor(public payload: any) { }
 }
 
+export class Logout {
+    static readonly type = '[User]';
+
+    constructor() { }
+}
+
 export class GetAuth {
-    static readonly type = '[Auth] Get';
-    
-    constructor(public payload: any) { }
+    static readonly type = '[User] Get';
 }

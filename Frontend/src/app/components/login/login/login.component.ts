@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { IAuthStateModel } from '../store/login.state.model';
 import { AuthState } from '../store/login.state';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { Route, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { Auth } from 'src/app/shared/models/auth.model';
+import { Login } from '../store/login.state.action';
 
 @Component({
   selector: 'app-login',
@@ -14,15 +15,23 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LoginComponent implements OnInit {
 
+  @Select(AuthState.getAuthList) auth$: Observable<IAuthStateModel[]>;
+
+  @Input() auth: any = [];
+
+  public authUser: Auth[] = [];
+
   loginForm!: FormGroup;
   loginErrMsg = "";
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private store: Store
   ) { }
 
   ngOnInit(): void {
+
     this.loginForm = this.fb.group({
       email: new FormControl('', Validators.compose([
         Validators.required,
@@ -37,51 +46,15 @@ export class LoginComponent implements OnInit {
     return this.loginForm.controls;
   }
 
-  login() {
-    const payload = {
-      email: this.loginForm.controls['email'].value,
-      password: this.loginForm.controls['password'].value,
-    }
-    // this.authSvc.login(payload).then(dist => {
-    //   localStorage.setItem('token', dist.token);
-    //   localStorage.setItem('userLoginData', JSON.stringify(dist.user));
-    //   this.router.navigate(["/posts-list"]);
-    // }).catch(err => {
-    //   this.loginErrMsg = `Email or password is incorrect...`;
-    // }
-    // )
+
+  onClickLogin() {
+    const formData = new FormData();
+    formData.append('email', this.loginForm.controls['email'].value);
+    formData.append('password', this.loginForm.controls['password'].value)
+
+    this.store.dispatch(new Login(formData))
+    .subscribe((result) => {
+      this.router.navigate(['/top-page']);
+    })
   }
-
-  // email: string;
-  // password: string;
-  // formData: FormGroup;
-
-  // constructor(
-  //   private http:HttpClient,
-  //   private router: Router,
-  //   private store: Store
-  // ) { }
-
-  // ngOnInit(): void {
-  //   this.formData = new FormGroup({
-  //     email: new FormControl(""),
-  //     password: new FormControl(""),
-  //   });
-  // }
-
-  // onClickLogin(data: any) {
-  //   // this.email = data.email;
-  //   // this.password = data.password;
-
-  //   // this.store.dispatch(data)
-  //   //   .subscribe((data: any) => {
-  //   //     localStorage.setItem("isUserLoggedIn", "true");
-  //   //     localStorage.setItem("token", data.token);
-  //   //     localStorage.setItem("loginUser", JSON.stringify(data.users));
-  //   //     this.router.navigate(['/']);
-  //   //   })
-  // }
-
-
-
 }

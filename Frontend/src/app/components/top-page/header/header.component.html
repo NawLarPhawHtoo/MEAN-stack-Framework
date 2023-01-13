@@ -9,12 +9,15 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" [routerLink]="['/']">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link active" [routerLink]="['/post']">Posts</a>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item">
+          <a class="nav-link active" [routerLink]="['/user']">Users</a>
+        </li>
+        <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown
           </a>
@@ -24,14 +27,14 @@
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
-        </li>
+        </li> -->
       </ul>
       <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success me-2" type="submit">Search</button>
-        <button type="button" class="btn btn-light me-2">Login</button>
+        <a mat-button class="profile">
+          <mat-icon>person</mat-icon>
+        </a>
         <div class="header__separator me-2"></div>
-        <button type="button" class="btn btn-light me-2">SignUp</button>
+        <button type="button" class="btn btn-light me-2" (click)="logout()">LogOut</button>
       </form>
     </div>
   </div>

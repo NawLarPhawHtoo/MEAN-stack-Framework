@@ -8,6 +8,8 @@ import { NgxsModule } from '@ngxs/store';
 import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import { AuthStateService } from './components/login/store/login.state.service';
+import { AuthStateModule } from './components/login/store/login.state.module';
 
 
 @NgModule({
@@ -20,10 +22,11 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     BrowserAnimationsModule,
     NgxsModule.forRoot([], { developmentMode: !environment.production }),
     HttpClientModule,
-    ScrollingModule
+    ScrollingModule,
+    AuthStateModule
   ],
 
-  providers: [],
+  providers: [AuthStateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

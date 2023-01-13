@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/shared/models/user.model';
@@ -9,20 +9,22 @@ import { IUserStateModel } from './user.state.model';
 export class UserStateService {
   constructor(private httpClient: HttpClient) {}
 
+  readonly headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
+
   public getUser(): Observable<any> {
-    return this.httpClient.get(`${environment.apiUrl}/users/all`);
+    return this.httpClient.get(`${environment.apiUrl}/users/all`, { headers: this.headers });
   }
 
   createUser(payload: IUserStateModel): Observable<any> {
-    return this.httpClient.post(`${environment.apiUrl}/users/create`, payload);
+    return this.httpClient.post(`${environment.apiUrl}/users/create`, payload, { headers: this.headers });
   }
 
   updateUser(payload: any,id : number): Observable<any> {
-    return this.httpClient.patch(`${environment.apiUrl}/users/edit/` + id, payload)
+    return this.httpClient.patch(`${environment.apiUrl}/users/edit/` + id, payload, { headers: this.headers })
   }
 
   deleteUser(id: number): Observable<any> {
-    return this.httpClient.delete(`${environment.apiUrl}/users/delete/` + id)
+    return this.httpClient.delete(`${environment.apiUrl}/users/delete/` + id, { headers: this.headers })
   }
 
 }
