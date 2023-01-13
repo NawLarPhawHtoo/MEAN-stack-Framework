@@ -10,11 +10,11 @@ import { HttpClientModule } from '@angular/common/http';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { AuthStateService } from './components/login/store/login.state.service';
 import { AuthStateModule } from './components/login/store/login.state.module';
-
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,7 +23,8 @@ import { AuthStateModule } from './components/login/store/login.state.module';
     NgxsModule.forRoot([], { developmentMode: !environment.production }),
     HttpClientModule,
     ScrollingModule,
-    AuthStateModule
+    AuthStateModule,
+    MatIconModule,
   ],
 
   providers: [AuthStateService],

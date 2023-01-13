@@ -17,24 +17,26 @@ import { PostCardScrollListComponent } from "./post-card/post-card-scroll-list";
 
 const COMPONENTS = [
   TopPageComponent,
-  HeaderComponent,
   BannerComponent,
   PostCardComponent,
   PostCardScrollListComponent,
   ReturnCardComponent,
   ReturnCardScrollListComponent,
-  FooterComponent
 ]
 
 @NgModule({
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS, HeaderComponent, FooterComponent],
   imports: [
     CommonModule,
     AngularMaterialModule,
     TopPageRoutingModule,
     PostStateModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+  ],
+  exports: [
+    HeaderComponent,
+    FooterComponent
   ]
 })
 export class TopPageModule { }
