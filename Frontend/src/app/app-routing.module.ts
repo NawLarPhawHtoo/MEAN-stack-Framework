@@ -20,10 +20,10 @@ const routes: Routes = [
   {
     path: 'post',
     loadChildren: () => import('./components/posts/post.module').then(mod => mod.PostModule),
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
-    path: '*',
+    path: '**',
     pathMatch: 'full',
     redirectTo: '/'
   }
