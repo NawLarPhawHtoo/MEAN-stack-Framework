@@ -67,8 +67,6 @@ export class PostCreateUpdateComponent {
 
   confirmPost() {
     if (this.buttonName == 'Create') {
-      // const data: any = localStorage.getItem('userLoginData') || "";
-      // this.userInfo = JSON.parse(data)._id;
       const formData = new FormData();
       formData.append('title', this.postForm.controls['title'].value);
       formData.append('description', this.postForm.controls['description'].value);
@@ -81,8 +79,6 @@ export class PostCreateUpdateComponent {
       });
     }
     else if (this.buttonName == 'Update') {
-      // const data: any = localStorage.getItem('userLoginData') || "";
-      // this.userInfo = JSON.parse(data)._id;
 
       const formData = new FormData();
       formData.append('title', this.postForm.controls['title'].value);

@@ -25,13 +25,6 @@ export class DeleteUser {
     }
 }
 
-// export class FindUser {
-//     static readonly type = '[User] Find';
-
-//     constructor(public id: number) {
-//     }
-// }
-
 export class ChangePassword {
     static readonly type = '[User] Change';
     constructor(public id: number,public payload: any) {

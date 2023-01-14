@@ -64,19 +64,6 @@ export class UsersState {
         }));
     }
 
-    // @Action(FindUser)
-    // findUser({ getState, setState }: StateContext<IUserStateModel>, { id }: FindUser) {
-    //     return this.userService.findUser(id).pipe(tap(() => {
-    //         const state = getState();
-    //         const filteredArray = state.users.filter((item: any) => item.id !== id);
-    //         setState({
-    //             ...state,
-    //             users: filteredArray,
-    //         });
-    //     }));
-    // }
-
-
     @Action(DeleteUser)
     deleteUser({ getState, setState }: StateContext<IUserStateModel>, { id }: DeleteUser) {
         return this.userService.deleteUser(id).pipe(tap(() => {
@@ -103,7 +90,6 @@ export class UsersState {
             });
         }));
     }
-
 
     @Action(SetSelectedUser)
     setSelectedUserId({ getState, setState }: StateContext<IUserStateModel>, { payload }: SetSelectedUser) {

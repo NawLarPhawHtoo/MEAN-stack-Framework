@@ -28,14 +28,6 @@ export class ForgotPasswordUpdateState {
       patchState({
           users: [...state.users, result]
       });
-      // const state = getState();
-      // const userList = [...state.users];
-      // const userIndex = userList.findIndex(item => item.id === payload.id);
-      // userList[userIndex] = result;
-      // setState({
-      //   ...state,
-      //   users: userList,
-      // });
     }));
   }
 

@@ -30,9 +30,6 @@ export class ChangePasswordComponent implements OnInit {
       {
         validator: MustMatch('newPassword', 'confirmPassword')
       });
-    // this.userInfo = localStorage.getItem('userLoginData') || "";
-    // this.userId = JSON.parse(this.userInfo)._id;
-    // this.password = this.userInfo.password;
   }
 
   public myError = (controlName: string, errorName: string) => {
@@ -41,7 +38,6 @@ export class ChangePasswordComponent implements OnInit {
 
   onSubmit() {
     if (this.passwordForm.valid) {
-      // this.id = this.activatedRoute.snapshot.params['id'];
       const id = this.activatedRoute.snapshot.params['id'];
       console.log(id);
 

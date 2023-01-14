@@ -24,14 +24,6 @@ export class ForgotPasswordUpdateComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.activatedRoute.queryParams.subscribe(params => {
-    //   this.id = params['id'];
-    //   this.token = params['token'];
-    //   console.log('*************** User Id ************', this.id);
-    //   // const token = this.activatedRoute.snapshot.params['token'];
-    //   console.log('*************** Token ************', this.token);
-    //   // code to validate the token and handle the token expiration
-    // });
 
     this.forgotPasswordUpdateForm = this.fb.group({
       password: ['', [Validators.required, Validators.pattern('(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9]{8,}$')]]
@@ -58,9 +50,7 @@ export class ForgotPasswordUpdateComponent implements OnInit {
 
     this.id = this.activatedRoute.snapshot.params['id'];
     this.token = this.activatedRoute.snapshot.params['token'];
-    console.log('*************** User Id ************', this.id);
-    // // const token = this.activatedRoute.snapshot.params['token'];
-    console.log('*************** Token ************', this.token);
+
     const formData = new FormData();
     formData.append('password', this.forgotPasswordUpdateForm.controls['password'].value);
 

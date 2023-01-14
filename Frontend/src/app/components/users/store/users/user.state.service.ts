@@ -28,10 +28,6 @@ export class UserStateService {
     return this.httpClient.delete(`${environment.apiUrl}/users/delete/` + id, { headers: this.headers })
   }
 
-  // findUser(id:number): Observable<any> {
-  //   return this.httpClient.get(`${environment.apiUrl}/users/find/` + id, { headers: this.headers });
-  // }
-
   changePassword(id: number,payload: any): Observable<any> {
     return this.httpClient.post(`${environment.apiUrl}/users/change-password/` + id, payload, { headers: this.headers })
   }

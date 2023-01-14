@@ -5,14 +5,7 @@ import { ForgotPasswordUpdateComponent } from './forgot-password-update/forgot-p
 const routes: Routes = [
   {
     path: 'forgot-password-update/:id/:token',
-    component: ForgotPasswordUpdateComponent,
-    // children: [
-    //   {
-    //     path: '',
-    //     pathMatch: 'full',
-    //     redirectTo: 'user-list'
-    //   }
-    // ]
+    component: ForgotPasswordUpdateComponent
   }
 ];
 

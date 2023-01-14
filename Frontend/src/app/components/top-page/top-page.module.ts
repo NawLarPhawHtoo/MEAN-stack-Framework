@@ -36,7 +36,6 @@ const COMPONENTS = [
     MatIconModule
   ],
   exports: [
-    //  TopPageComponent
     HeaderComponent,
     FooterComponent,
   ]

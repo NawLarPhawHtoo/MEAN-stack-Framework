@@ -1,7 +1,5 @@
 import { User } from "src/app/shared/models/user.model";
 
-import { PasswordReset } from "src/app/shared/models/password.reset.model";
-
 export class ForgotPasswordUpdate {
     static readonly type = '[PasswordReset] Find';
 

@@ -5,14 +5,7 @@ import { SignUpComponent } from './signup/signup.component';
 const routes: Routes = [
   {
   path: '',
-  component: SignUpComponent,
-  // children: [
-  //   {
-  //     path: '',
-  //     pathMatch: 'full',
-  //     redirectTo: 'user-list'
-  //   }
-  // ]
+  component: SignUpComponent
 }
 ];
 
