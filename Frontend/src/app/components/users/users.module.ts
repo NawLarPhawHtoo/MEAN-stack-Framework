@@ -32,6 +32,7 @@ const COMPONENTS = [
     TopPageModule,
     AngularMaterialModule,
     UserStateModule,
+    TopPageModule
   ]
 })
 export class UsersModule { }

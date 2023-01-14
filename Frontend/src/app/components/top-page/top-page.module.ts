@@ -18,17 +18,15 @@ import { UserStateModule } from "../users/store/users/user.state.module";
 
 const COMPONENTS = [
   TopPageComponent,
-  HeaderComponent,
   BannerComponent,
   PostCardComponent,
   PostCardScrollListComponent,
   ReturnCardComponent,
   ReturnCardScrollListComponent,
-  FooterComponent
 ]
 
 @NgModule({
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS, HeaderComponent, FooterComponent],
   imports: [
     CommonModule,
     AngularMaterialModule,

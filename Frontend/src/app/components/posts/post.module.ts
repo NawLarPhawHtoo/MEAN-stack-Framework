@@ -8,7 +8,6 @@ import { AngularMaterialModule } from 'src/app/angular-material.module';
 import { PostStateModule } from './store/posts/post.state.module';
 import { TopPageModule } from '../top-page';
 
-
 const COMPONENTS = [
   PostPageComponent,
   PostListComponent,

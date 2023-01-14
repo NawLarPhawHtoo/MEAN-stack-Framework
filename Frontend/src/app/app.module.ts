@@ -16,7 +16,7 @@ import { LoginStateModule } from './components/login/store/login.state.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
