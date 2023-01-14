@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthStateService } from '../../login/store/login.state.service';
+// import { AuthStateService } from '../../login/store/login.state.service';
+import { LoginStateService } from '../../login/store/login.state.service';
 import {  Store } from '@ngxs/store';
-import { Logout } from '../../login/store/login.state.action';
+// import { Logout } from '../../login/store/login.state.action';
 
 
 @Component({
@@ -11,16 +12,16 @@ import { Logout } from '../../login/store/login.state.action';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  constructor (public router: Router, private authSvc: AuthStateService, private store: Store) { }
+  constructor (public router: Router, private loginService: LoginStateService, private store: Store) { }
 
 
-  logout() {
-    this.store.dispatch(new Logout())
-    .subscribe(() => {
-      localStorage.removeItem('userLoginData');
-      this.router.navigate(['/']);
-    })
-  }
+  // logout() {
+  //   this.store.dispatch(new Logout())
+  //   .subscribe(() => {
+  //     localStorage.removeItem('userLoginData');
+  //     this.router.navigate(['/']);
+  //   })
+  // }
     // this.authSvc.logout().then((dist: any) => {
     //   localStorage.removeItem('userId');
     //   localStorage.clear();

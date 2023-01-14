@@ -1,55 +1,42 @@
-import { PathLocationStrategy } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
-import * as path from 'path';
-import { catchError, tap } from 'rxjs';
-import { AddUser } from '../../users/store/users/user.state.action';
-import { IUserStateModel } from '../../users/store/users/user.state.model';
-import { Login } from './login.state.action';
-import { Logout } from './login.state.action';
-import { IAuthStateModel } from './login.state.model';
-import { AuthStateService } from './login.state.service';
+import { tap } from 'rxjs/operators';
+import { SetSelectedUser, LoginUser } from './login.state.action';
+import { ILoginStateModel } from './login.state.model';
+import { LoginStateService } from './login.state.service';
 
-@State<IAuthStateModel>({
-    name: 'data',
+@State<ILoginStateModel>({
+    name: 'loginuser',
     defaults: {
-        auth: [],
-        selectedAuth: null
+        users: [],
+        selectedUser: null
     }
 })
-
 @Injectable()
 
-export class AuthState {
-    constructor(private authService: AuthStateService) { }
+export class LoginState {
 
-    @Selector()
-    static getAuthList(state: IAuthStateModel) {
-        return state.auth;
+    constructor(private loginService: LoginStateService) {
     }
 
-    @Action(Login)
-    Login({ getState, setState }: StateContext<IAuthStateModel>, { payload }: Login) {
-        return this.authService.login(payload).pipe(tap((result) => {
-            console.log(result)
-            localStorage.setItem('userLoginData', JSON.stringify(result) )
-            localStorage.setItem('token', result.token)
+    @Action(LoginUser)
+    loginUser({ getState, patchState }: StateContext<ILoginStateModel>, { payload }: LoginUser) {
+        return this.loginService.loginUser(payload).pipe(tap((result) => {
+            console.log('*****Result*************', result);
             const state = getState();
-            setState({
-                ...state,
-                auth: result.data,
+            console.log('****** State *******',state);
+            patchState({
+                users: [...state.users, result]
             });
         }));
     }
 
-    @Action(Logout)
-    Logout({ dispatch}: StateContext<IAuthStateModel>) {
-        return this.authService.logout().pipe(tap((result) => {
-            dispatch({
-                auth: [],
-                selectedAuth: null
-            })
-        }))
+    @Action(SetSelectedUser)
+    setSelectedUserId({ getState, setState }: StateContext<ILoginStateModel>, { payload }: SetSelectedUser) {
+        const state = getState();
+        setState({
+            ...state,
+            selectedUser: payload
+        });
     }
-
 }

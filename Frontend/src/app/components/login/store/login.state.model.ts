@@ -1,7 +1,6 @@
-import { User } from "src/app/shared/models/user.model"
-// import { Auth } from "src/app/shared/models/auth.model"
+import { User } from "src/app/shared/models/user.model";
 
-export interface IAuthStateModel {
-    auth : User[]
-    selectedAuth: User | null
+export interface ILoginStateModel {
+  users : User[]
+  selectedUser: User | null
 }

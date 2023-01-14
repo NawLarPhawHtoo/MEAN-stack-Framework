@@ -1,26 +1,24 @@
-import  { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { LoginComponent } from './login/login.component';
-import { AngularMaterialModule } from 'src/app/angular-material.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AngularMaterialModule} from 'src/app/angular-material.module';
 import { LoginRoutingModule } from './login-routing.module';
-import { AuthStateModule } from './store/login.state.module';
+import { LoginComponent } from './login/login.component';
+import { LoginStateModule } from './store/login.state.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const COMPONENTS = [
-    LoginComponent
-]
+  LoginComponent
+];
 
 @NgModule({
-    declarations: [...COMPONENTS],
-    imports: [
-        CommonModule,
-        AngularMaterialModule,
-        FormsModule,
-        ReactiveFormsModule,
-        LoginRoutingModule,
-        AuthStateModule
-    ]
+  declarations: [...COMPONENTS],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    LoginRoutingModule,
+    AngularMaterialModule,
+    LoginStateModule
+  ]
 })
-
 export class LoginModule { }

@@ -14,6 +14,7 @@ import { ReturnCardComponent } from "./post-card/return-card";
 import { ReturnCardScrollListComponent } from "./post-card/return-card-scroll-list";
 import { PostCardComponent } from "./post-card/post-card";
 import { PostCardScrollListComponent } from "./post-card/post-card-scroll-list";
+import { UserStateModule } from "../users/store/users/user.state.module";
 
 const COMPONENTS = [
   TopPageComponent,
@@ -35,6 +36,11 @@ const COMPONENTS = [
     PostStateModule,
     MatButtonModule,
     MatIconModule
+  ],
+  exports: [
+    //  TopPageComponent
+    HeaderComponent,
+    FooterComponent,
   ]
 })
 export class TopPageModule { }

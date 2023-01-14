@@ -1,25 +1,17 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { IAuthStateModel } from '../store/login.state.model';
-import { AuthState } from '../store/login.state';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Auth } from 'src/app/shared/models/auth.model';
-import { Login } from '../store/login.state.action';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MustMatch } from 'src/app/shared/directives/must-match.validator';
+import { LoginUser } from '../store/login.state.action';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
-
-  @Select(AuthState.getAuthList) auth$: Observable<IAuthStateModel[]>;
-
-  @Input() auth: any = [];
-
-  public authUser: Auth[] = [];
 
   loginForm!: FormGroup;
   loginErrMsg = "";
@@ -33,28 +25,36 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
 
     this.loginForm = this.fb.group({
-      email: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-      ])),
-      password: new FormControl('', [Validators.required]),
+      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
+      password: ['', [Validators.required, Validators.pattern('(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9]{8,}$')]],
       rememberme: ['']
     });
   }
 
-  get f() {
+  get myForm() {
     return this.loginForm.controls;
   }
 
+  keyPress(event: any) {
+    const pattern = /[0-9\+\-\ ]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
 
-  onClickLogin() {
+  clearData() {
+    this.loginForm.reset();
+  }
+
+  loginUser() {
     const formData = new FormData();
     formData.append('email', this.loginForm.controls['email'].value);
-    formData.append('password', this.loginForm.controls['password'].value)
+    formData.append('password', this.loginForm.controls['password'].value);
 
-    this.store.dispatch(new Login(formData))
-    .subscribe((result) => {
-      this.router.navigate(['/top-page']);
-    })
+    this.store.dispatch(new LoginUser(formData)).subscribe(() => {
+      this.router.navigate(['/top-page'])
+    });
   }
 }
+

@@ -4,7 +4,7 @@ import bcrypt, { compareSync } from "bcrypt";
 import crypto from "crypto";
 import jwt from 'jsonwebtoken';
 import { authService } from "../../services/auth/auth.service";
-import { IUserModel, UserDbModel,PasswordResetDbModel} from "../../database";
+import { IUserModel, UserDbModel, PasswordResetDbModel } from "../../database";
 
 import { sendEmail } from './../../utils/sendEmail';
 
@@ -31,13 +31,12 @@ class AuthController {
   async login(req: any, res: Response): Promise<any> {
     const email = req.body.email as any;
     const userData = await authService.loginUser(email);
-    console.log(userData);
 
     if (!userData) {
-      throw new Error('User is not found');
+      return res.status(404).send("User is not found");
     }
     if (!compareSync(req.body.password, userData.password)) {
-      return res.status(401).send({
+      return res.status(400).send({
         success: false,
         message: 'Incorrect Password'
       })
@@ -65,9 +64,10 @@ class AuthController {
   async forgotPassword(req: any, res: Response): Promise<any> {
     try {
       const email = req.body.email as any;
+      console.log(email);
       const user = await authService.forgotPassword(email);
       if (!user)
-        return res.status(401).send("Email does not exist");
+        return res.status(404).send("Email does not exist");
 
       const id: number = user.id;
       let data: any = await UserDbModel.findByPk(id);
@@ -82,7 +82,7 @@ class AuthController {
         }).save();
       }
       console.log('....Data.....', data);
-      const link = `${process.env.BASE_URL}/forgot-password-update/${user.id}/${data.token}`;
+      const link = `${process.env.CLIENT_URL}/forgot-password-update/${user.id}/${data.token}`;
       await sendEmail(user.email, "Password reset", link);
 
       res.status(200).json({
@@ -99,10 +99,10 @@ class AuthController {
       if (isNaN(id)) {
         id = Number(req.params.id)
       }
-  
+
       const user = await authService.resetPassword(id);
-    
-      if (!user) return res.status(401).send("User Id does not exist");
+
+      if (!user) return res.status(404).send("User Id does not exist");
 
       const token = req.params.token;
 
@@ -110,11 +110,11 @@ class AuthController {
         where: { token: token }
       });
 
-      if (!passwordReset) return res.status(401).send("Invalid link or expired");
+      if (!passwordReset) return res.status(410).send("Invalid link or expired");
 
       user.password = await bcrypt.hash(req.body.password, 12);
       await user.save();
-      
+
       res.json({
         message: "Password reset sucessfully."
       });

@@ -63,7 +63,7 @@ class PostController {
     const checkPost = await postService.getPostById(id);
 
     if (!checkPost) {
-      throw new Error('Post not found');
+       return res.status(404).send("Post not found");
     }
 
     let image: string = req.body.image;

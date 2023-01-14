@@ -6,14 +6,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PostCreateUpdateComponent, PostDeleteDialogComponent, PostListComponent, PostPageComponent } from './components';
 import { AngularMaterialModule } from 'src/app/angular-material.module';
 import { PostStateModule } from './store/posts/post.state.module';
-import { FooterComponent } from '../top-page/footer';
+import { TopPageModule } from '../top-page';
+
 
 const COMPONENTS = [
   PostPageComponent,
   PostListComponent,
   PostCreateUpdateComponent,
   PostDeleteDialogComponent,
-  // FooterComponent
 ]
 
 @NgModule({
@@ -24,7 +24,8 @@ const COMPONENTS = [
     FormsModule,
     ReactiveFormsModule,
     AngularMaterialModule,
-    PostStateModule
+    PostStateModule,
+    TopPageModule
   ]
 })
 export class PostModule { }

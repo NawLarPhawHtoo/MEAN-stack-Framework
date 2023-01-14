@@ -80,7 +80,7 @@ class UserController {
     const userData = await userService.getUserById(user_id);
 
     if (!userData) {
-      throw new Error('User is not found');
+      return res.status(404).send("User is not found");
     }
     await userService.deleteUserById(user_id);
 
@@ -104,8 +104,13 @@ class UserController {
       const user_id = +req.params.id;
 
       const user: any = await userService.getUserById(user_id);
+      console.log(user);
 
       const { oldPassword, newPassword, confirmPassword } = req.body as any;
+
+      console.log(oldPassword);
+      console.log(newPassword);
+      console.log(confirmPassword);
 
       //Check required fields
       if (!oldPassword || !newPassword || !confirmPassword) {

@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { NgxsModule } from '@ngxs/store';
-import { AuthState } from './login.state';
-import { AuthStateService } from './login.state.service';
+import { LoginState } from './login.state';
+import { LoginStateService } from './login.state.service';
+
 
 @NgModule({
-    imports: [NgxsModule.forRoot([AuthState])],
-    providers: [AuthStateService]
+  imports: [NgxsModule.forRoot([LoginState])],
+  providers: [LoginStateService]
 })
 
-export class AuthStateModule { }
+export class LoginStateModule { }

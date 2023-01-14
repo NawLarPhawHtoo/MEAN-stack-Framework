@@ -62,12 +62,16 @@ export default class Server {
     this.app.use("/apiuploads", express.static("apiuploads"));
 
     this.app.use(passport.initialize());
-    
+
     this.app.use('/api', authRouter);
-    // this.app.use(passport.authenticate('jwt', { session: false }), router);
-    this.app.use( router);
+    this.app.use(passport.authenticate('jwt', { session: false }), router);
+
     this.app.set('views', __dirname + '/views');
     this.app.set('view engine', 'pug');
+
+    this.app.get('/', (req, res) => {
+      res.send('Welcome to My Website')
+    });
 
     this.httpServer = http.createServer(this.app);
   }

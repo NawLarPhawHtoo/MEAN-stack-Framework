@@ -8,8 +8,10 @@ import { NgxsModule } from '@ngxs/store';
 import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import {ScrollingModule} from '@angular/cdk/scrolling';
-import { AuthStateService } from './components/login/store/login.state.service';
-import { AuthStateModule } from './components/login/store/login.state.module';
+// import { AuthStateService } from './components/login/store/login.state.service';
+import { LoginStateService } from './components/login/store/login.state.service';
+// import { AuthStateModule } from './components/login/store/login.state.module';
+import { LoginStateModule } from './components/login/store/login.state.module';
 
 
 @NgModule({
@@ -23,10 +25,11 @@ import { AuthStateModule } from './components/login/store/login.state.module';
     NgxsModule.forRoot([], { developmentMode: !environment.production }),
     HttpClientModule,
     ScrollingModule,
-    AuthStateModule
+    // AuthStateModule
+    LoginStateModule
   ],
 
-  providers: [AuthStateService],
+  providers: [LoginStateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
