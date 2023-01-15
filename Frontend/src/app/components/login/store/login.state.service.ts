@@ -11,9 +11,16 @@ export class LoginStateService {
 
   loginUser(payload: ILoginStateModel): Observable<any> {
     return this.httpClient.post<{ token: string }>(`${environment.authApiUrl}/login`, payload)
-      .pipe(tap(res => {
-        console.log('******Response********',res);
+      .pipe(tap((res: any) => {
         localStorage.setItem('token', res.token);
+        localStorage.setItem('loginUserData', JSON.stringify(res.users));
+      }));
+  }
+
+  logoutUser(payload: ILoginStateModel): Observable<any> {
+    return this.httpClient.post<{ email: string }>(`${environment.authApiUrl}/logout`, payload)
+      .pipe(tap(res => {
+        localStorage.removeItem('token');
       }));
   }
 }

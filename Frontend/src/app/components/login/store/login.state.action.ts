@@ -7,6 +7,13 @@ export class LoginUser {
     }
 }
 
+export class LogoutUser {
+    static readonly type = '[User] Logout';
+
+    constructor(public payload: any) {
+    }
+}
+
 export class SetSelectedUser {
     static readonly type = '[User] Set';
 

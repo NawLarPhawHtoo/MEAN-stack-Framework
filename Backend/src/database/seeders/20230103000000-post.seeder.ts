@@ -14,7 +14,7 @@ export default {
           description: 'Learning Node JS Framework',
           author: 'Jame Smith',
           references: 'https://www.w3schools.com/nodejs/nodejs_intro.asp',
-          image: 'http://localhost:3000/apiuploads/images/node.png',
+          image: 'apiuploads/images/node.png',
           created_at: new Date(),
           updated_at: new Date()
         },
@@ -26,7 +26,7 @@ export default {
           description: 'Learning Angular',
           author: 'June',
           references: 'https://www.w3schools.com/angular/',
-          image: 'http://localhost:3000/apiuploads/images/angular.png',
+          image: 'apiuploads/images/angular.png',
           created_at: new Date(),
           updated_at: new Date()
         }

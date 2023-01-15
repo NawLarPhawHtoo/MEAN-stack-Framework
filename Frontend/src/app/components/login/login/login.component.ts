@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Select, Store } from '@ngxs/store';
+import { Store } from '@ngxs/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MustMatch } from 'src/app/shared/directives/must-match.validator';
+import { Router } from '@angular/router';
 import { LoginUser } from '../store/login.state.action';
 
 @Component({
@@ -52,7 +51,7 @@ export class LoginComponent implements OnInit {
     formData.append('email', this.loginForm.controls['email'].value);
     formData.append('password', this.loginForm.controls['password'].value);
 
-    this.store.dispatch(new LoginUser(formData)).subscribe(() => {
+    this.store.dispatch(new LoginUser(formData)).subscribe((data) => {
       this.router.navigate(['/top-page'])
     });
   }

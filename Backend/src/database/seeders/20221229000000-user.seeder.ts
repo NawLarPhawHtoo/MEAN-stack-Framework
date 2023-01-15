@@ -8,7 +8,7 @@ export default {
       [
         {
           name: 'James Smith',
-          profile: 'http://localhost:3000/apiuploads/profiles/4c21c5a8-9f21-4f6e-8aaa-47cc427acbc0_images%20(1).png',
+          profile: 'apiuploads/profiles/4c21c5a8-9f21-4f6e-8aaa-47cc427acbc0_images%20(1).png',
           email: 'jamessmith@gmail.com',
           password: '12345678',
           gender: 'male',
@@ -21,7 +21,7 @@ export default {
         },
         {
           name: 'Rose Mary',
-          profile: 'http://localhost:3000/apiuploads/profiles/9f3ff16a-a685-4275-87e6-a81ecfeb68a4_219969.png',
+          profile: 'apiuploads/profiles/9f3ff16a-a685-4275-87e6-a81ecfeb68a4_219969.png',
           email: 'rosemary@gmail.com',
           password: '12345678',
           gender: 'female',

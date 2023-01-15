@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginStateService } from '../../login/store/login.state.service';
-import {  Store } from '@ngxs/store';
-// import { Logout } from '../../login/store/login.state.action';
+import { Select, Store } from '@ngxs/store';
+import { LoginState } from '../../login/store/login.state';
+import { LogoutUser } from '../../login/store/login.state.action';
+import { ILoginStateModel } from '../../login/store/login.state.model';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -11,14 +14,16 @@ import {  Store } from '@ngxs/store';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  constructor (public router: Router, private loginService: LoginStateService, private store: Store) { }
 
-  // logout() {
-  //   this.store.dispatch(new Logout())
-  //   .subscribe(() => {
-  //     localStorage.removeItem('userLoginData');
-  //     this.router.navigate(['/']);
-  //   })
-  // }
-}  
+  constructor(public router: Router, private loginService: LoginStateService, private store: Store) { }
+
+  logout() {
+    const loginUser: any = localStorage.getItem('loginUserData');
+    this.store.dispatch(new LogoutUser({ email: loginUser.email }))
+      .subscribe((data) => {
+        localStorage.removeItem('token');
+        this.router.navigate(['/']);
+      })
+  }
+}
 
