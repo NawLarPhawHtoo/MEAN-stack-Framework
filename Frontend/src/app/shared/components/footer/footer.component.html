@@ -2,7 +2,7 @@
   <div class="container position-relative">
     <div class="footer-grid-template">
       <div class="grid-area-logo">
-        <a routerlink="/" href="/">
+        <a [routerLink]="['/top-page']">
           <img src="../../../../assets/icons/angular_icon.svg" alt="angular_icon">
         </a>
       </div>
@@ -23,21 +23,21 @@
 
       <div class="grid-area-about-links position-relative">
         <div>
-          <a routerlink="/" href="/">TERMS OF USE</a>
+          <a [routerLink]="['/top-page']">TERMS OF USE</a>
         </div>
 
         <div>
-          <a routerlink="/" href="/">PRIVACY POLICY</a>
+          <a [routerLink]="['/top-page']">PRIVACY POLICY</a>
         </div>
 
         <div>
-          <a routerlink="/" href="/">COMPANY</a>
+          <a [routerLink]="['/top-page']">COMPANY</a>
         </div>
       </div>
 
       <div class="grid-area-product-link position-relative">
         <div>
-          <a href="#">ALL PRODUCT</a>
+          <a [routerLink]="['/top-page']">ALL PRODUCT</a>
         </div>
         <div class="description">See the list of products</div>
       </div>

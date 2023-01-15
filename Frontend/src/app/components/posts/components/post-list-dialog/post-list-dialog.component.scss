@@ -1,0 +1,21 @@
+.mat-dialog {
+    width: 100%;
+  
+    mat-list {
+      width: 100%;
+  
+      mat-list-item {
+        margin: 2% 0;
+  
+        span {
+          width: 28%;
+        }
+  
+        .dialog-data {
+          float: right;
+          clear: both;
+          width: 68%;
+        }
+      }
+    }
+  }

@@ -8,25 +8,28 @@ import { IPostStateModel } from "./post.state.model";
 export class PostStateService {
   constructor(private httpClient: HttpClient) { }
 
-  readonly headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
-
   public getPost(): Observable<any> {
-    return this.httpClient.get(`${environment.apiUrl}/posts/all`, { headers: this.headers });
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.httpClient.get(`${environment.apiUrl}/posts/all`, { headers: headers });
   }
 
   public getTopPost(): Observable<any> {
-    return this.httpClient.get(`${environment.apiUrl}/posts/top-posts`, { headers: this.headers });
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.httpClient.get(`${environment.apiUrl}/posts/top-posts`, { headers: headers });
   }
 
   public createPost(payload: IPostStateModel): Observable<any> {
-    return this.httpClient.post(`${environment.apiUrl}/posts/create`, payload, { headers: this.headers } );
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.httpClient.post(`${environment.apiUrl}/posts/create`, payload, { headers: headers } );
   }
 
   public updatePost(payload: IPostStateModel, id: number): Observable<any> {
-    return this.httpClient.patch(`${environment.apiUrl}/posts/edit/` + id, payload, { headers: this.headers } );
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.httpClient.patch(`${environment.apiUrl}/posts/edit/` + id, payload, { headers: headers } );
   }
 
   public deletePost(id: number): Observable<any> {
-    return this.httpClient.delete(`${environment.apiUrl}/posts/delete/` + id, { headers: this.headers } )
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.httpClient.delete(`${environment.apiUrl}/posts/delete/` + id, { headers: headers } )
   }
 }

@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PostDeleteDialogComponent } from '../post-delete-dialog';
+import { PostListDialogComponent } from '../post-list-dialog';
 import { PostsState } from '../../store/posts/post.state';
 import { Observable } from 'rxjs';
 import { IPostStateModel } from '../../store/posts/post.state.model';
@@ -69,6 +70,15 @@ export class PostListComponent implements OnInit{
        }
       })
     }
+
+//show post dialog
+showPost(data: any) {
+  const postId = data._id;
+  let dialogRef = this.dialog.open(PostListDialogComponent, {
+    width: '35%',
+    data: data,
+  });
+}
 
   //post create
   createPost() {
