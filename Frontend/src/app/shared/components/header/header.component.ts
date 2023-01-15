@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginStateService } from '../../login/store/login.state.service';
+import { LoginStateService } from 'src/app/components/login/store/login.state.service';
 import { Select, Store } from '@ngxs/store';
-import { LoginState } from '../../login/store/login.state';
-import { LogoutUser } from '../../login/store/login.state.action';
-import { ILoginStateModel } from '../../login/store/login.state.model';
-import { Observable } from 'rxjs';
+import { LogoutUser } from 'src/app/components/login/store/login.state.action';
 
 
 @Component({

@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { LoginStateService } from './components/login/store/login.state.service';
 import { LoginStateModule } from './components/login/store/login.state.module';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { LoginStateModule } from './components/login/store/login.state.module';
     NgxsModule.forRoot([], { developmentMode: !environment.production }),
     HttpClientModule,
     ScrollingModule,
-    LoginStateModule
+    LoginStateModule,
+    RouterModule
   ],
 
   providers: [LoginStateService],

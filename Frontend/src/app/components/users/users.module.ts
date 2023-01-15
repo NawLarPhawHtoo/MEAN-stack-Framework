@@ -11,7 +11,7 @@ import { UserDeleteDialogComponent } from './components/user-delete-dialog/user-
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { UserStateModule } from './store/users/user.state.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TopPageModule } from '../top-page';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const COMPONENTS = [
   UserListComponent,
@@ -29,10 +29,9 @@ const COMPONENTS = [
     UserRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    TopPageModule,
     AngularMaterialModule,
     UserStateModule,
-    TopPageModule
+    SharedModule
   ]
 })
 export class UsersModule { }

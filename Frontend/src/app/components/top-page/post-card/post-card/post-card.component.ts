@@ -16,7 +16,6 @@ export class PostCardComponent implements OnInit {
   // @Input()  posts$: Observable<IPostStateModel[]>;
   @Input() post: any = [];
 
-
   public posts: Post[] = [];
 
   constructor(private store: Store) { }

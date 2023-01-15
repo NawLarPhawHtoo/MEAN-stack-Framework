@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PostCreateUpdateComponent, PostDeleteDialogComponent, PostListComponent, PostPageComponent } from './components';
 import { AngularMaterialModule } from 'src/app/angular-material.module';
 import { PostStateModule } from './store/posts/post.state.module';
-import { TopPageModule } from '../top-page';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const COMPONENTS = [
   PostPageComponent,
@@ -24,7 +24,7 @@ const COMPONENTS = [
     ReactiveFormsModule,
     AngularMaterialModule,
     PostStateModule,
-    TopPageModule
+    SharedModule
   ]
 })
 export class PostModule { }

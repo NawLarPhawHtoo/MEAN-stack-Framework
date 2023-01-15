@@ -7,37 +7,29 @@ import { AngularMaterialModule } from "src/app/angular-material.module";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { PostStateModule } from "../posts/store/posts/post.state.module";
-import { HeaderComponent } from "./header";
 import { BannerComponent } from "./banner";
-import { FooterComponent } from "./footer";
-import { ReturnCardComponent } from "./post-card/return-card";
-import { ReturnCardScrollListComponent } from "./post-card/return-card-scroll-list";
 import { PostCardComponent } from "./post-card/post-card";
 import { PostCardScrollListComponent } from "./post-card/post-card-scroll-list";
 import { UserStateModule } from "../users/store/users/user.state.module";
+import { SharedModule } from "src/app/shared/shared.module";
 
 const COMPONENTS = [
   TopPageComponent,
   BannerComponent,
   PostCardComponent,
   PostCardScrollListComponent,
-  ReturnCardComponent,
-  ReturnCardScrollListComponent,
 ]
 
 @NgModule({
-  declarations: [...COMPONENTS, HeaderComponent, FooterComponent],
+  declarations: [...COMPONENTS],
   imports: [
     CommonModule,
     AngularMaterialModule,
     TopPageRoutingModule,
     PostStateModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    SharedModule
   ],
-  exports: [
-    HeaderComponent,
-    FooterComponent,
-  ]
 })
 export class TopPageModule { }

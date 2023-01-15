@@ -16,6 +16,12 @@
     column-gap: 16px;
 }
 
+.card-image{
+    width: 375px;
+    height: 280px;
+    object-fit: cover;
+}
+
 .example-card {
     max-width: 400px;
   }
