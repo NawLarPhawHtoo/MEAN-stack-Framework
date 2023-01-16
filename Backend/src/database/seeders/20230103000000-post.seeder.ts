@@ -50,7 +50,7 @@ export default {
           description: 'Learning Design',
           author: 'June',
           references: 'https://www.w3schools.com/angular/',
-          image: 'apiuploads/images/download(1).png',
+          image: 'apiuploads/images/download (1).png',
           created_at: new Date(),
           updated_at: new Date()
         },

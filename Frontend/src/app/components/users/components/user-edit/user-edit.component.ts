@@ -22,6 +22,7 @@ export class UserEditComponent implements OnInit {
     { enum: 'admin' },
     { enum: 'user' }
   ];
+  loginUser: any;
   pickDate: any;
   today = new Date();
   public user: any;
@@ -46,6 +47,7 @@ export class UserEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loginUser = JSON.parse(localStorage.getItem('loginUserData') || '');
     this.selectedUser.subscribe((user: any) => {
       if (user) {
         this.userForm.controls['name'].patchValue(user.name);
@@ -87,6 +89,18 @@ export class UserEditComponent implements OnInit {
     this.imgFile ? formData.append('profile', this.imgFile) : "";
 
     this.store.dispatch(new UpdateUser(formData, userId)).subscribe(() => {
+      if (this.loginUser.id === parseInt(userId)) {
+        this.loginUser = {
+          id: this.loginUser.id,
+          name: this.userForm.controls['name'].value,
+          email: this.userForm.controls['email'].value,
+          role: this.userForm.controls['role'].value,
+          phone: this.userForm.controls['phone'].value,
+          address: this.userForm.controls['address'].value,
+          dob: this.userForm.controls['dob'].value
+        };
+        localStorage.setItem('loginUserData', JSON.stringify(this.loginUser));
+      }
       this.router.navigate(['/user/user-list'])
     })
   }

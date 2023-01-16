@@ -19,9 +19,8 @@ export class TopPageComponent implements OnInit {
 
   constructor(private store: Store) { }
 
-  ngOnInit(): void {
-    this.store.dispatch(new GetPosts());
-
+  async ngOnInit() {
+    this.store.dispatch(await new GetPosts());
     this.posts$.subscribe((dist: any) => {
       this.posts = dist;
     })

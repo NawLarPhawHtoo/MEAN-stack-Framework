@@ -47,8 +47,8 @@ export class ForgotPasswordComponent implements OnInit {
     const formData = new FormData();
     formData.append('email', this.forgotPasswordForm.controls['email'].value);
     this.store.dispatch(new ForgotPassword(formData)).subscribe(() => {
+      alert('Password reset link sent to your email account');
       this.router.navigate(['/forgot-password-update']);
-      // this.router.navigate(['/']);
     });
   }
 }
