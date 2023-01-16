@@ -14,7 +14,7 @@
   </div>
 
   <div class="mat-elevation-z8">
-    <table mat-table mat-Sort matTableExporter [dataSource]="dataSource">
+    <table mat-table mat-Sort matTableExporter [dataSource] = "(dataSource || (posts$ | async))">
       <!-- Post Title -->
       <ng-container matColumnDef="title">
         <th mat-header-cell *matHeaderCellDef> Post Title </th>

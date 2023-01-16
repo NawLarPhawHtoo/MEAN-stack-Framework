@@ -6,7 +6,7 @@ import { postService } from '../../services/post';
 
 import { IPostModel } from '../../database';
 
-const POSTS_DEFAULT_LIMIT = 12;
+import { POSTS_DEFAULT_LIMIT } from '../../utils/constant';
 
 @autobind
 class PostController {

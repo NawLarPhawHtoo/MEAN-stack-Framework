@@ -134,7 +134,7 @@ class UserController {
               user.save();
             })
           );
-          res.json({ message: "Password Successfully Updated!", data: user, status: 1 });
+          res.json({ message: "Password Changes Successfully!", data: user, status: 1 });
         } else {
           res.json({ message: "Current Password is not match." })
         }

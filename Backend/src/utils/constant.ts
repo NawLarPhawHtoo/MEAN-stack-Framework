@@ -1,0 +1,1 @@
+export const POSTS_DEFAULT_LIMIT = 12;
