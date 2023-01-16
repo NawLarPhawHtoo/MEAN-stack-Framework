@@ -37,16 +37,38 @@ export class PostListComponent implements OnInit {
     private route: ActivatedRoute,
     private store: Store) { }
 
-  async ngOnInit() {
-    const posts = this.store.dispatch(await new GetPosts());
-    posts.subscribe((dist) => {
-      if (dist.posts.posts.length > 0) {
-        this.postList = dist.posts.posts;
-        this.dataSource = new MatTableDataSource(this.postList);
-        this.dataSource.paginator = this.paginator;
+    async ngOnInit() {
+      this.getPosts();
+    }
+  
+    async getPosts() {
+      const posts = this.store.dispatch(await new GetPosts());
+      posts.subscribe((dist) => {
+        if (dist.posts.posts.length > 0) {
+          this.postList = dist.posts.posts;
+          this.dataSource = new MatTableDataSource(this.postList);
+          this.dataSource.paginator = this.paginator;
+        }
+      })
+    }
+  
+      //post delete
+      deletePost(data: any) {
+        const postId = data._id;
+        let dialogRef = this.dialog.open(PostDeleteDialogComponent, {
+          width: '35%',
+          data: data,
+        });
+        dialogRef.afterClosed().subscribe(async(dist: any) => {
+          if (dist) {
+            const response = this.store.dispatch(await new DeletePost(data.id));
+            response.subscribe(async () => {
+              this.getPosts();
+            })
+          }
+        })
       }
-    })
-  }
+
 
   //post search filter
   applyFilter(filterValue: string) {
@@ -61,19 +83,6 @@ export class PostListComponent implements OnInit {
     this.router.navigate(['/post/edit/' + payload.id])
   }
 
-  //post delete
-  deletePost(data: any) {
-    const postId = data._id;
-    let dialogRef = this.dialog.open(PostDeleteDialogComponent, {
-      width: '35%',
-      data: data,
-    });
-    dialogRef.afterClosed().subscribe((dist: any) => {
-      if (dist) {
-        this.store.dispatch(new DeletePost(data.id));
-      }
-    })
-  }
 
   //show post dialog
   showPost(data: any) {

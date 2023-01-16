@@ -35,6 +35,10 @@ export class UserListComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog, private store: Store) { }
 
   async ngOnInit() {
+    this.getUsers();
+  }
+
+  async getUsers() {
     const users = this.store.dispatch(await new GetUsers());
     users.subscribe((dist) => {
       if (dist.users.users.length > 0) {
@@ -50,9 +54,12 @@ export class UserListComponent implements OnInit {
       width: '40%',
       data: data,
     });
-    dialogRef.afterClosed().subscribe((dist: any) => {
+    dialogRef.afterClosed().subscribe(async (dist: any) => {
       if (dist) {
-        this.store.dispatch(new DeleteUser(data.id));
+        const response = this.store.dispatch(await new DeleteUser(data.id));
+        response.subscribe(() => {
+          this.getUsers();
+        })
       }
     });
   }
@@ -71,7 +78,7 @@ export class UserListComponent implements OnInit {
     const userId = data._id;
     let dialogRef = this.dialog.open(UserListDialogComponent, {
       width: '35%',
-      // height: '600px',
+      height: '600px',
       data: data,
     })
   }
