@@ -7,10 +7,9 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./post-card-scroll-list.component.scss']
 })
 export class PostCardScrollListComponent {
-  @Input() posts:any=[];
+  @Input() posts: any = [];
 
-  public showScrollButton =true;
-  // public readonly trackByIdFn = trackByIdFn;
+  public showScrollButton = true;
 
   public scrollLeft(cdkVirtualScrollViewport: CdkVirtualScrollViewport): void {
     const scrollContainer = cdkVirtualScrollViewport.elementRef.nativeElement;

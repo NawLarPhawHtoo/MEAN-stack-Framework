@@ -6,7 +6,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   templateUrl: './user-delete-dialog.component.html',
   styleUrls: ['./user-delete-dialog.component.scss']
 })
-export class UserDeleteDialogComponent implements OnInit{
+export class UserDeleteDialogComponent implements OnInit {
   id?: string;
   name?: string;
   role?: string;
@@ -30,5 +30,4 @@ export class UserDeleteDialogComponent implements OnInit{
   remove() {
     this.dialogRef.close('delete');
   }
-
 }

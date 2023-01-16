@@ -6,8 +6,8 @@ import { IForgotPasswordStateModel } from './forgot-password.state.model';
 
 @Injectable()
 export class ForgotPasswordStateService {
-  
-constructor(private httpClient: HttpClient) { }
+
+  constructor(private httpClient: HttpClient) { }
 
   forgotPassword(payload: IForgotPasswordStateModel): Observable<any> {
     return this.httpClient.post(`${environment.authApiUrl}/forgot-password`, payload);

@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import {  ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { ILoginStateModel } from 'src/app/components/login/store/login.state.model';
-import { LoginStateService } from 'src/app/components/login/store/login.state.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService implements CanActivate  {
+export class AuthService implements CanActivate {
 
   user: any;
   public payload: ILoginStateModel;

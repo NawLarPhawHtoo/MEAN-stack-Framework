@@ -1,36 +1,36 @@
 <div class="login-container">
-    <h2> Login Form </h2>
-    <div class="error-alert" *ngIf="loginErrMsg">{{loginErrMsg}}</div>
-  
-    <div class="form-container">
-      <form class="login-form" [formGroup]="loginForm" (ngSubmit)="loginUser()">
-        <mat-form-field appearance="outline">
-          <mat-label>Email</mat-label>
-          <input matInput type="email" formControlName="email">
-          <mat-error *ngIf="myForm['email'].hasError('required')">Email is required</mat-error>
-          <mat-error *ngIf="myForm['email'].hasError('pattern')">Please enter a valid email</mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Password</mat-label>
-          <input matInput type="password" formControlName="password">
-          <mat-error *ngIf="myForm['password'].hasError('required')">Password is required</mat-error>
-        </mat-form-field>
-  
-        <div class="forgetPwd">
-          <mat-checkbox class="rememberme" color="primary" formControlName="rememberme">Remember Me</mat-checkbox>
-          <a [routerLink]="['/forgot-password']" class="fgPwd">forgotten password?</a>
-        </div>
-  
-        <div class="login-btn">
-          <button mat-raised-button color="primary" [disabled]="!loginForm.valid">
-            Login
-          </button>
-        </div>
-  
-        <div class="create-acc">
-          Don't have an account?
-          <a [routerLink]="['/signup']" class="create-account">Create</a>
-        </div>
-      </form>
-    </div>
+  <h2> Login Form </h2>
+  <div class="error-alert" *ngIf="loginErrMsg">{{loginErrMsg}}</div>
+
+  <div class="form-container">
+    <form class="login-form" [formGroup]="loginForm" (ngSubmit)="loginUser()">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email">
+        <mat-error *ngIf="myForm['email'].hasError('required')">Email is required</mat-error>
+        <mat-error *ngIf="myForm['email'].hasError('pattern')">Please enter a valid email</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password">
+        <mat-error *ngIf="myForm['password'].hasError('required')">Password is required</mat-error>
+      </mat-form-field>
+
+      <div class="forgetPwd">
+        <mat-checkbox class="rememberme" color="primary" formControlName="rememberme">Remember Me</mat-checkbox>
+        <a [routerLink]="['/forgot-password']" class="fgPwd">forgotten password?</a>
+      </div>
+
+      <div class="login-btn">
+        <button mat-raised-button color="primary" [disabled]="!loginForm.valid">
+          Login
+        </button>
+      </div>
+
+      <div class="create-acc">
+        Don't have an account?
+        <a [routerLink]="['/signup']" class="create-account">Create</a>
+      </div>
+    </form>
   </div>
+</div>

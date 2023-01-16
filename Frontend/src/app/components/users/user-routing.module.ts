@@ -8,32 +8,32 @@ import { UserPageComponent } from './components/user-page';
 
 const routes: Routes = [
   {
-  path: '',
-  component: UserPageComponent,
-  children: [
-    {
-      path:'user-list',
-      component: UserListComponent
-    },
-    {
-      path:'create',
-      component: UserCreateComponent
-    },
-    {
-      path:'edit/:id',
-      component: UserEditComponent
-    },
-    {
-      path:'change-password/:id',
-      component: ChangePasswordComponent
-    },
-    {
-      path: '',
-      pathMatch: 'full',
-      redirectTo: 'user-list'
-    }
-  ]
-}
+    path: '',
+    component: UserPageComponent,
+    children: [
+      {
+        path: 'user-list',
+        component: UserListComponent
+      },
+      {
+        path: 'create',
+        component: UserCreateComponent
+      },
+      {
+        path: 'edit/:id',
+        component: UserEditComponent
+      },
+      {
+        path: 'change-password/:id',
+        component: ChangePasswordComponent
+      },
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'user-list'
+      }
+    ]
+  }
 ];
 
 @NgModule({

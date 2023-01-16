@@ -14,17 +14,16 @@ import { Post } from 'src/app/shared/models/post.model';
 export class TopPageComponent implements OnInit {
   @Select(PostsState.getPostList) posts$: Observable<IPostStateModel[]>;
 
-  // @Input()  posts$: Observable<IPostStateModel[]>;
   @Input() post: any = [];
   public posts: Post[] = [];
 
   constructor(private store: Store) { }
-  
+
   ngOnInit(): void {
     this.store.dispatch(new GetPosts());
 
-    this.posts$.subscribe((dist: any) =>{
-      this.posts = dist; 
+    this.posts$.subscribe((dist: any) => {
+      this.posts = dist;
     })
   }
 }

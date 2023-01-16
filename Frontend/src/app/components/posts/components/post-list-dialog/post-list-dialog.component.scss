@@ -1,34 +1,34 @@
 .mat-dialog {
+  width: 100%;
+
+  mat-list {
     width: 100%;
-  
-    mat-list {
-      width: 100%;
-  
-      mat-list-item {
-        margin: 2% 0;
-  
-        span {
-          width: 28%;
-        }
-  
-        .dialog-data {
-          float: right;
-          clear: both;
-          width: 68%;
-        }
+
+    mat-list-item {
+      margin: 2% 0;
+
+      span {
+        width: 28%;
+      }
+
+      .dialog-data {
+        float: right;
+        clear: both;
+        width: 68%;
       }
     }
   }
+}
 
-  .dialog-title{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+.dialog-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .dialog-img{
-    width: 100px;
-    height: 50px;
-    object-fit: cover;
-    cursor: pointer;
-  }
+.dialog-img {
+  width: 100px;
+  height: 50px;
+  object-fit: cover;
+  cursor: pointer;
+}

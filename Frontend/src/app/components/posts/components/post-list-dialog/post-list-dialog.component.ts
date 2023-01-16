@@ -25,6 +25,6 @@ export class PostListDialogComponent {
   ) { }
 
   ngOnInit(): void {
-    
+
   }
 }

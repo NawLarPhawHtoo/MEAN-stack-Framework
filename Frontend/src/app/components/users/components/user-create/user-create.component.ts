@@ -25,25 +25,24 @@ export class UserCreateComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private store : Store
+    private store: Store
   ) { }
 
   ngOnInit(): void {
-
     this.userForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
       password: ['', [Validators.required, Validators.pattern('(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9]{8,}$')]],
-      confirmPwd: ['', [Validators.required,MustMatch]],
+      confirmPwd: ['', [Validators.required, MustMatch]],
       role: [''],
       phone: ['', [Validators.required, Validators.pattern("^[0-9]{11}$")]],
       dob: [''],
       address: [''],
       profile: ['', [Validators.required]]
     },
-    {
-      validator: MustMatch('password', 'confirmPwd')
-    });
+      {
+        validator: MustMatch('password', 'confirmPwd')
+      });
   }
 
   get myForm() {
@@ -59,7 +58,7 @@ export class UserCreateComponent implements OnInit {
   }
 
   clearData() {
-      this.userForm.reset();
+    this.userForm.reset();
   }
 
   confirmUser() {
@@ -73,9 +72,9 @@ export class UserCreateComponent implements OnInit {
     formData.append('dob', this.userForm.controls['dob'].value);
     formData.append('profile', this.imgFile);
 
-      this.store.dispatch(new AddUser(formData)).subscribe(()=>{
-        this.router.navigate(['/user'])
-      });
+    this.store.dispatch(new AddUser(formData)).subscribe(() => {
+      this.router.navigate(['/user'])
+    });
   }
 
   imageUpload(event: any) {

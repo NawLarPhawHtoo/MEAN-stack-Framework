@@ -22,8 +22,8 @@
     <!-- /Photo -->
     <input #file type="file" (change)="imageUpload($event)" formControlName="photo" accept="image/*"
       maxFileSize=2000000>
-    <div  *ngIf="myError('photo', 'required')">
-      <mat-error  *ngIf="myError('photo', 'required')" class="photoerror">Profile can't be blank.
+    <div *ngIf="myError('photo', 'required')">
+      <mat-error *ngIf="myError('photo', 'required')" class="photoerror">Profile can't be blank.
       </mat-error>
     </div>
     <div *ngIf="postImg">

@@ -1,22 +1,22 @@
 import { User } from "src/app/shared/models/user.model";
 
 export class LoginUser {
-    static readonly type = '[User] Find';
+  static readonly type = '[User] Find';
 
-    constructor(public payload: any) {
-    }
+  constructor(public payload: any) {
+  }
 }
 
 export class LogoutUser {
-    static readonly type = '[User] Logout';
+  static readonly type = '[User] Logout';
 
-    constructor(public payload: any) {
-    }
+  constructor(public payload: any) {
+  }
 }
 
 export class SetSelectedUser {
-    static readonly type = '[User] Set';
+  static readonly type = '[User] Set';
 
-    constructor(public payload: User) {
-    }
+  constructor(public payload: User) {
+  }
 }

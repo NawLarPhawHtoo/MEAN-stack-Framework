@@ -18,10 +18,10 @@ import { environment } from 'src/environments/environment';
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.scss']
 })
-export class PostListComponent implements OnInit{
+export class PostListComponent implements OnInit {
 
   public storageUrl = environment.storageUrl;
- 
+
   @Select(PostsState.getPostList) posts$: Observable<IPostStateModel[]>;
 
   public postList: IPostStateModel[] = [];
@@ -37,7 +37,7 @@ export class PostListComponent implements OnInit{
     private route: ActivatedRoute,
     private store: Store) { }
 
-  async ngOnInit(){
+  async ngOnInit() {
     const posts = this.store.dispatch(await new GetPosts());
     posts.subscribe((dist) => {
       if (dist.posts.posts.length > 0) {

@@ -1,6 +1,6 @@
 import { User } from "src/app/shared/models/user.model";
 
 export interface ILoginStateModel {
-  users : User[]
+  users: User[]
   selectedUser: User | null
 }

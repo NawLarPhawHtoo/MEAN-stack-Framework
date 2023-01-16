@@ -1,11 +1,9 @@
-
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
 import { ForgotPasswordUpdate, SetSelectedUser } from './forgot-password-update.state.action';
 import { IForgotPasswordUpdateStateModel } from './forgot-password-update.state.model';
 import { ForgotPasswordUpdateStateService } from './forgot-password-update.state.service';
-
 
 @State<IForgotPasswordUpdateStateModel>({
   name: 'forgotPasswordUpdate',
@@ -26,7 +24,7 @@ export class ForgotPasswordUpdateState {
     return this.forgotPasswordUpdateService.forgotPasswordUpdate(id, token, payload).pipe(tap((result) => {
       const state = getState();
       patchState({
-          users: [...state.users, result]
+        users: [...state.users, result]
       });
     }));
   }

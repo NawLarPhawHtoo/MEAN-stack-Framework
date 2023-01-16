@@ -22,7 +22,7 @@ export class PostCardComponent implements OnInit {
   public posts: Post[] = [];
 
   constructor(private store: Store) { }
-  
+
   ngOnInit(): void {
   }
 }

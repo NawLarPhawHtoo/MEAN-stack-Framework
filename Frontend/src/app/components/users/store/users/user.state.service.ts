@@ -30,7 +30,7 @@ export class UserStateService {
     return this.httpClient.delete(`${environment.apiUrl}/users/delete/` + id, { headers: headers })
   }
 
-  changePassword(id: number,payload: any): Observable<any> {
+  changePassword(id: number, payload: any): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
     return this.httpClient.post(`${environment.apiUrl}/users/change-password/` + id, payload, { headers: headers })
   }

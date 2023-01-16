@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginStateService } from 'src/app/components/login/store/login.state.service';
-import { Select, Store } from '@ngxs/store';
+import { Store } from '@ngxs/store';
 import { LogoutUser } from 'src/app/components/login/store/login.state.action';
 
 
 @Component({
-  selector: 'Header',
+  selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })

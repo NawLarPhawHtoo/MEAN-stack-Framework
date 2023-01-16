@@ -7,12 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxsModule } from '@ngxs/store';
 import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
-import {ScrollingModule} from '@angular/cdk/scrolling';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { LoginStateService } from './components/login/store/login.state.service';
 import { LoginStateModule } from './components/login/store/login.state.module';
 import { RouterModule } from '@angular/router';
-
-
 @NgModule({
   declarations: [
     AppComponent,

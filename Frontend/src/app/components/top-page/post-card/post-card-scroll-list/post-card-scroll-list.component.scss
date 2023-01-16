@@ -1,84 +1,84 @@
 :host {
-    display: block;
-    position: relative;
-    width: 100%;
-    height: 570px;
-    overflow: hidden;
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 570px;
+  overflow: hidden;
 }
 
 .post-cards {
-    margin-top: 42px;
+  margin-top: 42px;
 
-    .--title {
-        margin-bottom: 24px;
-    }
+  .--title {
+    margin-bottom: 24px;
+  }
 }
 
 .text-center {
-    text-align: center;
-    font-weight: bold;
+  text-align: center;
+  font-weight: bold;
 }
 
 
 .scroll-container::ng-deep {
 
-    width: calc(100% + 16px);
-    height: 450px;
-    margin: 0 auto;
-    padding: 30px 9.375vw 22px 8.775vw;
-    overflow: scroll hidden;
+  width: calc(100% + 16px);
+  height: 450px;
+  margin: 0 auto;
+  padding: 30px 9.375vw 22px 8.775vw;
+  overflow: scroll hidden;
 
-    .cdk-virtual-scroll-content-wrapper {
-        display: flex;
-        column-gap: 16px;
-        
-    }
+  .cdk-virtual-scroll-content-wrapper {
+    display: flex;
+    column-gap: 16px;
+
+  }
 }
 
 .scroll-button {
-    top: 50%;
-    width: 59px;
-    height: 59px;
-    border: none;
-    border-radius: 50%;
-    background-color: #242424;
-    opacity: 0.7;
-    display: grid;
-    place-items: center;
+  top: 50%;
+  width: 59px;
+  height: 59px;
+  border: none;
+  border-radius: 50%;
+  background-color: #242424;
+  opacity: 0.7;
+  display: grid;
+  place-items: center;
 
-    &--to-left {
-        left: 20px;
-    }
+  &--to-left {
+    left: 20px;
+  }
 
-    &--to-right {
-        right: 20px;
-    }
+  &--to-right {
+    right: 20px;
+  }
 }
 
 .cdk-virtual-scroll-viewport::-webkit-scrollbar {
-    overflow: scroll hidden;
+  overflow: scroll hidden;
 }
 
 @media (min-width: 576px) {
-    .container {
-        max-width: 540px;
-    }
+  .container {
+    max-width: 540px;
+  }
 }
 
 @media (min-width: 768px) {
-    .container {
-        max-width: 720px;
-    }
+  .container {
+    max-width: 720px;
+  }
 }
 
 @media (min-width: 992px) {
-    .container {
-        max-width: 960px;
-    }
+  .container {
+    max-width: 960px;
+  }
 }
 
 @media (min-width: 1200px) {
-    .container {
-        max-width: 1140px;
-    }
+  .container {
+    max-width: 1140px;
+  }
 }

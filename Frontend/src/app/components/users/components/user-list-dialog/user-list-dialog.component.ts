@@ -28,5 +28,4 @@ export class UserListDialogComponent {
   ) { }
 
   ngOnInit(): void { }
-
 }

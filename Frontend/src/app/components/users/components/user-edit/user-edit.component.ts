@@ -30,7 +30,7 @@ export class UserEditComponent implements OnInit {
   constructor(
     private router: Router,
     private store: Store,
-    private activatedRoute : ActivatedRoute
+    private activatedRoute: ActivatedRoute
   ) {
     this.userForm = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -46,7 +46,6 @@ export class UserEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.selectedUser.subscribe((user: any) => {
       if (user) {
         this.userForm.controls['name'].patchValue(user.name);
@@ -86,8 +85,8 @@ export class UserEditComponent implements OnInit {
     formData.append('address', this.userForm.controls['address'].value);
     formData.append('dob', this.userForm.controls['dob'].value);
     this.imgFile ? formData.append('profile', this.imgFile) : "";
-   
-    this.store.dispatch(new UpdateUser(formData,userId)).subscribe(()=>{
+
+    this.store.dispatch(new UpdateUser(formData, userId)).subscribe(() => {
       this.router.navigate(['/user/user-list'])
     })
   }

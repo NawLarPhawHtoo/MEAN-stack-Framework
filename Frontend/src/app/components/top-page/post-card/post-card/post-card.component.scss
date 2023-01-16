@@ -1,32 +1,32 @@
-.post-card{
-    width: 375px;
-    height: 420px;
-    margin-bottom: 16px; 
+.post-card {
+  width: 375px;
+  height: 420px;
+  margin-bottom: 16px;
 }
 
-.card-list{
-    padding: 0 9.375vw;
+.card-list {
+  padding: 0 9.375vw;
 }
 
-.scroll-container{
-    background-color: #fff;
-    display: flex;
-    align-items: center;
-    padding-left: 6px;
-    column-gap: 16px;
+.scroll-container {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  padding-left: 6px;
+  column-gap: 16px;
 }
 
-.card-image{
-    width: 375px;
-    height: 280px;
-    object-fit: cover;
+.card-image {
+  width: 375px;
+  height: 280px;
+  object-fit: cover;
 }
 
 .example-card {
-    max-width: 400px;
-  }
-  
+  max-width: 400px;
+}
+
 .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-    background-size: cover;
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
 }

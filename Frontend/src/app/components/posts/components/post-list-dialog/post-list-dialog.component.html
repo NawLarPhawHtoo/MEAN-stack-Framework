@@ -1,52 +1,50 @@
 <div mat-dialog-content class="mat-dialog">
-    <div class="dialog-title" >
-        <h2 >Post Details</h2>
-        <mat-dialog-actions align="end">
-            <button mat-icon-button mat-dialog-close>
-                <mat-icon>close</mat-icon>
-            </button>
-        </mat-dialog-actions>
-    </div>
-    <mat-list role="list">
-        <!-- image -->
-        <mat-list-item role="listitem">
-            <div class="dialog-data">
-                <!-- <td mat-cell *matCellDef="let row">  -->
-                    <img class="dialog-img" [src]="imgUrl" crossorigin="anonymous" style="padding-top:3px" alt=""> 
-                <!-- </td> -->
-            </div>
-        </mat-list-item>
+  <div class="dialog-title">
+    <h2>Post Details</h2>
+    <mat-dialog-actions align="end">
+      <button mat-icon-button mat-dialog-close>
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-dialog-actions>
+  </div>
+  <mat-list role="list">
+    <!-- image -->
+    <mat-list-item role="listitem">
+      <div class="dialog-data">
+        <img class="dialog-img" [src]="imgUrl" crossorigin="anonymous" style="padding-top:3px" alt="">
+      </div>
+    </mat-list-item>
 
-        <!-- Title -->
-        <mat-list-item role="listitem">
-            <span>Title :</span>
-            <div class="dialog-data">
-                {{data.title}}
-            </div>
-        </mat-list-item>
+    <!-- Title -->
+    <mat-list-item role="listitem">
+      <span>Title :</span>
+      <div class="dialog-data">
+        {{data.title}}
+      </div>
+    </mat-list-item>
 
-        <!-- Description -->
-        <mat-list-item role="listitem">
-            <span>Description :</span>
-            <div class="dialog-data">
-                {{data.description}}
-            </div>
-        </mat-list-item>
+    <!-- Description -->
+    <mat-list-item role="listitem">
+      <span>Description :</span>
+      <div class="dialog-data">
+        {{data.description}}
+      </div>
+    </mat-list-item>
 
-        <!-- Author -->
-        <mat-list-item role="listitem">
-            <span>Author :</span>
-            <div class="dialog-data">
-                {{data.author}}
-            </div>
-        </mat-list-item>
+    <!-- Author -->
+    <mat-list-item role="listitem">
+      <span>Author :</span>
+      <div class="dialog-data">
+        {{data.author}}
+      </div>
+    </mat-list-item>
 
-        <!-- Posted Date -->
-        <mat-list-item role="listitem">
-            <span>Created_Date :</span>
-            <div class="dialog-data">
-                {{data.created_at | date: 'shortDate'}}
-            </div>
-        </mat-list-item>
-    </mat-list>
+    <!-- Posted Date -->
+    <mat-list-item role="listitem">
+      <span>Created_Date :</span>
+      <div class="dialog-data">
+        {{data.created_at | date: 'shortDate'}}
+      </div>
+    </mat-list-item>
+  </mat-list>
 </div>

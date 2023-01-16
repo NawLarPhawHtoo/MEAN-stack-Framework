@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AngularMaterialModule} from 'src/app/angular-material.module';
+import { AngularMaterialModule } from 'src/app/angular-material.module';
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login/login.component';
 import { LoginStateModule } from './store/login.state.module';
