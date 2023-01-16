@@ -9,7 +9,7 @@ import { PostListDialogComponent } from '../post-list-dialog';
 import { PostsState } from '../../store/posts/post.state';
 import { Observable } from 'rxjs';
 import { IPostStateModel } from '../../store/posts/post.state.model';
-import { Select,Store } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { DeletePost, GetPosts, SetSelectedPost } from '../../store/posts/post.state.action';
 
 @Component({
@@ -17,8 +17,8 @@ import { DeletePost, GetPosts, SetSelectedPost } from '../../store/posts/post.st
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.scss']
 })
-export class PostListComponent implements OnInit{
- 
+export class PostListComponent implements OnInit {
+
   @Select(PostsState.getPostList) posts$: Observable<IPostStateModel[]>;
 
   public postList: IPostStateModel[] = [];
@@ -32,15 +32,24 @@ export class PostListComponent implements OnInit{
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
-    private store : Store) { }
+    private store: Store) { }
 
-  ngOnInit(): void {
-    this.store.dispatch(new GetPosts());
+  async ngOnInit(){
+    // this.store.dispatch(new GetPosts());
 
-    this.posts$.subscribe((dist:any)=>{
-      this.postList = dist;
-      this.dataSource = new MatTableDataSource(this.postList);
-      this.dataSource.paginator = this.paginator;
+    // this.posts$.subscribe((dist: any) => {
+    //   this.postList = dist;
+    //   this.dataSource = new MatTableDataSource(this.postList);
+    //   this.dataSource.paginator = this.paginator;
+    // })
+
+    const posts = this.store.dispatch(await new GetPosts());
+    posts.subscribe((dist) => {
+      if (dist.posts.posts.length > 0) {
+        this.postList = dist.posts.posts;
+        this.dataSource = new MatTableDataSource(this.postList);
+        this.dataSource.paginator = this.paginator;
+      }
     })
   }
 
@@ -58,27 +67,27 @@ export class PostListComponent implements OnInit{
   }
 
   //post delete
-  deletePost(data:any){
+  deletePost(data: any) {
     const postId = data._id;
     let dialogRef = this.dialog.open(PostDeleteDialogComponent, {
       width: '35%',
       data: data,
     });
-    dialogRef.afterClosed().subscribe((dist:any) => {
-       if(dist){
+    dialogRef.afterClosed().subscribe((dist: any) => {
+      if (dist) {
         this.store.dispatch(new DeletePost(data.id));
-       }
-      })
-    }
+      }
+    })
+  }
 
-//show post dialog
-showPost(data: any) {
-  const postId = data._id;
-  let dialogRef = this.dialog.open(PostListDialogComponent, {
-    width: '35%',
-    data: data,
-  });
-}
+  //show post dialog
+  showPost(data: any) {
+    const postId = data._id;
+    let dialogRef = this.dialog.open(PostListDialogComponent, {
+      width: '35%',
+      data: data,
+    });
+  }
 
   //post create
   createPost() {

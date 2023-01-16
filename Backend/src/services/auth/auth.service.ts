@@ -1,4 +1,4 @@
-import { IUserModel, UserDbModel } from "../../database";
+import { IPasswordResetModel, IUserModel, PasswordResetDbModel, UserDbModel } from "../../database";
 
 class AuthService {
 
@@ -24,6 +24,10 @@ class AuthService {
     }) as any;
   }
 
+  getUserById(user_id: number): Promise<any> {
+    return UserDbModel.findByPk(user_id) as any;
+  }
+
   forgotPassword(email: string): Promise<any> {
     return UserDbModel.findOne({
       where: {
@@ -36,8 +40,18 @@ class AuthService {
     return UserDbModel.findByPk(user_id) as any;
   }
 
-  changePassword(user_id: number): Promise<any> {
-    return UserDbModel.findByPk(user_id) as any;
+  getUserByToken(token: string): Promise<any> {
+    return PasswordResetDbModel.findOne({
+      where: {
+        token: token
+      }
+    }) as any;
+  }
+
+  async resetUser(userObj: Partial<IPasswordResetModel>): Promise<PasswordResetDbModel> {
+    const createReset = await PasswordResetDbModel.create({ ...userObj, created_at: new Date().toISOString() });
+    console.log(createReset);
+    return createReset;
   }
 }
 

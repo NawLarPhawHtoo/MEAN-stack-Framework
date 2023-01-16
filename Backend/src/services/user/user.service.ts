@@ -15,7 +15,7 @@ class UserService {
     return createUser;
   }
 
-  async updateUser(user_id:number,userObj: Partial<IUserModel>): Promise<any> {
+  async updateUser(user_id: number, userObj: Partial<IUserModel>): Promise<any> {
     await UserDbModel.update(userObj, {
       where: { id: user_id as number }
     });

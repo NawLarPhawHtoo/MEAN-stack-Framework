@@ -30,40 +30,41 @@ export class UserListComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog, private store: Store) { }
 
-  ngOnInit(): void {
-    this.store.dispatch(new GetUsers());
+  async ngOnInit() {
 
-    this.users$.subscribe((dist: any) => {
-      this.userList = dist;
-      this.dataSource = new MatTableDataSource(this.userList);
-      this.dataSource.paginator = this.paginator;
+    const users = this.store.dispatch(await new GetUsers());
+    users.subscribe((dist) => {
+      if (dist.users.users.length > 0) {
+        this.userList = dist.users.users;
+        this.dataSource = new MatTableDataSource(this.userList);
+        this.dataSource.paginator = this.paginator;
+      }
     })
-
   }
 
-deleteUserData(data: any) {
-  let dialogRef = this.dialog.open(UserDeleteDialogComponent, {
-    width: '40%',
-    data: data,
-  });
-  dialogRef.afterClosed().subscribe((dist: any) => {
-    if (dist) {
-      this.store.dispatch(new DeleteUser(data.id));
-    }
-  });
-}
+  deleteUserData(data: any) {
+    let dialogRef = this.dialog.open(UserDeleteDialogComponent, {
+      width: '40%',
+      data: data,
+    });
+    dialogRef.afterClosed().subscribe((dist: any) => {
+      if (dist) {
+        this.store.dispatch(new DeleteUser(data.id));
+      }
+    });
+  }
 
-editUserData(payload: User,){
-  this.store.dispatch(new SetSelectedUser(payload));
-  this.router.navigate(['/user/edit/' + payload.id])
-}
+  editUserData(payload: User,) {
+    this.store.dispatch(new SetSelectedUser(payload));
+    this.router.navigate(['/user/edit/' + payload.id])
+  }
 
-changePassword(payload: User,){
-  this.store.dispatch(new SetSelectedUser(payload));
-  this.router.navigate(['/user/change-password/' + payload.id])
-}
+  changePassword(payload: User,) {
+    this.store.dispatch(new SetSelectedUser(payload));
+    this.router.navigate(['/user/change-password/' + payload.id])
+  }
 
-onClickUserCreate() {
-  this.router.navigate(['/user/create']);
-}
+  onClickUserCreate() {
+    this.router.navigate(['/user/create']);
+  }
 }

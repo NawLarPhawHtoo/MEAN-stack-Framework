@@ -4,7 +4,7 @@ import bcrypt, { compareSync } from "bcrypt";
 import crypto from "crypto";
 import jwt from 'jsonwebtoken';
 import { authService } from "../../services/auth/auth.service";
-import { IUserModel, UserDbModel, PasswordResetDbModel } from "../../database";
+import { IUserModel, IPasswordResetModel, PasswordResetDbModel } from "../../database";
 
 import { sendEmail } from './../../utils/sendEmail';
 
@@ -64,24 +64,23 @@ class AuthController {
   async forgotPassword(req: any, res: Response): Promise<any> {
     try {
       const email = req.body.email as any;
-      console.log(email);
+
       const user = await authService.forgotPassword(email);
       if (!user)
         return res.status(404).send("Email does not exist");
 
       const id: number = user.id;
-      let data: any = await UserDbModel.findByPk(id);
+
+      let data: any = await authService.getUserById(id);
 
       if (!data.token) {
-        const email = req.body.email;
-        const token = crypto.randomBytes(16).toString('hex');
-
-        data = await new PasswordResetDbModel({
-          email: email,
-          token: token,
-        }).save();
+        const resetData: IPasswordResetModel = {
+          email: req.body.email,
+          token: crypto.randomBytes(16).toString('hex')
+        } as any;
+        data = await (await authService.resetUser(resetData)).save();
       }
-      console.log('....Data.....', data);
+
       const link = `${process.env.CLIENT_URL}/forgot-password-update/${user.id}/${data.token}`;
       await sendEmail(user.email, "Password reset", link);
 
@@ -101,19 +100,19 @@ class AuthController {
       }
 
       const user = await authService.resetPassword(id);
+     console.log(user);
 
       if (!user) return res.status(404).send("User Id does not exist");
 
       const token = req.params.token;
 
-      const passwordReset = await PasswordResetDbModel.findOne({
-        where: { token: token }
-      });
-
+      const passwordReset = await authService.getUserByToken(token);
+    
       if (!passwordReset) return res.status(410).send("Invalid link or expired");
 
       user.password = await bcrypt.hash(req.body.password, 12);
       await user.save();
+      await passwordReset.delete();
 
       res.json({
         message: "Password reset sucessfully."
