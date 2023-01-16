@@ -14,7 +14,7 @@
         <th mat-header-cell *matHeaderCellDef>Profile</th>
         <td mat-cell *matCellDef="let row">
           <img
-            [src]="'http://localhost:3000/' + row.profile"
+            [src]="storageUrl + row.profile"
             crossorigin="anonymous"
             width="50"
             height="50"
@@ -27,7 +27,7 @@
       <!-- Name Column -->
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Name</th>
-        <td mat-cell *matCellDef="let user">{{ user.name }}</td>
+        <td class="user-title" mat-cell *matCellDef="let user" (click)="showUser(user)">{{ user.name }}</td>
       </ng-container>
 
       <!-- Email Column -->

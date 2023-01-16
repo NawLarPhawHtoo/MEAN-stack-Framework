@@ -12,6 +12,7 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
 import { UserStateModule } from './store/users/user.state.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { UserListDialogComponent } from './components/user-list-dialog/user-list-dialog.component';
 
 const COMPONENTS = [
   UserListComponent,
@@ -19,7 +20,8 @@ const COMPONENTS = [
   UserPageComponent,
   UserEditComponent,
   UserDeleteDialogComponent,
-  ChangePasswordComponent
+  ChangePasswordComponent,
+  UserListDialogComponent
 ];
 
 @NgModule({

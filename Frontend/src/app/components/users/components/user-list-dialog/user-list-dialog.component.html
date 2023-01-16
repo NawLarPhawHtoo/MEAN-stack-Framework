@@ -1,0 +1,75 @@
+<div mat-dialog-content class="mat-dialog">
+  <div class="dialog-title">
+    <h2>User Details</h2>
+    <mat-dialog-actions align="end">
+      <button mat-icon-button mat-dialog-close>
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-dialog-actions>
+  </div>
+
+  <mat-list role="list">
+    <!-- image -->
+    <mat-list-item role="listitem">
+      <div class="dialog-data">
+        <img class="dialog-img" [src]="imgUrl" crossorigin="anonymous" style="padding-top:3px" alt="">
+      </div>
+    </mat-list-item>
+
+    <!-- Title -->
+    <mat-list-item role="listitem">
+      <span>Name :</span>
+      <div class="dialog-data">
+        {{data.name}}
+      </div>
+    </mat-list-item>
+
+    <!-- Description -->
+    <mat-list-item role="listitem">
+      <span>Gender :</span>
+      <div class="dialog-data">
+        {{data.gender}}
+      </div>
+    </mat-list-item>
+
+    <!-- Author -->
+    <mat-list-item role="listitem">
+      <span>Role :</span>
+      <div class="dialog-data">
+        {{data.role}}
+      </div>
+    </mat-list-item>
+
+    <!-- DOB -->
+    <mat-list-item role="listitem">
+      <span>Date of Birth :</span>
+      <div class="dialog-data">
+        {{data.dob | date: 'shortDate'}}
+      </div>
+    </mat-list-item>
+
+    <!-- phone -->
+    <mat-list-item role="listitem">
+      <span>Phone :</span>
+      <div class="dialog-data">
+        {{data.phone}}
+      </div>
+    </mat-list-item>
+
+    <!-- Address -->
+    <mat-list-item role="listitem">
+      <span>Address :</span>
+      <div class="dialog-data">
+        {{data.address}}
+      </div>
+    </mat-list-item>
+
+    <!-- Posted Date -->
+    <mat-list-item role="listitem">
+      <span>Created_Date :</span>
+      <div class="dialog-data">
+        {{data.created_at | date: 'shortDate'}}
+      </div>
+    </mat-list-item>
+  </mat-list>
+</div>

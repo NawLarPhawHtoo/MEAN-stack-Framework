@@ -11,6 +11,8 @@ import { User } from 'src/app/shared/models/user.model';
 import { DeleteUser, GetUsers, SetSelectedUser } from '../../store/users/user.state.action';
 import { IUserStateModel } from '../../store/users/user.state.model';
 import { UsersState } from '../../store/users/user.state';
+import { UserListDialogComponent } from '../user-list-dialog';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-user-list',
@@ -18,6 +20,8 @@ import { UsersState } from '../../store/users/user.state';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
+
+  public storageUrl = environment.storageUrl;
 
   @Select(UsersState.getUserList) users$: Observable<IUserStateModel[]>;
 
@@ -61,6 +65,15 @@ editUserData(payload: User,){
 changePassword(payload: User,){
   this.store.dispatch(new SetSelectedUser(payload));
   this.router.navigate(['/user/change-password/' + payload.id])
+}
+
+showUser(data: any) {
+  const userId = data._id;
+  let dialogRef = this.dialog.open(UserListDialogComponent, {
+    width: '35%',
+    // height: '600px',
+    data: data,
+  })
 }
 
 onClickUserCreate() {

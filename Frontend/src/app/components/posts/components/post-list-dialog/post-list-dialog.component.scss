@@ -19,3 +19,16 @@
       }
     }
   }
+
+  .dialog-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .dialog-img{
+    width: 100px;
+    height: 50px;
+    object-fit: cover;
+    cursor: pointer;
+  }

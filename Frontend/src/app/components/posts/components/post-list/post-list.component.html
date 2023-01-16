@@ -31,7 +31,7 @@
       <ng-container matColumnDef="photo">
         <th mat-header-cell *matHeaderCellDef> Photo </th>
         <td mat-cell *matCellDef="let row"> 
-          <img class="post-list-img" [src]="'http://localhost:3000/'+row.image" crossorigin="anonymous" width="50" height="50" style="padding-top:3px" alt=""> 
+          <img class="post-list-img" [src]="storageUrl+row.image" crossorigin="anonymous" width="50" height="50" style="padding-top:3px" alt=""> 
         </td>
       </ng-container>
 

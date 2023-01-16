@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-post-list-dialog',
@@ -7,6 +8,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./post-list-dialog.component.scss']
 })
 export class PostListDialogComponent {
+
+  public imgUrl = environment.storageUrl + this.data.image;
 
   title: string;
   description: string;

@@ -10,5 +10,6 @@ export interface User {
   dob: Date,
   address: string,
   createdAt: Date,
-  updatedAt: Date
+  updatedAt: Date,
+  profile: string,
 }

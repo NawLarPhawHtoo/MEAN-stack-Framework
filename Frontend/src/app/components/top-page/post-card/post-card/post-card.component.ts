@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { PostsState } from 'src/app/components/posts/store/posts/post.state';
 import { IPostStateModel } from 'src/app/components/posts/store/posts/post.state.model';
 import { Post } from 'src/app/shared/models/post.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'post-card',
@@ -11,9 +12,11 @@ import { Post } from 'src/app/shared/models/post.model';
   styleUrls: ['./post-card.component.scss']
 })
 export class PostCardComponent implements OnInit {
+
+  public storageUrl = environment.storageUrl;
+
   @Select(PostsState.getPostList) posts$: Observable<IPostStateModel[]>;
 
-  // @Input()  posts$: Observable<IPostStateModel[]>;
   @Input() post: any = [];
 
   public posts: Post[] = [];

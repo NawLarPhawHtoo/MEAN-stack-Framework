@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { IPostStateModel } from '../../store/posts/post.state.model';
 import { Select,Store } from '@ngxs/store';
 import { DeletePost, GetPosts, SetSelectedPost } from '../../store/posts/post.state.action';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-post-list',
@@ -18,6 +19,8 @@ import { DeletePost, GetPosts, SetSelectedPost } from '../../store/posts/post.st
   styleUrls: ['./post-list.component.scss']
 })
 export class PostListComponent implements OnInit{
+
+  public storageUrl = environment.storageUrl;
  
   @Select(PostsState.getPostList) posts$: Observable<IPostStateModel[]>;
 
