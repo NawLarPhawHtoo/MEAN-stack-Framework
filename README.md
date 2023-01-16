@@ -38,5 +38,4 @@ Backend Tehnique
 1. JWT Authentication
 2. ORM models with Sequelize
 3. Image Uploading
-4. 
 ```
