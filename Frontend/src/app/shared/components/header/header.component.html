@@ -1,16 +1,33 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" [routerLink]="['/top-page']">
-      <img src="../../../../assets/icons/angular_icon.svg" alt="angular_icon" width="50" height="30">
+      <img
+        src="../../../../assets/icons/angular_icon.svg"
+        alt="angular_icon"
+        width="50"
+        height="30"
+      />
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" [routerLink]="['/top-page']">Home</a>
+          <a
+            class="nav-link active"
+            aria-current="page"
+            [routerLink]="['/top-page']"
+            >Home</a
+          >
         </li>
         <li class="nav-item">
           <a class="nav-link active" [routerLink]="['/post']">Posts</a>
@@ -20,11 +37,19 @@
         </li>
       </ul>
       <form class="d-flex">
-        <a mat-button class="profile">
+        <label>{{ username }}</label>
+        <!-- <a mat-button class="profile">
           <mat-icon>person</mat-icon>
-        </a>
+        </a> -->
         <div class="header__separator me-2"></div>
-        <button [routerLink]="['/']" type="button" class="btn btn-light me-2" (click)="logout()">LogOut</button>
+        <button
+          [routerLink]="['/']"
+          type="button"
+          class="btn btn-light me-2"
+          (click)="logout()"
+        >
+          LogOut
+        </button>
       </form>
     </div>
   </div>

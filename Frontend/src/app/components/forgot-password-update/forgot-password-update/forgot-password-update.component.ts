@@ -55,6 +55,7 @@ export class ForgotPasswordUpdateComponent implements OnInit {
     formData.append('password', this.forgotPasswordUpdateForm.controls['password'].value);
 
     this.store.dispatch(new ForgotPasswordUpdate(this.id, this.token, formData)).subscribe(() => {
+      alert('Password Reset Successful');
       this.router.navigate(['/']);
     });
   }

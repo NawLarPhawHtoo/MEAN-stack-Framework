@@ -4,6 +4,7 @@ import { Select, Store } from '@ngxs/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MustMatch } from 'src/app/shared/directives/must-match.validator';
+import { LogoutUser } from 'src/app/components/login/store/login.state.action';
 
 @Component({
   selector: 'app-change-password',
@@ -46,10 +47,19 @@ export class ChangePasswordComponent implements OnInit {
         newPassword: this.passwordForm.controls['newPassword'].value,
         confirmPassword: this.passwordForm.controls['confirmPassword'].value
       };
-      console.log(payload);
       this.store.dispatch(new ChangePassword(id, payload)).subscribe(() => {
-        this.router.navigate(['/'])
-      })
+        const loginUser = JSON.parse(localStorage.getItem('loginUserData') || '');
+        alert('Change Password Successful');
+        if (loginUser.id === parseInt(id)) {
+          this.store.dispatch(new LogoutUser({ email: loginUser.email }))
+            .subscribe((data) => {
+              localStorage.removeItem('token');
+              this.router.navigate(['/']);
+            })
+        } else {
+          this.router.navigate(['/'])
+        }
+      });
     }
   }
 
