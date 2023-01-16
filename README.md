@@ -29,7 +29,6 @@ Frontend Technique
 1. @ngxs/store (link Redux)
 2. Anguar Lazy Loading structure
 3. Horizontal Slider with CdkVirtualScrollViewport.
-4. 
 ```
 
 Backend Tehnique
