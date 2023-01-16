@@ -106,12 +106,12 @@ class AuthController {
       const token = req.params.token;
 
       const passwordReset = await authService.getUserByToken(token);
-    
+
       if (!passwordReset) return res.status(410).send("Invalid link or expired");
 
       user.password = await bcrypt.hash(req.body.password, 12);
       await user.save();
-      await passwordReset.delete();
+      await authService.deleteUserToken(token);
 
       res.json({
         message: "Password reset sucessfully."

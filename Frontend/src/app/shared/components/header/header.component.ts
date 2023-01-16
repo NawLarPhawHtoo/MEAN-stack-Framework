@@ -17,7 +17,6 @@ export class HeaderComponent {
     router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
         const loginUser: any = JSON.parse(localStorage.getItem('loginUserData') || '');
-        console.log(loginUser);
         this.username = loginUser.name;
       }
     });

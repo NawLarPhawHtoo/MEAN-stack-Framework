@@ -48,6 +48,14 @@ class AuthService {
     }) as any;
   }
 
+  deleteUserToken(token: string): Promise<any> {
+    return PasswordResetDbModel.destroy({
+      where: {
+        token: token
+      }
+    }) as any;
+  }
+
   async resetUser(userObj: Partial<IPasswordResetModel>): Promise<PasswordResetDbModel> {
     const createReset = await PasswordResetDbModel.create({ ...userObj, created_at: new Date().toISOString() });
     return createReset;
