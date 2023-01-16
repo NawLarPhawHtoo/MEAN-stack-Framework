@@ -38,7 +38,10 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-          {{username}}
+          <button class="btn btn-light me-2">{{username}}</button>
+        </li>
+        <li class="header__separator me-2">
+          <span></span>
         </li>
         <li>
           <button [routerLink]="['/']" type="button" class="btn btn-light me-2" (click)="logout()">LogOut</button>
